@@ -10,3 +10,8 @@ cd ~ && git clone git@github.com:matiascaniete/dotfiles.git && cd dotfiles
 cd ~/dotfiles
 stow <module>
 ```
+
+Available modules:
+
+- alacritty
+- neofetch
