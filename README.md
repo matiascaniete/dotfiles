@@ -15,3 +15,4 @@ Available modules:
 
 - alacritty
 - neofetch
+- nvim
