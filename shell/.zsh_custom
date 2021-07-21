@@ -11,3 +11,7 @@ source ~/.bash_aliases
 
 # shellcheck disable=SC1090
 source ~/.antigen_custom
+
+# antigen autocompletion issue workaround
+autoload -U +X bashcompinit && bashcompinit
+autoload -U +X compinit && compinit
