@@ -13,9 +13,9 @@ antigen use oh-my-zsh
 antigen bundle ansible
 antigen bundle aws
 antigen bundle colored-man-pages
-antigen bundle composer
+# antigen bundle composer
 antigen bundle cp
-antigen bundle docker
+# antigen bundle docker
 antigen bundle docker-compose
 antigen bundle extract
 antigen bundle fd
@@ -24,16 +24,16 @@ antigen bundle genpass
 antigen bundle git
 antigen bundle git-extras
 antigen bundle git-flow
-antigen bundle history
+# antigen bundle history
 antigen bundle jump
 antigen bundle last-working-dir
-antigen bundle nmap
-antigen bundle npm
+# antigen bundle nmap
+# antigen bundle npm
 antigen bundle sudo
 antigen bundle systemadmin
-antigen bundle taskwarrior
-antigen bundle themes
-antigen bundle tmux
+# antigen bundle taskwarrior
+# antigen bundle themes
+# antigen bundle tmux
 antigen bundle transfer
 antigen bundle ubuntu
 antigen bundle universalarchive
