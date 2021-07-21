@@ -11,8 +11,9 @@ export BAT_PAGER=less
 export HIST_STAMPS="yyyy-mm-dd"
 
 export plugins=(
-    aws
+    #zsh-navigation-tools
     ansible
+    aws
     colored-man-pages
     docker
     docker-compose
@@ -20,24 +21,23 @@ export plugins=(
     fzf
     genpass
     git
-    git-flow
     git-extras
+    git-flow
     jump
     nmap
     sudo
     systemadmin
-    themes
     taskwarrior
+    themes
     tmux
     ubuntu
     universalarchive
     wd
     web-search
     z
+    zsh_reload
     zsh-autosuggestions
     zsh-completions
     zsh-interactive-cd
-    #zsh-navigation-tools
     zsh-syntax-highlighting
-    zsh_reload
 )
