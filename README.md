@@ -16,8 +16,9 @@ Available modules:
 - alacritty
 - neofetch
 - nvim
-- shell
 - ranger
+- shell
+- tmux
 
 ## Bootstrap shell configs
 
