@@ -21,6 +21,10 @@ Include this line in ~/.zshrc
 source ~/.zsh_custom
 ```
 
-## Install JetBrains font
+## Install JetBrains fonts
 
-> https://www.jetbrains.com/lp/mono/#how-to-install
+```sh
+bash ./install-fonts.sh
+```
+
+> Based on https://www.jetbrains.com/lp/mono/#how-to-install
