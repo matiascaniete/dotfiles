@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# shellcheck disable=SC1090
+source ~/.bash_aliases
+
+export PAGER=bat
+export BAT_PAGER=less
+# export PATH="$PATH:/home/$USER/bin"
+
+# --------------------------------- oh my zsh -------------------------------- #
+export HIST_STAMPS="yyyy-mm-dd"
+
+export plugins=(
+    aws
+    ansible
+    colored-man-pages
+    docker
+    docker-compose
+    fd
+    fzf
+    genpass
+    git
+    git-flow
+    git-extras
+    jump
+    nmap
+    sudo
+    systemadmin
+    themes
+    taskwarrior
+    tmux
+    ubuntu
+    universalarchive
+    wd
+    web-search
+    z
+    zsh-autosuggestions
+    zsh-completions
+    zsh-interactive-cd
+    #zsh-navigation-tools
+    zsh-syntax-highlighting
+    zsh_reload
+)

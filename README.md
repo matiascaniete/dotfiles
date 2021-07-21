@@ -4,7 +4,7 @@
 cd ~ && git clone git@github.com:matiascaniete/dotfiles.git && cd dotfiles
 ```
 
-### Activate configs
+## Activate configs
 
 ```sh
 cd ~/dotfiles
@@ -14,7 +14,15 @@ stow <module>
 Available modules:
 
 - alacritty
-- bash_aliases
 - neofetch
 - nvim
+- shell
 - ranger
+
+## Bootstrap shell configs
+
+Include this line in ~/.zshrc
+
+```sh
+source ~/.zsh_custom
+```
