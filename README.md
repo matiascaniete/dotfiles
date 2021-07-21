@@ -16,3 +16,4 @@ Available modules:
 - alacritty
 - neofetch
 - nvim
+- ranger
