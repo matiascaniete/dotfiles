@@ -12,6 +12,6 @@ source ~/.bash_aliases
 # shellcheck disable=SC1090
 source ~/.antigen_custom
 
-# antigen autocompletion issue workaround
+# antigen autocompletion issue workaround, but slows down shell starting time
 autoload -U +X bashcompinit && bashcompinit
 autoload -U +X compinit && compinit
