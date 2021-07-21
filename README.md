@@ -14,6 +14,7 @@ stow <module>
 Available modules:
 
 - alacritty
+- bash_aliases
 - neofetch
 - nvim
 - ranger
