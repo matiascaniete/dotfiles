@@ -1,51 +1,13 @@
 #!/usr/bin/env bash
 
+export EDITOR=nvim
+export PAGER=bat
+export BAT_PAGER=less
+export HIST_STAMPS="yyyy-mm-dd"
+# export PATH="$PATH:/home/$USER/bin"
+
 # shellcheck disable=SC1090
 source ~/.bash_aliases
 
-export PAGER=bat
-export BAT_PAGER=less
-# export PATH="$PATH:/home/$USER/bin"
-
-# --------------------------------- oh my zsh -------------------------------- #
-export HIST_STAMPS="yyyy-mm-dd"
-
-export plugins=(
-    # zsh-completions
-    # zsh-navigation-tools
-    ansible
-    aws
-    colored-man-pages
-    composer
-    cp
-    docker
-    docker-compose
-    extract
-    fd
-    fzf
-    genpass
-    git
-    git-extras
-    git-flow
-    history
-    jump
-    last-working-dir
-    nmap
-    npm
-    sudo
-    systemadmin
-    taskwarrior
-    themes
-    tmux
-    transfer
-    ubuntu
-    universalarchive
-    wd
-    web-search
-    z
-    zsh_reload
-    zsh-autosuggestions
-    zsh-completions
-    zsh-interactive-cd
-    zsh-syntax-highlighting
-)
+# shellcheck disable=SC1090
+source ~/.antigen_custom
