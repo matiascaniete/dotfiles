@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 if [ ! -f ~/antigen.zsh ]; then
-    echo "antigen is not installed!"
+    echo "Antigen is not installed! Intalling..."
+    curl -L git.io/antigen > ~/antigen.zsh
 else
     # shellcheck disable=SC1090
     source ~/antigen.zsh
