@@ -22,7 +22,7 @@ Plug 'tpope/vim-sensible'
 " Initialize plugin system
 call plug#end()
 
-autocmd vimenter * ++nested colorscheme gruvbox
+colorscheme gruvbox
 
 set background=dark    
 
