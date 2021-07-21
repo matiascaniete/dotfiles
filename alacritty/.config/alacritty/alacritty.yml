@@ -368,10 +368,10 @@ bell:
 
   # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
   # disable the visual bell animation.
-  duration: 100
+  duration: 50
 
   # Visual bell animation color.
-  color: '#ffffff'
+  color: '#ebdbb2'
 
   # Bell Command
   #
