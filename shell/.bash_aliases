@@ -12,6 +12,9 @@ alias f2b="sudo fail2ban-client"
 # get my public ip
 alias mip="curl ifconfig.me"
 
+# get forecast
+alias clima="ansiweather -f 7 -l Barcelona,ES -s true | cut -d '>' -f2- | tr '-' '\n'"
+
 # open nvim after fzf search
 function se() {
     du -a ./ 2>/dev/null | awk '{print $2}' | fzf --preview='([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' | xargs -r nvim
