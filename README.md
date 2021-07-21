@@ -18,3 +18,7 @@ Include this line in ~/.zshrc
 ```sh
 source ~/.zsh_custom
 ```
+
+## Install JetBrains font
+
+> https://www.jetbrains.com/lp/mono/#how-to-install
