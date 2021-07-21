@@ -11,25 +11,33 @@ export BAT_PAGER=less
 export HIST_STAMPS="yyyy-mm-dd"
 
 export plugins=(
-    #zsh-navigation-tools
+    # zsh-completions
+    # zsh-navigation-tools
     ansible
     aws
     colored-man-pages
+    composer
+    cp
     docker
     docker-compose
+    extract
     fd
     fzf
     genpass
     git
     git-extras
     git-flow
+    history
     jump
+    last-working-dir
     nmap
+    npm
     sudo
     systemadmin
     taskwarrior
     themes
     tmux
+    transfer
     ubuntu
     universalarchive
     wd
