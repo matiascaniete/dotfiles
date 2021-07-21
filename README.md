@@ -21,6 +21,13 @@ Include this line in ~/.zshrc
 source ~/.zsh_custom
 ```
 
+## Install VimPlug plugin
+```sh
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+```
+
+
 ## Install JetBrains fonts
 
 ```sh
