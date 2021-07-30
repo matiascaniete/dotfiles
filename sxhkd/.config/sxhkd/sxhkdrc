@@ -3,3 +3,6 @@ super + Return
 
 super + r
     rofi -modi drun -show drun
+
+super + c
+    zenity --calendar
