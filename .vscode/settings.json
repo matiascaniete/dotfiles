@@ -1,12 +1,16 @@
 {
     "cSpell.words": [
         "alacritty",
+        "combi",
         "dotfiles",
+        "drun",
         "matiascaniete",
         "neofetch",
         "nvim",
+        "rofi",
         "sxhkd",
         "xinit",
-        "xinitrc"
+        "xinitrc",
+        "zenity"
     ]
 }
