@@ -8,7 +8,7 @@ cd ~ && git clone git@github.com:matiascaniete/dotfiles.git && cd dotfiles
 
 ```sh
 cd ~/dotfiles
-stow alacritty neofetch nvim ranger shell tmux
+stow alacritty neofetch nvim ranger shell tmux sxhkd
 ```
 
 ## Bootstrap shell configs
@@ -16,8 +16,15 @@ stow alacritty neofetch nvim ranger shell tmux
 Include this line in ~/.zshrc
 
 ```sh
-source ~/.zsh_custom
+source ~/.custom_zshrc
 ```
+
+## Bootstrap keybindings
+Include this line in the ~/.xinitrc
+```sh
+source ~/.custom_xinitrc
+```
+
 
 ## Install plugins
 

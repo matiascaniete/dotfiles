@@ -4,6 +4,9 @@
         "dotfiles",
         "matiascaniete",
         "neofetch",
-        "nvim"
+        "nvim",
+        "sxhkd",
+        "xinit",
+        "xinitrc"
     ]
 }

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Repetition keys configuration 
+xset r rate 250 100
