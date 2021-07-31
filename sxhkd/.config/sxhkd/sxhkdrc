@@ -2,7 +2,7 @@ super + Return
 	alacritty
 
 super + r
-    rofi -show combi drun run ssh keys -modi drun,run,ssh,combi,keys
+    rofi -sorting-method fzf -show combi drun run ssh keys -modi drun,run,ssh,combi,keys
 
 super + c
     zenity --calendar
@@ -15,4 +15,4 @@ super + Escape
 
 # Restarts sxhkd daemon
 super + x
-    killall -SIGUSR1 sxhkd
+    killall -SIGUSR1 sxhkd && notify-send -i "face-glasses" "Simple X HotKeys Daemon" "sxhkd restarted and reload its configuration"
