@@ -1,18 +1,18 @@
-super + Return
+{super, control + alt} + Return
 	alacritty
 
-super + r
+{super, control + alt} + {r, p}
     rofi -sorting-method fzf -matching fuzzy -width 25 -show-icons -show drun run ssh keys -modi drun,run,ssh,keys
 
-super + c
+control + super + c
     zenity --calendar
 
-super + Escape
+{super, control + alt} + o
 	echo "systemctl suspend|systemctl reboot|systemctl poweroff" \
     | rofi -dmenu -sep "|" -i -u 2 -a 1 -width -25 -window-title "Exit Options" -lines 3 \
     | head -n 1 \
     | xargs -i"XXX" --no-run-if-empty bash -c "XXX"
 
 # Restarts sxhkd daemon
-super + x
+{super, control + alt} + x
     killall -SIGUSR1 sxhkd && notify-send -i "face-glasses" "Simple X HotKeys Daemon" "sxhkd restarted and reload its configuration"

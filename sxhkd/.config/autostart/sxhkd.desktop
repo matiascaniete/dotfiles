@@ -1,6 +1,8 @@
 [Desktop Entry]
+
 Name=sxhkd
 Comment=Simple X hotkey daemon
 Exec=/usr/bin/sxhkd
 Terminal=false
 Type=Application
+X-GNOME-Autostart-enabled=true
