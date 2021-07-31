@@ -1,16 +1,21 @@
 {
     "cSpell.words": [
+        "SIGUSR",
         "alacritty",
         "combi",
         "dotfiles",
         "drun",
+        "killall",
         "matiascaniete",
         "neofetch",
         "nvim",
+        "pkill",
+        "poweroff",
         "rofi",
         "sxhkd",
         "xinit",
         "xinitrc",
+        "xsit",
         "zenity"
     ]
 }

@@ -6,3 +6,13 @@ super + r
 
 super + c
     zenity --calendar
+
+super + Escape
+	echo "systemctl suspend|systemctl reboot|systemctl hibernate|systemctl poweroff" \
+    | rofi -dmenu -sep "|" -i -u 1 -a 0 -sorting-method fzf -window-title "Exit Options" -lines 4 \
+    | head -n 1 \
+    | xargs -i"XXX" bash -c "XXX"
+
+# Restarts sxhkd daemon
+super + x
+    killall -SIGUSR1 sxhkd
