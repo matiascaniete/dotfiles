@@ -2,16 +2,16 @@ super + Return
 	alacritty
 
 super + r
-    rofi -sorting-method fzf -show combi drun run ssh keys -modi drun,run,ssh,combi,keys
+    rofi -sorting-method fzf -matching fuzzy -width 25 -show-icons -show drun run ssh keys -modi drun,run,ssh,keys
 
 super + c
     zenity --calendar
 
 super + Escape
-	echo "systemctl suspend|systemctl reboot|systemctl hibernate|systemctl poweroff" \
-    | rofi -dmenu -sep "|" -i -u 1 -a 0 -sorting-method fzf -window-title "Exit Options" -lines 4 \
+	echo "systemctl suspend|systemctl reboot|systemctl poweroff" \
+    | rofi -dmenu -sep "|" -i -u 2 -a 1 -width -25 -window-title "Exit Options" -lines 3 \
     | head -n 1 \
-    | xargs -i"XXX" bash -c "XXX"
+    | xargs -i"XXX" --no-run-if-empty bash -c "XXX"
 
 # Restarts sxhkd daemon
 super + x
