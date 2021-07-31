@@ -2,7 +2,10 @@
 	alacritty
 
 {super, control + alt} + {r, p}
-    rofi -sorting-method fzf -matching fuzzy -show-icons -show drun run ssh keys -modi drun,run,ssh,keys
+    rofi -sorting-method fzf \
+        -matching fuzzy \
+        -show drun run ssh keys \
+        -modi drun,run,ssh,keys
 
 control + super + c
     zenity --calendar

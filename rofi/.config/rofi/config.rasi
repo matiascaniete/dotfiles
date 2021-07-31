@@ -1,0 +1,9 @@
+/** Basic config file **/
+
+configuration {
+  show-icons:   true;
+  icon-theme:   "Papirus";
+  font:         "JetBrains Mono 10";
+}
+
+@import "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
