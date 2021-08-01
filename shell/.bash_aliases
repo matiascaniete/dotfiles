@@ -13,7 +13,7 @@ alias f2b="sudo fail2ban-client"
 alias mip="curl ifconfig.me"
 
 # get forecast
-alias clima="ansiweather -f 7 -l Barcelona,ES -s true | cut -d '>' -f2- | tr '-' '\n'"
+alias clima="ansiweather -f 7 -l Barcelona,ES -s true -a false | cut -d '>' -f2- | tr '-' '\n'"
 
 # restart network manager
 alias rnm="sudo service network-manager restart"
