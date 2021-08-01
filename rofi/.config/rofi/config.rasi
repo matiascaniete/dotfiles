@@ -3,6 +3,7 @@
 configuration {
   show-icons:   true;
   font:         "JetBrains Mono 10";
+  dpi:          200;
 }
 
 @import "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
