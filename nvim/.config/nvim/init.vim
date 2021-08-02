@@ -5,19 +5,18 @@ call plug#begin(stdpath('data') . '/plugged')
 
 " Make sure you use single quotes
 
-Plug 'morhetz/gruvbox'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'vim-airline/vim-airline'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tpope/vim-commentary'
 Plug 'StanAngeloff/php.vim'
+Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'morhetz/gruvbox'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
-
+Plug 'vim-airline/vim-airline'
 
 " Initialize plugin system
 call plug#end()
@@ -26,8 +25,8 @@ let mapleader=","
 
 " Some theming
 colorscheme gruvbox
-set background=dark    
-let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_dark='hard'
+set background=dark 
 
 " Show number lines
 set number
