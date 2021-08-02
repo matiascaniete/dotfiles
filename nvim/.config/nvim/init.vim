@@ -16,7 +16,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
-Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'    
 
 " Initialize plugin system
 call plug#end()
