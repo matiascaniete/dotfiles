@@ -3,7 +3,6 @@
 
 {super, control + alt} + {r, p}
     rofi -sorting-method fzf \
-        -matching fuzzy \
         -show drun run ssh keys \
         -modi drun,run,ssh,keys
 
