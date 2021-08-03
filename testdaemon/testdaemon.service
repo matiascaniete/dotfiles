@@ -1,0 +1,5 @@
+[Unit]
+Description=Test Daemon Service
+
+[Service]
+ExecStart=bash -c "date >> /home/matias/testdaemon.service.log"

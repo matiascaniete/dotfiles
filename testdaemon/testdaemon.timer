@@ -1,0 +1,9 @@
+[Unit]
+Description=Test Daemon Timer
+
+[Timer]
+Persistent=true
+OnCalendar=*-*-* *:*:00
+
+[Install]
+WantedBy=timers.target
