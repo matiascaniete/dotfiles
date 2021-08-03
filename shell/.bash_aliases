@@ -16,7 +16,7 @@ alias mip="curl ifconfig.me"
 alias clima="ansiweather -f 7 -l Barcelona,ES -s true -a false | cut -d '>' -f2- | tr '-' '\n'"
 
 # restart network manager
-alias rnm="sudo service network-manager restart"
+alias rnm="sudo systemctl restart network-manager"
 
 # open nvim after fzf search
 function se() {
