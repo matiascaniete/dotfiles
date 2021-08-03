@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Installs configs
 stow -vt ~ \
     alacritty \
     neofetch \
@@ -9,3 +10,6 @@ stow -vt ~ \
     shell \
     sxhkd \
     tmux
+
+# Installs scripts
+sudo stow -vt /usr/local/bin scripts

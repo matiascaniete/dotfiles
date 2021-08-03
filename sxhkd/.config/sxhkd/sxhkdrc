@@ -6,6 +6,9 @@
         -show drun run ssh keys \
         -modi drun,run,ssh,keys
 
+super + alt + p
+    lpass-select
+
 control + super + c
     zenity --calendar
 

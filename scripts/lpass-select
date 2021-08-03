@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# Show lastpass password selected from rofi or fzf
+
+# notify-send "SHLVL=$SHLVL"
+
+if [ $SHLVL == "1" ]; then
+    selector="rofi -dmenu"
+    display="rofi -e"
+    lpscolor="--color=never"
+else
+    selector="fzf"
+    display="printf"
+    lpscolor="--color=always"
+fi
+
+lpass ls >/dev/null || exit 1
+account=$(lpass ls | $selector)
+
+if [ ! "$account" ]; then exit 1; fi
+
+accountid=$(echo "$account" | sed -nze 's/\(.*\) \[id: \(.*\)\]/\2/p')
+result=$(printf "1 - Copy password to clipboard\\n2 - Show password\\n3 - Show all fields" | $selector)
+
+case "${result}" in
+1*)
+    (lpass show "$lpscolor" --password "$accountid" | tr -d "\n" | xsel -b) && echo "Password copied to the clipboard!"  | xargs -0 $display
+    ;;
+2*)
+    lpass show "$lpscolor" --password "$accountid" | xargs -0 $display
+    ;;
+3*)
+    lpass show "$lpscolor" "$accountid" | xargs -0 $display
+    ;;
+*) ;;
+esac
+
+# echo "$accountid"
