@@ -5,6 +5,7 @@ stow -vt ~ \
     neofetch \
     nvim \
     ranger \
+    rofi \
     shell \
     sxhkd \
     tmux
