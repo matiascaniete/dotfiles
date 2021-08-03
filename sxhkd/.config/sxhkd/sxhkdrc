@@ -18,3 +18,6 @@ super + alt + l
 # Restarts sxhkd daemon
 super + alt + x
     killall -SIGUSR1 sxhkd && notify-send -i "face-glasses" "Simple X HotKeys Daemon" "sxhkd restarted and reload its configuration"
+
+super + p; {m, b, t, c}
+    {mailspring, librewolf, ktorrent, code}
