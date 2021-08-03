@@ -8,7 +8,7 @@ cd ~ && git clone git@github.com:matiascaniete/dotfiles.git && cd dotfiles
 
 ```sh
 cd ~/dotfiles
-stow alacritty neofetch nvim ranger shell tmux sxhkd
+bash ./install.sh
 ```
 
 ## Bootstrap shell configs
