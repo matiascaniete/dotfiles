@@ -1,7 +1,7 @@
-{super, super + alt} + Return
+{super, control + alt} + Return
 	alacritty
 
-{super, super + alt} + {r, p}
+{super, control + alt} + r
     rofi -sorting-method fzf \
         -show drun run ssh keys \
         -modi drun,run,ssh,keys
@@ -9,15 +9,15 @@
 super + alt + l
     lpass-select
 
-{super, super + alt} + o
+{super, control + alt} + o
 	echo "systemctl suspend|systemctl reboot|systemctl poweroff" \
     | rofi -dmenu -sep "|" -i -u 2 -a 1 -width -25 -window-title "Exit Options" -lines 3 \
     | head -n 1 \
     | xargs -i"XXX" --no-run-if-empty bash -c "XXX"
 
 # Restarts sxhkd daemon
-super + alt + x
+{super, control + alt} + x
     killall -SIGUSR1 sxhkd && notify-send -i "face-glasses" "Simple X HotKeys Daemon" "sxhkd restarted and reload its configuration"
 
-super + p; {m, b, t, c}
+{super, control + alt} + p; {m, b, t, c}
     {mailspring, librewolf, ktorrent, code}
