@@ -3,6 +3,7 @@
 # Installs configs
 stow -vt ~ \
     alacritty \
+    bat \
     neofetch \
     nvim \
     ranger \
