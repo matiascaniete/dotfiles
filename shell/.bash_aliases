@@ -21,9 +21,12 @@ alias rnm="sudo systemctl restart network-manager"
 # select lastpass password
 alias lps="lpass-select"
 
-# open nvim after fzf search
-function se() {
-    du -a ./ 2>/dev/null | awk '{print $2}' | fzf --preview='([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' | xargs -r nvim
+# selects a file and open it with default editor
+alias vf='fzf | xargs "$EDITOR"'
+
+# open nvim after fzf search with preview
+function vfp() {
+    fzf --preview='([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' | xargs -r "$EDITOR"
 }
 
 # cheat.sh
