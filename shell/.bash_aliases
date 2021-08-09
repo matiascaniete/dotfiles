@@ -24,6 +24,8 @@ alias lps="lpass-select"
 # selects a file and open it with default editor
 alias vf='fzf | xargs "$EDITOR"'
 
+alias zzh="zsh-show-keybindings"
+
 # open nvim after fzf search with preview
 function vfp() {
     fzf --preview='([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200' | xargs -r "$EDITOR"

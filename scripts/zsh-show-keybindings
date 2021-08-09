@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+(
+    cat <<EOF
+Tab           Auto complete
+Ctrl+a        Beginning of line
+Ctrl+e        End of line
+Ctrl+f        Forward one character
+Ctrl+b        Back one character
+Ctrl+h        Delete one character (backw­ards)
+Alt+d         Delete form the cursor to the end of the word
+Alt+f         Forward one word
+Alt+b         Back one word
+Ctrl+w        Delete one word (backw­ards)
+Ctrl+u        Clear to beginning of line
+Ctrl+k        Clear to end of line
+Ctrl+y        Paste from Kill Ring
+Ctrl+t        Swap cursor with previous character
+Alt+t         Swap cursor with previous word
+Ctrl+p        Previous line in history
+Ctrl+n        Next line in history
+Ctrl+r        Search backwards in history
+Ctrl+l        Clear screen
+Ctrl+o        Execute command but keep line
+Ctrl+z        Suspend process
+Ctrl+c        Kill current process
+Ctrl+d        Exit shell
+EOF
+) | rofi -dmenu -i
