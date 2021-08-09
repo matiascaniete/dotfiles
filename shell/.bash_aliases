@@ -31,5 +31,5 @@ function vfp() {
 
 # cheat.sh
 function cht() {
-    curl "cheat.sh/$1"
+    curl "cheat.sh/$1" | "$PAGER"
 }
