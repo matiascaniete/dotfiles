@@ -24,7 +24,7 @@ result=$(printf "1 - Copy password to clipboard\\n2 - Show password\\n3 - Show a
 
 case "${result}" in
 1*)
-    (lpass show "$lpscolor" --password "$accountid" | tr -d "\n" | xsel -b) && echo "Password copied to the clipboard!"  | xargs -0 $display
+    (lpass show "$lpscolor" --password "$accountid" | tr -d "\n" | xsel -bi) && echo "Password copied to the clipboard!" | xargs -0 $display
     ;;
 2*)
     lpass show "$lpscolor" --password "$accountid" | xargs -0 $display
