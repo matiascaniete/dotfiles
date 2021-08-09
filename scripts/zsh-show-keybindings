@@ -15,6 +15,7 @@ Ctrl+w        Delete one word (backw­ards)
 Ctrl+u        Clear to beginning of line
 Ctrl+k        Clear to end of line
 Ctrl+y        Paste from Kill Ring
+Alt+.         Paste last word from previous line in history
 Ctrl+t        Swap cursor with previous character
 Alt+t         Swap cursor with previous word
 Ctrl+p        Previous line in history
