@@ -98,7 +98,7 @@ for i in groups:
     ])
 
 layouts = [
-    layout.MonadTall(border_width=1, border_focus="#cccccc", border_normal="#444444", margin=4),
+    layout.MonadTall(border_width=2, border_focus="#dddddd", border_normal="#222222", margin=3),
     layout.Max(),
     # layout.Stack(num_stacks=2),
     # Try more layouts by unleashing below layouts.
@@ -111,13 +111,13 @@ layouts = [
     # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
-    layout.Floating(border_focus="#cccccc"),
+    # layout.Floating(border_focus="#cccccc"),
 ]
 
 widget_defaults = dict(
     font='JetBrains Mono',
     fontsize=12,
-    padding=5,
+    padding=3,
 )
 extension_defaults = widget_defaults.copy()
 
@@ -128,7 +128,7 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
-                widget.GroupBox(borderwidth=1, highlight_method="border", this_current_screen_border="444444", rounded=True, padding_y=2),
+                widget.GroupBox(borderwidth=1, highlight_method="border", this_current_screen_border="444444", rounded=False, padding_y=0),
                 sep,
                 widget.CurrentLayout(),
                 # sep,
