@@ -136,7 +136,7 @@ screens = [
                 sep,
                 widget.WindowName(),
                 sep,
-                widget.Battery(discharge_char="batt"),
+                widget.Battery(discharge_char="🔋", charge_char="🔌"),
                 # widget.LaunchBar(progs=[("firefox", "firefox", "Firefox")]),
                 sep,
                 widget.Wallpaper(directory="~/Imágenes/", label="wllppr"),
