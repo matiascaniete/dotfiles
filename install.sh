@@ -6,6 +6,7 @@ stow -vt ~ \
     bat \
     neofetch \
     nvim \
+    qtile \
     ranger \
     rofi \
     shell \
