@@ -5,6 +5,7 @@ export VISUAL=nvim
 export PAGER=bat
 export BAT_PAGER=less
 export HIST_STAMPS="yyyy-mm-dd"
+export TERMINAL=alacritty
 # export PATH="$PATH:/home/$USER/bin"
 
 # shellcheck disable=SC1090
