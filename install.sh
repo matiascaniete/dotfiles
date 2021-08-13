@@ -4,6 +4,7 @@
 stow -vt ~ \
     alacritty \
     bat \
+    i3 \
     neofetch \
     nvim \
     qtile \
