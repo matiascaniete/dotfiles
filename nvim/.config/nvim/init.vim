@@ -16,13 +16,14 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
-Plug 'vim-airline/vim-airline'    
+Plug 'vim-airline/vim-airline'
+Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 " Initialize plugin system
 call plug#end()
 
-let mapleader=","
+let mapleader=" "
 
 " Some theming
 colorscheme gruvbox
@@ -65,4 +66,9 @@ set colorcolumn=80
 nnoremap <Leader>ve :e $MYVIMRC<CR>
 " Reload vimr configuration file
 nnoremap <Leader>vr :source $MYVIMRC<CR>
+
+nnoremap <Leader>ff <cmd>Telescope find_files<cr>
+nnoremap <Leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <Leader>fb <cmd>Telescope buffers<cr>
+nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
 
