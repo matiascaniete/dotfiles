@@ -6,6 +6,12 @@ folder-hook "inbox emciphoto" 'source ~/.config/neomutt/accounts/info@emciphoto.
 macro index <f2> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/info@emciphoto.com<enter><change-folder>!<enter>'
 macro index <f10> '<sync-mailbox><enter-command>source ~/.config/neomutt/neomuttrc<enter><enter>'
 
+macro index gi "<change-folder>=INBOX<enter>" "Go to Inbox"
+macro index gs "<change-folder>=INBOX.Sent<enter>" "Go to Sent"
+macro index gd "<change-folder>=INBOX.Drafts<enter>" "Go to Drafts"
+macro index gt "<change-folder>=INBOX.Trash<enter>" "Go to Trash"
+macro index gj "<change-folder>=INBOX.Junk<enter>" "Go to Trash"
+
 set header_cache = ~/.cache/mutt/
 set message_cachedir = ~/.cache/mutt/
 set certificate_file = ~/.cache/neomutt/certificates
