@@ -57,10 +57,9 @@ set exrc
 set nohlsearch
 
 set hidden
-
 set scrolloff=8
-
 set colorcolumn=80
+set clipboard+=unnamedplus
 
 " Edit vimr configuration file
 nnoremap <Leader>ve :e $MYVIMRC<CR>

@@ -1,0 +1,54 @@
+source ./colors
+source ./keybindings
+
+#folder-hook 'inbox.info.emciphoto' 'source ~/.config/neomutt/accounts/info@emciphoto.com'
+#folder-hook 'inbox.informatica.ndorma' 'source ~/.config/neomutt/accounts/informatica@ndorma.com'
+#folder-hook 'inbox.erp.ndorma' 'source ~/.config/neomutt/accounts/informatica@ndorma.com'
+
+#source ~/.config/neomutt/accounts/info@emciphoto.com
+#source ~/.config/neomutt/accounts/informatica@ndorma.com
+
+macro index <f2> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/info@emciphoto.com<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/informatica@ndorma.com<enter><change-folder>!<enter>'
+macro index <f4> '<sync-mailbox><enter-command>source ~/.config/neomutt/accounts/erp@ndorma.com<enter><change-folder>!<enter>'
+
+macro index <f10> '<sync-mailbox><enter-command>source ~/.config/neomutt/neomuttrc<enter>'
+
+bind index gt noop
+
+macro index gi "<change-folder>=INBOX<enter>" "Go to Inbox"
+macro index gs "<change-folder>=INBOX.Sent<enter>" "Go to Sent"
+macro index gd "<change-folder>=INBOX.Drafts<enter>" "Go to Drafts"
+macro index gt "<change-folder>=INBOX.Trash<enter>" "Go to Trash"
+macro index gj "<change-folder>=INBOX.Junk<enter>" "Go to Trash"
+
+set header_cache = ~/.cache/mutt/
+set message_cachedir = ~/.cache/mutt/
+set certificate_file = ~/.cache/neomutt/certificates
+
+set sidebar_visible = yes
+set mail_check_stats
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_folder_indent = yes
+set sidebar_indent_string = " "
+#set sidebar_short_path = yes
+set sidebar_delim_chars = "./"
+set sidebar_component_depth = 3
+set imap_check_subscribed
+# Allow Mutt to open a new IMAP connection automatically.
+#unset imap_passive
+
+# Keep the IMAP connection alive by polling intermittently (time in seconds).
+set imap_keepalive = 300
+
+# How often to check for new mail (time in seconds).
+set mail_check = 120
+
+set sort = 'reverse-date'
+set date_format="%y-%m-%d %H:%M"
+#set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
+set index_format="%4C %Z %{%y-%m-%d %H:%M} %-15.15L (%?l?%4l&%4c?) %s"
+set editor="vim -c 'set spell spelllang=es,en' -c 'set colorcolumn=72' -c 'startinsert' -c 'set wrap' '+/^$'"
+set status_format = "-%r-NeoMutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---"
+ 
+
