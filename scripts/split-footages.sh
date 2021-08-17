@@ -1,0 +1,42 @@
+#! /usr/bin/env bash
+
+INPUT_PATH="$1"
+OUTPUT_PATH="$2"
+
+mkdir -p "$OUTPUT_PATH"
+if [ ! -d "$INPUT_PATH" ]; then
+    echo "An input path must be provided as first argument."
+    exit 1
+fi
+
+if [ ! -d "$OUTPUT_PATH" ]; then
+    echo "An output path must be provided as second argument."
+    exit 1
+fi
+
+FILES=$(find "$INPUT_PATH" -type f | sort)
+
+#echo "$FILES"
+remap() {
+    file="$1"
+    pathname=$(dirname "$file")
+    pathname="${pathname##*/}"
+    filename=$(basename "$file")
+    fext=${filename##*.}
+    fname=${filename%%.*}
+    creation=$(stat --format %y "$file")
+    creation_date=$(date +"%Y-%m-%d" --date "$creation")
+    creation_time=$(date +"%H:%M:%S" --date "$creation")
+    duration=$(ffprobe -v error -show_entries format=duration -sexagesimal -of default=noprint_wrappers=1:nokey=1 "$file")
+    duration=${duration%%.*}
+
+    output_dir="$OUTPUT_PATH/$creation_date/$pathname"
+    output_filename="${fname}-[${creation_time}]-[${duration}].${fext}"
+    mkdir -p "$output_dir"
+    touch "$output_dir/$output_filename"
+}
+
+for file in $FILES; do
+    dest=$(remap "$file")
+    echo "$file > $dest"
+done
