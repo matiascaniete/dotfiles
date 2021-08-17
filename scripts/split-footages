@@ -3,12 +3,12 @@
 INPUT_PATH="$1"
 OUTPUT_PATH="$2"
 
-mkdir -p "$OUTPUT_PATH"
 if [ ! -d "$INPUT_PATH" ]; then
     echo "An input path must be provided as first argument."
     exit 1
 fi
 
+mkdir -p "$OUTPUT_PATH"
 if [ ! -d "$OUTPUT_PATH" ]; then
     echo "An output path must be provided as second argument."
     exit 1
