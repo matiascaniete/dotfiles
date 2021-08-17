@@ -14,9 +14,11 @@ if [ ! -d "$OUTPUT_PATH" ]; then
     exit 1
 fi
 
-FILES=$(find "$INPUT_PATH" -type f | sort)
+duration() {
+    duration=$(ffprobe -v error -show_entries format=duration -sexagesimal -of default=noprint_wrappers=1:nokey=1 "$1")
+    echo "${duration%%.*}"
+}
 
-#echo "$FILES"
 remap() {
     file="$1"
     pathname=$(dirname "$file")
@@ -24,23 +26,26 @@ remap() {
     filename=$(basename "$file")
     fext=${filename##*.}
     fname=${filename%%.*}
-    creation=$(stat --format %y "$file")
+
+    creation=$(stat --format %y "$1")
     creation_date=$(date +"%Y-%m-%d" --date "$creation")
     creation_time=$(date +"%H:%M:%S" --date "$creation")
-    duration=$(ffprobe -v error -show_entries format=duration -sexagesimal -of default=noprint_wrappers=1:nokey=1 "$file")
-    duration=${duration%%.*}
+
+    duration=$(duration "$file")
 
     output_dir="$OUTPUT_PATH/$creation_date/$pathname"
-    output_filename="${fname}-[${creation_time}]-[${duration}].${fext}"
-    # mkdir -p "$output_dir"
+    output_filename=$(echo "${fname}-[${creation_time}]-[${duration}].${fext}" | sed 's/:/_/g')
+
     echo "$output_dir/$output_filename"
 }
 
-for file in $FILES; do
+find "$INPUT_PATH" -type f -print0 2>/dev/null | sort | while read -d $'\0' file; do
     dest_file=$(remap "$file")
     dest_path=$(dirname "$dest_file")
-    
+
     echo "Moving [$file] to [$dest_file]"
+    
     mkdir -p "$dest_path"
-    touch "$dest_file"
+    mv "$file" "$dest_file"
+    # touch "$dest_file"
 done
