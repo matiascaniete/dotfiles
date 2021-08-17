@@ -32,11 +32,15 @@ remap() {
 
     output_dir="$OUTPUT_PATH/$creation_date/$pathname"
     output_filename="${fname}-[${creation_time}]-[${duration}].${fext}"
-    mkdir -p "$output_dir"
-    touch "$output_dir/$output_filename"
+    # mkdir -p "$output_dir"
+    echo "$output_dir/$output_filename"
 }
 
 for file in $FILES; do
-    dest=$(remap "$file")
-    echo "$file > $dest"
+    dest_file=$(remap "$file")
+    dest_path=$(dirname "$dest_file")
+    
+    echo "Moving [$file] to [$dest_file]"
+    mkdir -p "$dest_path"
+    touch "$dest_file"
 done
