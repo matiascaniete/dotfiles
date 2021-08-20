@@ -17,7 +17,7 @@ json-init() {
 
 json-set() {
     local key="$1"
-    local value="$2"
+    local value=${*:2}
 
     content=$(jq ".$key = \"$value\"" "$TMP_FILE") && echo "$content">"$TMP_FILE"
 }
