@@ -1,0 +1,37 @@
+#! /usr/bin/env bash
+
+MESSAGE="$1"
+CHANNEL="#general"
+USERNAME="local-bot"
+ICON=":computer:"
+
+if [ ! $LOCAL_SLACK_WEBHOOK ]; then
+    echo "LOCAL_SLACK_WEBHOOK environment variable is not defined"
+    exit 1
+fi
+
+json-init() {
+    TMP_FILE=$(mktemp)
+    echo "{}">"$TMP_FILE"
+}
+
+json-set() {
+    local key="$1"
+    local value="$2"
+
+    content=$(jq ".$key = \"$value\"" "$TMP_FILE") && echo "$content">"$TMP_FILE"
+}
+
+json-destroy() {
+    rm "$TMP_FILE"
+}
+
+json-init
+json-set channel "$CHANNEL"
+json-set username "$USERNAME"
+json-set text "$MESSAGE"
+json-set icon_emoji "$ICON"
+
+curl -X POST --data-urlencode "payload=$(cat "$TMP_FILE")" "$LOCAL_SLACK_WEBHOOK"
+
+json-destroy
