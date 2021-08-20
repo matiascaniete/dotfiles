@@ -2,7 +2,7 @@
 
 MESSAGE="$1"
 CHANNEL="#general"
-USERNAME="local-bot"
+USERNAME=""
 ICON=":computer:"
 
 if [ ! $LOCAL_SLACK_WEBHOOK ]; then
@@ -61,12 +61,15 @@ json-destroy() {
     rm "$TMP_FILE"
 }
 
+FROM="$(whoami)@$(hostname)"
+MESSAGE="$MESSAGE\n\nEnviado desde $FROM"
+
 json-init
 json-set channel "$CHANNEL"
-json-set username "$USERNAME"
+json-set username "${USERNAME:-$FROM}"
 json-set text "$MESSAGE"
 json-set icon_emoji "$ICON"
 
-curl -X POST --data-urlencode "payload=$(cat "$TMP_FILE")" "$LOCAL_SLACK_WEBHOOK"
+curl -X POST --silent --data-urlencode "payload=$(cat "$TMP_FILE")" "$LOCAL_SLACK_WEBHOOK"
 
 json-destroy
