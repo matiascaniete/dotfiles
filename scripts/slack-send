@@ -63,8 +63,8 @@ json-destroy() {
 
 
 INVOKER=$(ps -ocmd= -p $PPID)
-FROM="$(whoami)@$(hostname):$0 ($INVOKER)"
-MESSAGE="$MESSAGE\n\nEnviado desde $FROM"
+FROM="$(whoami)@$(hostname)"
+MESSAGE="$MESSAGE\n\nEnviado desde $FROM:$0 ($INVOKER)"
 
 json-init
 json-set channel "$CHANNEL"
