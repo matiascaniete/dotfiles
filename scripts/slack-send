@@ -10,6 +10,41 @@ if [ ! $LOCAL_SLACK_WEBHOOK ]; then
     exit 1
 fi
 
+options=$(getopt --long channel:,username:,icon: --options "" -- "$@")
+#echo "$options"
+eval set -- "$options"
+
+while true; do
+    case $1 in
+        --icon)
+            ICON="$2"
+            shift 2
+            ;;
+        --username)
+            USERNAME="$2"
+            shift 2
+            ;;
+        --channel)
+            CHANNEL="$2"
+            shift 2
+            ;;
+        --)
+            MESSAGE="${*:2}"
+            shift
+            break
+            ;;
+        *)
+            echo "Internal error!"
+            exit 1
+            ;;
+    esac
+done
+
+echo "CHANNEL:$CHANNEL"
+echo "MESSAGE:$MESSAGE"
+echo "ICON:$ICON"
+echo "USERNAME:$USERNAME"
+
 json-init() {
     TMP_FILE=$(mktemp)
     echo "{}">"$TMP_FILE"
