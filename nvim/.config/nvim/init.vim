@@ -5,23 +5,22 @@ call plug#begin(stdpath('data') . '/plugged')
 
 " Make sure you use single quotes
 
-Plug 'StanAngeloff/php.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'ap/vim-css-color'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'gruvbox-community/gruvbox'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-sensible'
-Plug 'vim-airline/vim-airline'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-" Plug 'jremmen/vim-ripgrep'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'burntsushi/ripgrep'
+plug 'airblade/vim-gitgutter'
+plug 'ap/vim-css-color'
+plug 'burntsushi/ripgrep'
+plug 'ctrlpvim/ctrlp.vim'
+plug 'gruvbox-community/gruvbox'
+plug 'junegunn/fzf'
+plug 'junegunn/fzf.vim'
+plug 'neoclide/coc.nvim', {'branch': 'release'}
+plug 'nvim-lua/plenary.nvim'
+plug 'nvim-telescope/telescope.nvim'
+plug 'scrooloose/nerdtree'
+plug 'stanangeloff/php.vim'
+plug 'tpope/vim-commentary'
+plug 'tpope/vim-fugitive'
+plug 'tpope/vim-sensible'
+plug 'vim-airline/vim-airline'
 
 " Initialize plugin system
 call plug#end()
