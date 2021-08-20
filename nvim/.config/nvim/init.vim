@@ -16,12 +16,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'scrooloose/nerdtree'
-Plug 'stanangeloff/php.vim'
+" Plug 'stanangeloff/php.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
+Plug 'scrooloose/syntastic'
 
 " Initialize plugin system
 call plug#end()
@@ -82,3 +83,16 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 nnoremap <C-p> :Files<Cr>
+
+" let g:coc_global_extensions = ['coc-sh', 'coc-snippets', 'coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-json']
+
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+
+" let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
