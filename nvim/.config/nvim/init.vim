@@ -73,5 +73,5 @@ nnoremap <Leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <Leader>fb <cmd>Telescope buffers<cr>
 nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
 
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
