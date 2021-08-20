@@ -40,10 +40,10 @@ while true; do
     esac
 done
 
-echo "CHANNEL:$CHANNEL"
-echo "MESSAGE:$MESSAGE"
-echo "ICON:$ICON"
-echo "USERNAME:$USERNAME"
+#echo "CHANNEL:$CHANNEL"
+#echo "MESSAGE:$MESSAGE"
+#echo "ICON:$ICON"
+#echo "USERNAME:$USERNAME"
 
 json-init() {
     TMP_FILE=$(mktemp)
