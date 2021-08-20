@@ -61,7 +61,9 @@ json-destroy() {
     rm "$TMP_FILE"
 }
 
-FROM="$(whoami)@$(hostname)"
+
+INVOKER=$(ps -ocmd= -p $PPID)
+FROM="$(whoami)@$(hostname):$0 ($INVOKER)"
 MESSAGE="$MESSAGE\n\nEnviado desde $FROM"
 
 json-init
