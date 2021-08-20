@@ -83,6 +83,7 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 nnoremap <C-p> :Files<Cr>
+inoremap jj <Esc>
 
 " let g:coc_global_extensions = ['coc-sh', 'coc-snippets', 'coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-json']
 
