@@ -5,7 +5,7 @@ CHANNEL="#general"
 USERNAME=""
 ICON=":computer:"
 
-if [ ! $LOCAL_SLACK_WEBHOOK ]; then
+if [ ! "$LOCA_SLACK_WEBHOOK" ]; then
     echo "LOCAL_SLACK_WEBHOOK environment variable is not defined"
     exit 1
 fi
