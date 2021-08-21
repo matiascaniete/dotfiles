@@ -1,0 +1,4 @@
+{
+    "coc.preferences.formatOnSaveFiletypes": ["css", "sh", "markdown", "php", "json"],
+    "coc.preferences.formatOnType":true
+}

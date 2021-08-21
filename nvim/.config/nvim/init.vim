@@ -85,6 +85,12 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 nnoremap <C-p> :Files<Cr>
 inoremap jj <Esc>
 
+set splitbelow splitright
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
 let g:coc_global_extensions = ['coc-sh', 'coc-snippets', 'coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-json', 'coc-php-cs-fixer', 'coc-phpls']
 
 set statusline+=%#warningmsg#
