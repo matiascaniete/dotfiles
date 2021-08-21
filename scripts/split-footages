@@ -39,7 +39,13 @@ remap() {
     echo "$output_dir/$output_filename"
 }
 
-find "$INPUT_PATH" -type f -print0 2>/dev/null | sort | while read -d $'\0' file; do
+list() {
+    find "$INPUT_PATH" -type f -print0 2>/dev/null | sort 
+}
+
+move() {
+    file=$1
+
     dest_file=$(remap "$file")
     dest_path=$(dirname "$dest_file")
 
@@ -47,5 +53,8 @@ find "$INPUT_PATH" -type f -print0 2>/dev/null | sort | while read -d $'\0' file
     
     mkdir -p "$dest_path"
     mv "$file" "$dest_file"
-    # touch "$dest_file"
+}
+
+list | while read -d $'\0' -r file; do
+    move "$file"
 done
