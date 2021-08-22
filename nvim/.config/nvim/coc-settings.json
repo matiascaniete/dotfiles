@@ -1,12 +1,51 @@
 {
-  "cSpellExt.enableDictionaries": ["spanish"],
-  "cSpell.language": "en,es",
-  "coc.preferences.formatOnSaveFiletypes": [
-    "css",
-    "sh",
-    "markdown",
-    "php",
-    "json"
-  ],
-  "coc.preferences.formatOnType": true
+    "cSpellExt.enableDictionaries": [
+        "spanish"
+    ],
+    "cSpell.language": "en,es",
+    "cSpell.numSuggestions": 7,
+    "cSpell.enabledLanguageIds": [
+        "vim",
+        "asciidoc",
+        "c",
+        "cpp",
+        "csharp",
+        "css",
+        "git-commit",
+        "go",
+        "handlebars",
+        "haskell",
+        "html",
+        "jade",
+        "java",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "jsonc",
+        "latex",
+        "less",
+        "markdown",
+        "php",
+        "plaintext",
+        "python",
+        "pug",
+        "restructuredtext",
+        "rust",
+        "scala",
+        "scss",
+        "sh",
+        "text",
+        "typescript",
+        "typescriptreact",
+        "yaml",
+        "yml"
+    ],
+    "coc.preferences.formatOnSaveFiletypes": [
+        "css",
+        "sh",
+        "markdown",
+        "php",
+        "json"
+    ],
+    "coc.preferences.formatOnType": true
 }
