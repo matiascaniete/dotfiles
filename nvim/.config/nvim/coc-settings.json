@@ -1,4 +1,12 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": ["css", "sh", "markdown", "php", "json"],
-    "coc.preferences.formatOnType":true
+  "cSpellExt.enableDictionaries": ["spanish"],
+  "cSpell.language": "en,es",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "sh",
+    "markdown",
+    "php",
+    "json"
+  ],
+  "coc.preferences.formatOnType": true
 }

@@ -1,3 +1,5 @@
+# Readme
+
 ## Install
 
 ```sh
@@ -20,11 +22,12 @@ source ~/.custom_zshrc
 ```
 
 ## Bootstrap keybindings
+
 Include this line in the ~/.xinitrc
+
 ```sh
 source ~/.custom_xinitrc
 ```
-
 
 ## Install plugins
 
@@ -38,4 +41,4 @@ bash ./install-plugins.sh
 bash ./install-fonts.sh
 ```
 
-> Based on https://www.jetbrains.com/lp/mono/#how-to-install
+> Based on [https://www.jetbrains.com/lp/mono/#how-to-install](https://www.jetbrains.com/lp/mono/#how-to-install)
