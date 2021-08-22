@@ -24,6 +24,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/syntastic'
 Plug 'stsewd/fzf-checkout.vim'
+Plug 'mbbill/undotree'
 
 " Initialize plugin system
 call plug#end()
@@ -79,7 +80,10 @@ nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>gc :GCheckout<cr>
 nnoremap <leader>gs :G<cr>
 nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>r <Plug>(coc-references)
+nmap <leader>gr <Plug>(coc-references)
+nnoremap <leader>u :UndotreeShow<cr>
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<cr>
+nnoremap <leader>ps :Rg<SPACE>
 
 " Coc related
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
