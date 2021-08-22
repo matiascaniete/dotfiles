@@ -77,6 +77,7 @@ nnoremap <Leader>fb <cmd>Telescope buffers<cr>
 nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
 
 nnoremap <leader>gc :GCheckout<cr>
+nnoremap <leader>gs :G<cr>
 
 " Coc related
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
