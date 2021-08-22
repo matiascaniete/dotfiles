@@ -91,8 +91,12 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+" coc configs
 let g:coc_global_extensions = ['coc-sh', 'coc-snippets', 'coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-json', 'coc-php-cs-fixer', 'coc-phpls', 'coc-vetur', 'coc-css', 'coc-yaml', 'coc-stylelint', 'coc-python', 'coc-markdownlint', 'coc-spell-checker', 'coc-cspell-dicts']
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
 
+" Syntastic configs
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
