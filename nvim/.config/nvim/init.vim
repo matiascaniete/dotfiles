@@ -32,7 +32,7 @@ let mapleader=" "
 " Some theming
 colorscheme gruvbox
 let g:gruvbox_contrast_dark='hard'
-set background=dark 
+set background=dark
 highlight Normal guibg=none
 
 " Show number lines
