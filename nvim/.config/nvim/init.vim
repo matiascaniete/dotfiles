@@ -23,6 +23,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/syntastic'
+Plug 'stsewd/fzf-checkout.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -74,6 +75,8 @@ nnoremap <Leader>ff <cmd>Telescope find_files<cr>
 nnoremap <Leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <Leader>fb <cmd>Telescope buffers<cr>
 nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
+
+nnoremap <leader>gc :GCheckout<cr>
 
 " Coc related
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
