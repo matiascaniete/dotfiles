@@ -27,6 +27,8 @@ alias vf='fzf | xargs "$EDITOR"'
 alias v="nvim"
 
 alias zzh="zsh-show-keybindings"
+alias ytdla="youtube-dl --extract-audio --audio-format mp3"
+alias ytdlv="youtube-dl"
 
 # open nvim after fzf search with preview
 function vfp() {
