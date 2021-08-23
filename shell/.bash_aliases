@@ -29,6 +29,8 @@ alias v="nvim"
 alias zzh="zsh-show-keybindings"
 alias ytdla="youtube-dl --extract-audio --audio-format mp3"
 alias ytdlv="youtube-dl"
+alias mntp="mkdir ~/Phone && go-mtpfs ~/Phone &"
+alias umntp="fusermount -u ~/Phone"
 
 # open nvim after fzf search with preview
 function vfp() {

@@ -1,4 +1,5 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
+# shellcheck shell=sh
 
 MESSAGE="$1"
 CHANNEL="#general"
@@ -11,7 +12,6 @@ if [ ! "$LOCAL_SLACK_WEBHOOK" ]; then
 fi
 
 options=$(getopt --long channel:,username:,icon: --options "" -- "$@")
-#echo "$options"
 eval set -- "$options"
 
 while true; do
@@ -40,24 +40,19 @@ while true; do
     esac
 done
 
-#echo "CHANNEL:$CHANNEL"
-#echo "MESSAGE:$MESSAGE"
-#echo "ICON:$ICON"
-#echo "USERNAME:$USERNAME"
-
-json-init() {
+json_init() {
     TMP_FILE=$(mktemp)
     echo "{}">"$TMP_FILE"
 }
 
-json-set() {
-    local key="$1"
-    local value=${*:2}
+json_set() {
+    key="$1"
+    value=${*:2}
 
     content=$(jq ".$key = \"$value\"" "$TMP_FILE") && echo "$content">"$TMP_FILE"
 }
 
-json-destroy() {
+json_destroy() {
     rm "$TMP_FILE"
 }
 
@@ -66,12 +61,12 @@ INVOKER=$(ps -ocmd= -p $PPID)
 FROM="$(whoami)@$(hostname)"
 MESSAGE="$MESSAGE\n\nEnviado desde $FROM:$0 ($INVOKER)"
 
-json-init
-json-set channel "$CHANNEL"
-json-set username "${USERNAME:-$FROM}"
-json-set text "$MESSAGE"
-json-set icon_emoji "$ICON"
+json_init
+json_set channel "$CHANNEL"
+json_set username "${USERNAME:-$FROM}"
+json_set text "$MESSAGE"
+json_set icon_emoji "$ICON"
 
 curl -X POST --silent --data-urlencode "payload=$(cat "$TMP_FILE")" "$LOCAL_SLACK_WEBHOOK"
 
-json-destroy
+json_destroy
