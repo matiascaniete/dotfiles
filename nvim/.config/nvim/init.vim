@@ -45,9 +45,9 @@ set relativenumber
 set cursorline
 
 " Converts tabs into 4 spaces
-set expandtab
 set tabstop=4 softtabstop=4
 set shiftwidth=4
+set expandtab
 set smartindent
 
 " set mouse=a
@@ -56,10 +56,15 @@ set smartindent
 set smartcase
 set ignorecase
 
-" Execute local vimrc
+set noswapfile
+set nobackup
+
+set incsearch
+
+" Execute local vimrc, if exists
 set exrc
 
-" No highligh after search
+" No highlight after search
 set nohlsearch
 
 set hidden
@@ -69,6 +74,8 @@ set clipboard+=unnamedplus
 
 " Shows trailing spaces
 set list
+
+set nowrap
 
 " Edit vimr configuration file
 nnoremap <Leader>ve :e $MYVIMRC<CR>
