@@ -3,9 +3,6 @@
 INPUT_PATH="$1"
 OUTPUT_PATH="$2"
 
-# claca
-
-
 if [ ! -d "$INPUT_PATH" ]; then
     echo "An input path must be provided as first argument."
     exit 1
@@ -43,7 +40,7 @@ remap() {
 }
 
 list() {
-    find "$INPUT_PATH" -type f -print0 2>/dev/null | sort 
+    find "$INPUT_PATH" -type f -print0 2>/dev/null | sort
 }
 
 move() {
@@ -53,7 +50,7 @@ move() {
     dest_path=$(dirname "$dest_file")
 
     echo "Moving [$file] to [$dest_file]"
-    
+
     mkdir -p "$dest_path"
     mv "$file" "$dest_file"
 }

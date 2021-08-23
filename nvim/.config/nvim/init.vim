@@ -47,5 +47,33 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-vnoremap J :m '>+1<cr>gv=gv
-vnoremap K :m '<-2<cr>gv=gv
+" Move line(s) up and down
+nnoremap <M-j> :m .+1<CR>==
+nnoremap <M-k> :m .-2<CR>==
+inoremap <M-j> <Esc>:m .+1<CR>==gi
+inoremap <M-k> <Esc>:m .-2<CR>==gi
+vnoremap <M-j> :m '>+1<CR>gv=gv
+vnoremap <M-k> :m '<-2<CR>gv=gv
+
+" Shrug ¯\_(ツ)_/¯
+inoremap ,shrug ¯\_(ツ)_/¯
+
+" Run the last command
+nnoremap <leader><leader>c :<up>
+
+nnoremap <Up> <C-y>
+nnoremap <Down> <C-e>
+" Switch between tabs
+nnoremap <Right> gt
+nnoremap <Left>  gT
+
+" Sizing window vertically
+" taller
+nnoremap <A-t> <C-W>+
+" shorter
+nnoremap <A-s> <C-W>-
+
+" Move easily to the next error
+nnoremap <leader>l :lnext<CR>
+nnoremap <leader>h :lprevious<CR>
+
