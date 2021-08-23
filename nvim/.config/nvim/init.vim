@@ -94,6 +94,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 "nnoremap <C-p> :Files<Cr>
 nnoremap <C-p> :GFiles<Cr>
+nnoremap <S-p> :Command<Cr>
 inoremap jj <Esc>
 
 set splitbelow splitright
