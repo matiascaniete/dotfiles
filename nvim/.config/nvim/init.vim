@@ -1,10 +1,6 @@
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
 call plug#begin(stdpath('data') . '/plugged')
 
 " Make sure you use single quotes
-
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
 Plug 'burntsushi/ripgrep'
@@ -26,60 +22,11 @@ Plug 'scrooloose/syntastic'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'mbbill/undotree'
 
-" Initialize plugin system
 call plug#end()
 
 let mapleader=" "
 
-" Some theming
-colorscheme gruvbox
-let g:gruvbox_contrast_dark='hard'
-set background=dark
-highlight Normal guibg=none
-
-" Show number lines
-set number
-set relativenumber
-
-" Show whole line on current line
-set cursorline
-
-" Converts tabs into 4 spaces
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set expandtab
-set smartindent
-
-" set mouse=a
-
-" Searching case sensitivity
-set smartcase
-set ignorecase
-
-set noswapfile
-set nobackup
-
-set incsearch
-
-" Execute local vimrc, if exists
-set exrc
-
-" No highlight after search
-set nohlsearch
-
-set hidden
-set scrolloff=8
-" set colorcolumn=80
-set clipboard+=unnamedplus
-
-" Shows trailing spaces
-set list
-
-set nowrap
-
-" Edit vimr configuration file
 nnoremap <Leader>ve :e $MYVIMRC<CR>
-" Reload vimr configuration file
 nnoremap <Leader>vr :source $MYVIMRC<CR>
 
 nnoremap <Leader>ff <cmd>Telescope find_files<cr>
@@ -89,37 +36,12 @@ nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
 
 nnoremap <leader>gc :GCheckout<cr>
 nnoremap <leader>gs :G<cr>
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gr <Plug>(coc-references)
 nnoremap <leader>u :UndotreeShow<cr>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<cr>
 nnoremap <leader>ps :Rg<SPACE>
 
-" Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-" Coc related
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-"nnoremap <C-p> :Files<Cr>
-nnoremap <C-p> :Files<Cr>
-nnoremap <S-p> :Command<Cr>
 inoremap jj <Esc>
 
-set splitbelow splitright
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
@@ -127,35 +49,3 @@ nnoremap <c-l> <c-w>l
 
 vnoremap J :m '>+1<cr>gv=gv
 vnoremap K :m '<-2<cr>gv=gv
-
-" coc configs
-let g:coc_global_extensions = [
-    \ 'coc-sh',
-    \ 'coc-snippets',
-    \ 'coc-tsserver',
-    \ 'coc-eslint',
-    \ 'coc-prettier',
-    \ 'coc-json',
-    \ 'coc-php-cs-fixer',
-    \ 'coc-phpls',
-    \ 'coc-vetur',
-    \ 'coc-css',
-    \ 'coc-yaml',
-    \ 'coc-stylelint',
-    \ 'coc-python',
-    \ 'coc-markdownlint',
-    \ ]
-vmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
-
-" Syntastic configs
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
