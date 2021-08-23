@@ -105,7 +105,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <c-space> coc#refresh()
 
 "nnoremap <C-p> :Files<Cr>
-nnoremap <C-p> :GFiles<Cr>
+nnoremap <C-p> :Files<Cr>
 nnoremap <S-p> :Command<Cr>
 inoremap jj <Esc>
 
