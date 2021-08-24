@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 # shellcheck shell=sh
 
 MESSAGE="$1"

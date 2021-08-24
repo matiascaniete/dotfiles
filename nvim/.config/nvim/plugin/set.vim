@@ -22,6 +22,7 @@ set incsearch
 
 " Execute local vimrc, if exists
 set exrc
+set secure
 
 " No highlight after search
 set nohlsearch
