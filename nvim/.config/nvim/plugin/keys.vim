@@ -8,7 +8,6 @@ nnoremap <Leader>ff <cmd>Telescope find_files<cr>
 nnoremap <Leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <Leader>fb <cmd>Telescope buffers<cr>
 nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <tab> <cmd>Telescope buffers theme=get_ivy<cr>
 
 nnoremap <C-p> :Telescope git_files<Cr>
 nnoremap <leader>gc :GCheckout<cr>
@@ -43,6 +42,9 @@ nnoremap <Down> <C-e>
 " Switch between tabs
 nnoremap <Right> gt
 nnoremap <Left>  gT
+
+" Remove whitespace
+nnoremap <leader>sws :%s/\s\+$//<CR>
 
 " Sizing window vertically
 " taller
