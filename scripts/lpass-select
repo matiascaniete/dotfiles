@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
+# shellcheck shell=sh
 
 # Show lastpass password selected from rofi or fzf
-
 # notify-send "SHLVL=$SHLVL"
 
 if [ $SHLVL == "1" ]; then

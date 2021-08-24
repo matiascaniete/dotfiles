@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck shell=sh
 
 INPUT_PATH="$1"
 OUTPUT_PATH="$2"
