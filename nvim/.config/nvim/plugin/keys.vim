@@ -11,6 +11,7 @@ nnoremap <Leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <tab> <cmd>Telescope buffers theme=get_ivy<cr>
 
 nnoremap <C-p> :Telescope git_files<Cr>
+nnoremap <A-p> :Telescope commands<Cr>
 nnoremap <leader>gc :GCheckout<cr>
 nnoremap <leader>gs :G<cr>
 nnoremap <leader>u :UndotreeShow<cr>
