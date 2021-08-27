@@ -21,6 +21,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/syntastic'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'mbbill/undotree'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-treesitter/playground'
 
 call plug#end()
 
