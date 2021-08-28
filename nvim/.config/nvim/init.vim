@@ -23,6 +23,7 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'mbbill/undotree'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'nvim-treesitter/playground'
+Plug 'kyazdani42/nvim-web-devicons'
 
 call plug#end()
 
