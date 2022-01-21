@@ -1,9 +1,10 @@
 {
-  "cSpell.words": [
-    "dotfiles",
-    "matiascaniete",
-    "xinitrc",
-    "ytdla",
-    "ytdlv"
-  ]
+    "cSpell.words": [
+        "dotfiles",
+        "matiascaniete",
+        "xinitrc",
+        "ytdla",
+        "ytdlv"
+    ],
+    "vetur.trace.server": "verbose"
 }
