@@ -20,6 +20,7 @@ antigen bundle docker-compose
 antigen bundle extract
 antigen bundle fd
 antigen bundle fzf
+antigen bundle Aloxaf/fzf-tab
 antigen bundle genpass
 antigen bundle git
 antigen bundle git-extras
