@@ -45,7 +45,7 @@ antigen bundle z
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle RobSis/zsh-completion-generator
-antigen bundle zsh-interactive-cd
+# antigen bundle zsh-interactive-cd
 
 # Must be the last bundle!!
 antigen bundle zsh-users/zsh-syntax-highlighting
