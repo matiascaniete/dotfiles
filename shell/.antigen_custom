@@ -44,6 +44,7 @@ antigen bundle web-search
 antigen bundle z
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
+antigen bundle RobSis/zsh-completion-generator
 antigen bundle zsh-interactive-cd
 
 # Must be the last bundle!!
@@ -53,3 +54,6 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen theme romkatv/powerlevel10k
 
 antigen apply
+
+zstyle :plugin:zsh-completion-generator programs \
+    tr cat nl man
