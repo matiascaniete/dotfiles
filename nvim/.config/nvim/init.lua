@@ -43,6 +43,8 @@ require('packer').startup(function(use)
     after = 'nvim-treesitter',
   }
 
+  use 'jose-elias-alvarez/null-ls.nvim'
+
   -- Git related plugins
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
@@ -197,6 +199,15 @@ require('telescope').setup {
   },
 }
 
+require("null-ls").setup({
+  sources = {
+    require("null-ls").builtins.formatting.shfmt, -- shell script formatting
+    require("null-ls").builtins.formatting.prettier, -- markdown formatting
+    -- require("null-ls").builtins.diagnostics.shellcheck, -- shell script diagnostics
+    require("null-ls").builtins.code_actions.shellcheck, -- shell script code actions
+  }
+})
+
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
@@ -344,6 +355,7 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
+  bashls = {},
 
   sumneko_lua = {
     Lua = {
