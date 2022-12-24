@@ -15,4 +15,4 @@ stow -vt ~ \
     tmux
 
 # Installs scripts
-sudo stow -vt /usr/local/bin scripts
+# sudo stow -vt /usr/local/bin scripts
