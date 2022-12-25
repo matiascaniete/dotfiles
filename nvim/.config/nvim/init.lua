@@ -200,6 +200,7 @@ require('telescope').setup {
 }
 
 require("null-ls").setup({
+
   sources = {
     require("null-ls").builtins.formatting.shfmt, -- shell script formatting
     require("null-ls").builtins.formatting.prettier, -- markdown formatting
@@ -342,6 +343,11 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  vim.api.nvim_buf_create_user_command(bufnr, 'CodeActions', function(_)
+    vim.lsp.buf.code_action()
+  end, { desc = 'Code action for current buffer with LSP' });
+
 end
 
 -- Enable the following language servers
