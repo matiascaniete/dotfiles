@@ -51,6 +51,7 @@ require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
 
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
+  use 'sainnhe/gruvbox-material'
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
@@ -157,7 +158,10 @@ vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme onedark]]
+vim.o.background = 'dark'
+vim.g.gruvbox_material_background = 'hard'
+vim.g.gruvbox_material_better_performance = 1
+vim.cmd [[colorscheme gruvbox-material]]
 
 local Terminal = require('toggleterm.terminal').Terminal
 local lazyGit = Terminal:new({
@@ -193,6 +197,7 @@ vim.g.maplocalleader = ' '
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set('i', 'jj', '<Esc>', { noremap = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -214,7 +219,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'onedark',
+    theme = 'gruvbox-material',
     component_separators = '|',
     section_separators = '',
   },
@@ -264,11 +269,12 @@ require("null-ls").setup({
     require("null-ls").builtins.code_actions.shellcheck, -- shell script code actions
     require("null-ls").builtins.diagnostics.phpmd.with({
       extra_args = function()
-        if vim.fn.filereadable("phpmd.xml") == 1 then
-          return { "phpmd.xml" }
-        else
-          return { "cleancode,codesize,controversial,design,naming,unusedcode" }
+        local configFile = "phpmd.xml"
+        if vim.fn.filereadable(configFile) == 1 then
+          return { configFile }
         end
+
+        return { "cleancode,codesize,controversial,design,naming,unusedcode" }
       end
     }), -- shell script code actions
   }
