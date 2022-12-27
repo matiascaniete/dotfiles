@@ -256,12 +256,21 @@ require('telescope').setup {
 }
 
 require("null-ls").setup({
-
+  debug = true,
   sources = {
     require("null-ls").builtins.formatting.shfmt, -- shell script formatting
     require("null-ls").builtins.formatting.prettier, -- markdown formatting
     -- require("null-ls").builtins.diagnostics.shellcheck, -- shell script diagnostics
     require("null-ls").builtins.code_actions.shellcheck, -- shell script code actions
+    require("null-ls").builtins.diagnostics.phpmd.with({
+      extra_args = function()
+        if vim.fn.filereadable("phpmd.xml") == 1 then
+          return { "phpmd.xml" }
+        else
+          return { "cleancode,codesize,controversial,design,naming,unusedcode" }
+        end
+      end
+    }), -- shell script code actions
   }
 })
 
