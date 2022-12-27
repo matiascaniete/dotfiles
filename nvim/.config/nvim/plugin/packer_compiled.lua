@@ -185,7 +185,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["toggleterm.nvim"] = {
-    config = { "\27LJ\2\2\20\0\1\2\0\1\0\0029\1\0\0L\1\2\0\tname–\3\1\0\4\0\14\0\0196\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0004\2\0\0=\2\4\0016\2\5\0009\2\6\0029\2\a\2=\2\a\0015\2\b\0=\2\t\0015\2\n\0003\3\v\0=\3\f\2=\2\r\1B\0\2\1K\0\1\0\vwinbar\19name_formatter\0\1\0\1\fenabled\2\15float_opts\1\0\2\rwinblend\3\3\vborder\vsingle\nshell\6o\bvim\20shade_filetypes\1\0\r\17persist_size\2\18close_on_exit\2\14direction\nfloat\16auto_scroll\2\22terminal_mappings\2\20start_in_insert\2\17persist_mode\2\20insert_mappings\2\tsize\3\20\20shade_terminals\2\17open_mapping\n<c-\\>\14autochdir\1\17hide_numbers\2\nsetup\15toggleterm\frequire\0" },
+    config = { "\27LJ\2\n\20\0\1\2\0\1\0\0029\1\0\0L\1\2\0\tname–\3\1\0\5\0\14\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\0026\3\5\0009\3\6\0039\3\a\3=\3\a\0025\3\b\0=\3\t\0025\3\n\0003\4\v\0=\4\f\3=\3\r\2B\0\2\1K\0\1\0\vwinbar\19name_formatter\0\1\0\1\fenabled\2\15float_opts\1\0\2\vborder\vsingle\rwinblend\3\3\nshell\6o\bvim\20shade_filetypes\1\0\r\18close_on_exit\2\14direction\nfloat\17persist_mode\2\17persist_size\2\22terminal_mappings\2\20insert_mappings\2\20start_in_insert\2\20shade_terminals\2\14autochdir\1\17hide_numbers\2\17open_mapping\n<c-\\>\tsize\3\20\16auto_scroll\2\nsetup\15toggleterm\frequire\0" },
     loaded = true,
     path = "/home/matias/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
@@ -210,7 +210,7 @@ _G.packer_plugins = {
 time([[Defining packer_plugins]], false)
 -- Config for: toggleterm.nvim
 time([[Config for toggleterm.nvim]], true)
-try_loadstring("\27LJ\2\2\20\0\1\2\0\1\0\0029\1\0\0L\1\2\0\tname–\3\1\0\4\0\14\0\0196\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0004\2\0\0=\2\4\0016\2\5\0009\2\6\0029\2\a\2=\2\a\0015\2\b\0=\2\t\0015\2\n\0003\3\v\0=\3\f\2=\2\r\1B\0\2\1K\0\1\0\vwinbar\19name_formatter\0\1\0\1\fenabled\2\15float_opts\1\0\2\rwinblend\3\3\vborder\vsingle\nshell\6o\bvim\20shade_filetypes\1\0\r\17persist_size\2\18close_on_exit\2\14direction\nfloat\16auto_scroll\2\22terminal_mappings\2\20start_in_insert\2\17persist_mode\2\20insert_mappings\2\tsize\3\20\20shade_terminals\2\17open_mapping\n<c-\\>\14autochdir\1\17hide_numbers\2\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
+try_loadstring("\27LJ\2\n\20\0\1\2\0\1\0\0029\1\0\0L\1\2\0\tname–\3\1\0\5\0\14\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\0026\3\5\0009\3\6\0039\3\a\3=\3\a\0025\3\b\0=\3\t\0025\3\n\0003\4\v\0=\4\f\3=\3\r\2B\0\2\1K\0\1\0\vwinbar\19name_formatter\0\1\0\1\fenabled\2\15float_opts\1\0\2\vborder\vsingle\rwinblend\3\3\nshell\6o\bvim\20shade_filetypes\1\0\r\18close_on_exit\2\14direction\nfloat\17persist_mode\2\17persist_size\2\22terminal_mappings\2\20insert_mappings\2\20start_in_insert\2\20shade_terminals\2\14autochdir\1\17hide_numbers\2\17open_mapping\n<c-\\>\tsize\3\20\16auto_scroll\2\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
 time([[Config for toggleterm.nvim]], false)
 -- Conditional loads
 time([[Conditional loading of telescope-fzf-native.nvim]], true)
