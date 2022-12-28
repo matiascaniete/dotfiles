@@ -243,12 +243,7 @@ vim.api.nvim_create_user_command('LazyGit', function(_)
   print 'lg toggled!'
 end, { desc = 'LazyGit toggled!' })
 
-function _lazygit_toggle()
-  lazyGit:toggle()
-end
-
 vim.keymap.set({ 'n', 't' }, '<leader>g', '<cmd>lua _lazygit_toggle()<CR>', { noremap = true, silent = true })
-
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -269,6 +264,10 @@ vim.keymap.set('i', 'jj', '<Esc>', { noremap = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set('n', '<leader>ff', '<cmd>NvimTreeToggle<CR>', { noremap = true })
+vim.keymap.set('n', '<C-k>', '<C-w>k<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<C-j>', '<C-w>j<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<C-h>', '<C-w>h<CR>', { silent = true, noremap = true })
+vim.keymap.set('n', '<C-l>', '<C-w>l<CR>', { silent = true, noremap = true })
 
 
 -- [[ Highlight on yank ]]
@@ -477,7 +476,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('KK', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
