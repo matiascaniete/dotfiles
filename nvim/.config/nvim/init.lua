@@ -53,6 +53,21 @@ require('packer').startup(function(use)
   }
 
   use 'jose-elias-alvarez/null-ls.nvim'
+  use "folke/which-key.nvim"
+  -- using packer.nvim
+  use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
+  use {
+    'goolord/alpha-nvim',
+    requires = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require 'alpha'.setup(require 'alpha.themes.startify'.config)
+    end
+  }
+  use 'pwntester/octo.nvim'
+
+  use { 'RRethy/vim-illuminate' }
+  use 'nacro90/numb.nvim'
+  use "f-person/git-blame.nvim"
 
   -- Git related plugins
   use 'tpope/vim-fugitive'
@@ -61,6 +76,8 @@ require('packer').startup(function(use)
 
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'sainnhe/gruvbox-material'
+  use "lunarvim/Onedarker.nvim"
+
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
@@ -213,6 +230,7 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set('n', '<leader>ff', '<cmd>NvimTreeToggle<CR>', { noremap = true })
 
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -228,14 +246,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help lualine.txt`
 require('lualine').setup {
   options = {
-    icons_enabled = false,
     theme = 'gruvbox-material',
-    component_separators = '|',
-    section_separators = '',
   },
 }
 
 require("nvim-tree").setup()
+require("which-key").setup()
+require("bufferline").setup {}
+require('numb').setup()
+require('octo').setup()
+require('nvim-autopairs').setup()
+
+vim.api.nvim_create_user_command('Issues', ':Octo issue list', { desc = 'Show issues from Github' })
 
 -- Enable Comment.nvim
 require('Comment').setup()
