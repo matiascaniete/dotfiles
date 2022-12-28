@@ -68,6 +68,46 @@ require('packer').startup(function(use)
   use { 'RRethy/vim-illuminate' }
   use 'nacro90/numb.nvim'
   use "f-person/git-blame.nvim"
+  use {
+    'rmagatti/goto-preview',
+    config = function()
+      require('goto-preview').setup {
+        default_mappings = true
+      }
+    end
+  }
+  use {
+    "ray-x/lsp_signature.nvim",
+  }
+  use 'simrat39/symbols-outline.nvim'
+  -- Lua
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+  use 'karb94/neoscroll.nvim'
+  -- Lua
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+  use "itchyny/vim-cursorword"
+  use 'wakatime/vim-wakatime'
+
 
   -- Git related plugins
   use 'tpope/vim-fugitive'
@@ -256,6 +296,9 @@ require("bufferline").setup {}
 require('numb').setup()
 require('octo').setup()
 require('nvim-autopairs').setup()
+require "lsp_signature".setup()
+require("symbols-outline").setup()
+require('neoscroll').setup()
 
 vim.api.nvim_create_user_command('Issues', ':Octo issue list', { desc = 'Show issues from Github' })
 
