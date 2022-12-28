@@ -592,5 +592,15 @@ cmp.setup {
   },
 }
 
+if vim.g.neovide == true then
+  vim.g.neovide_scale_factor = 0.8
+  vim.g.neovide_transparency = 0.75
+  vim.g.neovide_fullscreen = true
+  vim.g.neovide_cursor_vfx_mode = "pixiedust"
+  vim.g.neovide_cursor_vfx_opacity = 1000
+  vim.g.neovide_cursor_vfx_particle_lifetime = 3
+end
+
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
