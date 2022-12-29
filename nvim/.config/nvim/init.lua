@@ -106,8 +106,6 @@ require('packer').startup(function(use)
     end
   }
   use "itchyny/vim-cursorword"
-  use 'wakatime/vim-wakatime'
-
 
   -- Git related plugins
   use 'tpope/vim-fugitive'
