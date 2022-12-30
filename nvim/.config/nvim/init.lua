@@ -337,7 +337,31 @@ require('telescope').setup {
 require("null-ls").setup({
   debug = true,
   sources = {
-    require("null-ls").builtins.formatting.shfmt, -- shell script formatting
+    require("null-ls").builtins.formatting.shfmt.with({
+      extra_args = function(params)
+        return params.options
+            and params.options.tabSize
+            and {
+              "--simplify",
+              "--indent",
+              params.options.tabSize,
+            }
+      end,
+    }), -- shell script formatting
+
+    require("null-ls").builtins.formatting.shellharden, -- shell script formatting
+    require("null-ls").builtins.formatting.beautysh.with({
+      extra_args = function(params)
+        return params.options
+            and params.options.tabSize
+            and {
+              "--force-function-style",
+              "paronly",
+              "--indent-size",
+              params.options.tabSize,
+            }
+      end
+    }), -- shell script formatting
     require("null-ls").builtins.formatting.prettier, -- markdown formatting
     -- require("null-ls").builtins.diagnostics.shellcheck, -- shell script diagnostics
     require("null-ls").builtins.code_actions.shellcheck, -- shell script code actions
