@@ -31,6 +31,18 @@ require('packer').startup(function(use)
     requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   }
 
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-buffer'
+
+  use {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  }
+
+  use 'p00f/nvim-ts-rainbow'
+
   use { "windwp/nvim-autopairs" }
 
   use {
@@ -38,6 +50,19 @@ require('packer').startup(function(use)
     requires = {
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
+  }
+
+  -- Lua
+  use {
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+      require('telescope').load_extension('projects')
+    end
   }
 
   use { -- Highlight, edit, and navigate code
@@ -51,6 +76,8 @@ require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter-textobjects',
     after = 'nvim-treesitter',
   }
+
+  use 'nvim-treesitter/nvim-treesitter-context'
 
   use 'jose-elias-alvarez/null-ls.nvim'
   use "folke/which-key.nvim"
@@ -115,6 +142,7 @@ require('packer').startup(function(use)
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'sainnhe/gruvbox-material'
   use "lunarvim/Onedarker.nvim"
+  use 'norcalli/nvim-colorizer.lua'
 
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
@@ -126,7 +154,6 @@ require('packer').startup(function(use)
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
-
   use { "akinsho/toggleterm.nvim", tag = '*' }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
@@ -286,6 +313,7 @@ require('lualine').setup {
     theme = 'gruvbox-material',
   },
 }
+require 'colorizer'.setup()
 
 require("nvim-tree").setup()
 require("which-key").setup()
@@ -296,6 +324,19 @@ require('nvim-autopairs').setup()
 require "lsp_signature".setup()
 require("symbols-outline").setup()
 require('neoscroll').setup()
+require("nvim-treesitter.configs").setup {
+  rainbow = {
+    enable = true,
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+  }
+}
+require 'treesitter-context'.setup({
+  enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+  throttle = true, -- Throttles plugin updates (may improve performance)
+  max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+})
 
 vim.api.nvim_create_user_command('Issues', ':Octo issue list', { desc = 'Show issues from Github' })
 
@@ -369,9 +410,10 @@ require("null-ls").setup({
       extra_args = function()
         local configFile = "phpmd.xml"
         if vim.fn.filereadable(configFile) == 1 then
+          print("Using phpmd configuration from file " .. configFile)
           return { configFile }
         end
-
+        print("Using phpmd with all rules")
         return { "cleancode,codesize,controversial,design,naming,unusedcode" }
       end
     }), -- shell script code actions
@@ -403,7 +445,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'bash', 'php',
-    'javascript', 'html', 'json', 'regex', 'markdown', 'gitcommit', 'scss', 'dockerfile', 'twig', 'yaml' },
+    'javascript', 'html', 'json', 'regex', 'markdown', 'gitcommit', 'scss', 'dockerfile', 'twig', 'yaml', 'css' },
 
 
   highlight = { enable = true },
@@ -610,6 +652,8 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'path' },
+    { name = 'buffer' },
   },
 }
 
@@ -621,7 +665,6 @@ if vim.g.neovide == true then
   vim.g.neovide_cursor_vfx_opacity = 1000
   vim.g.neovide_cursor_vfx_particle_lifetime = 3
 end
-
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
