@@ -31,6 +31,8 @@ require('packer').startup(function(use)
     requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
   }
 
+  use "rafamadriz/friendly-snippets"
+
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-buffer'
 
@@ -91,6 +93,20 @@ require('packer').startup(function(use)
     end
   }
   use 'pwntester/octo.nvim'
+  use { "ellisonleao/glow.nvim" }
+  use({ "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" },
+  })
+
+  use {
+    "tpope/vim-surround",
+
+    -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
+    -- setup = function()
+    --  vim.o.timeoutlen = 500
+    -- end
+  }
 
   use { 'RRethy/vim-illuminate' }
   use 'nacro90/numb.nvim'
@@ -142,6 +158,7 @@ require('packer').startup(function(use)
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'sainnhe/gruvbox-material'
   use "lunarvim/Onedarker.nvim"
+  use "rebelot/kanagawa.nvim"
   use 'norcalli/nvim-colorizer.lua'
 
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
@@ -324,6 +341,10 @@ require('nvim-autopairs').setup()
 require "lsp_signature".setup()
 require("symbols-outline").setup()
 require('neoscroll').setup()
+require('glow').setup({
+  style = "dark",
+  width = 120,
+})
 require("nvim-treesitter.configs").setup {
   rainbow = {
     enable = true,
@@ -656,6 +677,7 @@ cmp.setup {
     { name = 'buffer' },
   },
 }
+require("luasnip.loaders.from_vscode").lazy_load()
 
 if vim.g.neovide == true then
   vim.g.neovide_scale_factor = 0.8
