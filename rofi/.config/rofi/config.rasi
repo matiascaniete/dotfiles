@@ -2,7 +2,7 @@
 
 configuration {
   show-icons:   true;
-  font:         "JetBrains Mono 10";
+  font:         "JetBrainsMono Nerd Font Mono 12";
   dpi:          1;
 }
 
