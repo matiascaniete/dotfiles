@@ -416,33 +416,9 @@ require('telescope').setup {
 require("null-ls").setup({
     debug = true,
     sources = {
-        require("null-ls").builtins.formatting.shfmt.with({
-            extra_args = function(params)
-                return params.options
-                    and params.options.tabSize
-                    and {
-                        "--simplify",
-                        "--indent",
-                        params.options.tabSize,
-                    }
-            end,
-        }), -- shell script formatting
-
-        require("null-ls").builtins.formatting.shellharden, -- shell script formatting
-        require("null-ls").builtins.formatting.beautysh.with({
-            extra_args = function(params)
-                return params.options
-                    and params.options.tabSize
-                    and {
-                        "--force-function-style",
-                        "paronly",
-                        "--indent-size",
-                        params.options.tabSize,
-                    }
-            end
-        }), -- shell script formatting
+        require("null-ls").builtins.hover.dictionary,
+        require("null-ls").builtins.hover.printenv,
         require("null-ls").builtins.formatting.prettier, -- markdown formatting
-        -- require("null-ls").builtins.diagnostics.shellcheck, -- shell script diagnostics
         require("null-ls").builtins.code_actions.shellcheck, -- shell script code actions
         require("null-ls").builtins.diagnostics.phpmd.with({
             extra_args = function()
@@ -457,6 +433,19 @@ require("null-ls").setup({
         }), -- shell script code actions
     }
 })
+
+local null_ls = require("null-ls")
+local shellcheck_formatter = {
+    method = null_ls.methods.FORMATTING,
+    filetypes = { "sh" },
+    generator = null_ls.formatter({
+        command = "sh",
+        args = { "-c", "shellcheck $0 --format=diff | patch $0 -o-", '$FILENAME' },
+        to_stdin = true,
+        from_stderr = true,
+    }),
+}
+null_ls.register(shellcheck_formatter)
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -548,6 +537,13 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
+vim.diagnostic.config({
+    severity_sort = true,
+    float = {
+        source = "always", -- Or "if_many"
+    },
+})
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
@@ -704,6 +700,3 @@ if vim.g.neovide == true then
     vim.g.neovide_cursor_vfx_opacity = 1000
     vim.g.neovide_cursor_vfx_particle_lifetime = 3
 end
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
