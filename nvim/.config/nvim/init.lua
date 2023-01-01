@@ -418,20 +418,6 @@ require("null-ls").setup({
     sources = {
         require("null-ls").builtins.hover.dictionary,
         require("null-ls").builtins.hover.printenv,
-        -- require("null-ls").builtins.formatting.beautysh.with({
-        --     extra_args = function(params)
-        --         -- print(params.options.tabSize)
-        --         return params.options
-        --             and params.options.tabSize
-        --             and {
-        --                 "--indent-size",
-        --                 params.options.tabSize,
-        --                 "--force-function-style",
-        --                 "paronly"
-        --             }
-        --     end,
-        -- }),
-        require("null-ls").builtins.formatting.prettier, -- markdown formatting
         require("null-ls").builtins.code_actions.shellcheck, -- shell script code actions
         require("null-ls").builtins.diagnostics.phpmd.with({
             extra_args = function()
@@ -448,12 +434,14 @@ require("null-ls").setup({
 })
 
 local null_ls = require("null-ls")
+
 local shellcheck_formatter = {
+    name = 'custom_shellcheck',
     method = null_ls.methods.FORMATTING,
     filetypes = { "sh" },
     generator = null_ls.formatter({
         command = "sh",
-        args = { "-c", "shellcheck $0 --format=diff | patch $0 -o-", '$FILENAME' },
+        args = { "-c", "tmp=/tmp/sss; cat > $tmp; shellcheck $tmp --format=diff | patch $tmp -o-" },
         to_stdin = true,
         from_stderr = true,
     }),
@@ -461,11 +449,12 @@ local shellcheck_formatter = {
 null_ls.register(shellcheck_formatter)
 
 local fmter = {
+    name = 'custom_beautysh',
     method = null_ls.methods.FORMATTING,
     filetypes = { "sh" },
     generator = null_ls.formatter({
         command = "sh",
-        args = { "-c", "cat $0 | beautysh - --force-function-style paronly", '$FILENAME' },
+        args = { "-c", "beautysh - --force-function-style paronly" },
         to_stdin = true,
         from_stderr = true,
     }),
