@@ -19,15 +19,16 @@ install-configs() {
         sxhkd \
         tmux
 
-	echo "Installing mpv shaders..."
+    echo "Installing mpv shaders..."
 
-	cp -vr _data/shaders ~/.config/mpv/
+    cp -vr _data/shaders ~/.config/mpv/
 }
 
 install-fonts() {
     echo "Installing fonts..."
-    
-	cd ~/.local/share/fonts/ || exit
+
+    mkdir -p ~/.local/share/fonts
+    cd ~/.local/share/fonts/ || exit
 
     curl -L "$FONT_URL" >JetBrainsMono.zip
     unzip JetBrainsMono.zip -d JetBrainsMono
