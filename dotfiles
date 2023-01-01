@@ -9,6 +9,7 @@ install-configs() {
         alacritty \
         bat \
         i3 \
+        mpv \
         neofetch \
         nvim \
         qtile \
@@ -17,6 +18,10 @@ install-configs() {
         shell \
         sxhkd \
         tmux
+
+	echo "Installing mpv shaders..."
+
+	cp -vr _data/shaders ~/.config/mpv/
 }
 
 install-fonts() {
