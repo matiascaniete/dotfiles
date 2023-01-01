@@ -25,9 +25,9 @@ install-configs() {
 }
 
 install-fonts() {
-    cd ~/.local/share/fonts/ || exit
-
     echo "Installing fonts..."
+    
+	cd ~/.local/share/fonts/ || exit
 
     curl -L "$FONT_URL" >JetBrainsMono.zip
     unzip JetBrainsMono.zip -d JetBrainsMono
@@ -36,8 +36,9 @@ install-fonts() {
 }
 
 adopt-config() {
-    program=$1
     echo "Adopting config from [$program]"
+
+    program=$1
     mkdir -p "$program"/.config/"$program"
     stow --adopt --verbose --target ~ "$program"
 }
