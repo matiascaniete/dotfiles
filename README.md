@@ -1,19 +1,18 @@
 # Readme
 
-## Install
+## Clone the repo
 
 ```sh
 cd ~ && git clone git@github.com:matiascaniete/dotfiles.git && cd dotfiles
 ```
 
-## Activate configs
+## Install configs
 
 ```sh
-cd ~/dotfiles
-bash ./install.sh
+./dotfiles install-configs
 ```
 
-## Bootstrap shell configs
+## Include shell configs
 
 Include this line in ~/.zshrc
 
@@ -21,7 +20,7 @@ Include this line in ~/.zshrc
 source ~/.custom_zshrc
 ```
 
-## Bootstrap keybindings
+## Include X11 Server config
 
 Include this line in the ~/.xinitrc
 
@@ -38,7 +37,15 @@ bash ./install-plugins.sh
 ## Install JetBrains fonts
 
 ```sh
-bash ./install-fonts.sh
+./dotfiles install-fonts
 ```
 
 > Based on [https://www.jetbrains.com/lp/mono/#how-to-install](https://www.jetbrains.com/lp/mono/#how-to-install)
+
+## Adopting configs
+
+```sh
+./dotfiles adopt-config [package]
+```
+
+> Based on https://apiumhub.com/tech-blog-barcelona/managing-dotfiles-with-stow/

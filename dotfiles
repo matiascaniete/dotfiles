@@ -1,0 +1,40 @@
+#! /usr/bin/env bash
+
+FONT_URL=https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/JetBrainsMono.zip
+
+install-configs() {
+    echo "Installing configs..."
+
+    stow -vt ~ \
+        alacritty \
+        bat \
+        i3 \
+        neofetch \
+        nvim \
+        qtile \
+        ranger \
+        rofi \
+        shell \
+        sxhkd \
+        tmux
+}
+
+install-fonts() {
+    cd ~/.local/share/fonts/ || exit
+
+    echo "Installing fonts..."
+
+    curl -L "$FONT_URL" >JetBrainsMono.zip
+    unzip JetBrainsMono.zip -d JetBrainsMono
+    fc-cache -f -v
+    rm JetBrainsMono.zip
+}
+
+adopt-config() {
+    program=$1
+    echo "Adopting config from [$program]"
+    mkdir -p "$program"/.config/"$program"
+    stow --adopt --verbose --target ~ "$program"
+}
+
+"$@"
