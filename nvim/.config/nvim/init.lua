@@ -418,6 +418,19 @@ require("null-ls").setup({
     sources = {
         require("null-ls").builtins.hover.dictionary,
         require("null-ls").builtins.hover.printenv,
+        -- require("null-ls").builtins.formatting.beautysh.with({
+        --     extra_args = function(params)
+        --         -- print(params.options.tabSize)
+        --         return params.options
+        --             and params.options.tabSize
+        --             and {
+        --                 "--indent-size",
+        --                 params.options.tabSize,
+        --                 "--force-function-style",
+        --                 "paronly"
+        --             }
+        --     end,
+        -- }),
         require("null-ls").builtins.formatting.prettier, -- markdown formatting
         require("null-ls").builtins.code_actions.shellcheck, -- shell script code actions
         require("null-ls").builtins.diagnostics.phpmd.with({
@@ -446,6 +459,18 @@ local shellcheck_formatter = {
     }),
 }
 null_ls.register(shellcheck_formatter)
+
+local fmter = {
+    method = null_ls.methods.FORMATTING,
+    filetypes = { "sh" },
+    generator = null_ls.formatter({
+        command = "sh",
+        args = { "-c", "cat $0 | beautysh - --force-function-style paronly", '$FILENAME' },
+        to_stdin = true,
+        from_stderr = true,
+    }),
+}
+null_ls.register(fmter)
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
