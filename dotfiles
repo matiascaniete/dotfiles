@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
 FONT_URL=https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/JetBrainsMono.zip
+oh_my_tmux_path=~/oh-my-tmux
 
 install-configs() {
     echo "Installing configs..."
@@ -22,6 +23,11 @@ install-configs() {
     echo "Installing mpv shaders..."
 
     cp -vr _data/shaders ~/.config/mpv/
+
+    echo "Installing Oh-my-tmux plugin..."
+
+    git clone https://github.com/gpakosz/.tmux.git "$oh_my_tmux_path"
+    ln -s -f "$oh_my_tmux_path"/.tmux.conf ~/.tmux.conf
 }
 
 install-fonts() {
