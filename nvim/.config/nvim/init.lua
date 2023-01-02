@@ -628,7 +628,6 @@ local servers = {
     tsserver = {},
     marksman = {},
     intelephense = {},
-    phpactor = {},
     psalm = {},
     pyright = {},
     stylelint_lsp = {},
