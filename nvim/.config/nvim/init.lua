@@ -441,7 +441,7 @@ local shellcheck_formatter = {
     filetypes = { "sh" },
     generator = null_ls.formatter({
         command = "sh",
-        args = { "-c", "tmp=/tmp/sss; cat > $tmp; shellcheck $tmp --format=diff | patch $tmp -o-" },
+        args = { "-c", "tmp=$(mktemp); cat > $tmp; shellcheck $tmp --format=diff | patch $tmp -o-" },
         to_stdin = true,
         from_stderr = true,
     }),
