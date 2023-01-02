@@ -621,7 +621,21 @@ local servers = {
     -- rust_analyzer = {},
     -- tsserver = {},
     bashls = {},
-
+    html = {},
+    dockerls = {},
+    emmet_ls = {},
+    jsonls = {},
+    tsserver = {},
+    marksman = {},
+    intelephense = {},
+    phpactor = {},
+    psalm = {},
+    pyright = {},
+    stylelint_lsp = {},
+    taplo = {},
+    vuels = {},
+    lemminx = {},
+    yamlls = {},
     sumneko_lua = {
         Lua = {
             workspace = { checkThirdParty = false },
