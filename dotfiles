@@ -36,7 +36,7 @@ install-configs() {
 
 install-config() {
     conf=$1
-    stow -vt ~ $conf
+    stow -vt ~ "$conf"
 }
 
 install-fonts() {
