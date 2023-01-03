@@ -8,13 +8,13 @@ require("null-ls").setup({
             extra_args = function()
                 local configFile = "phpmd.xml"
                 if vim.fn.filereadable(configFile) == 1 then
-                    print("Using phpmd configuration from file " .. configFile)
+                    vim.notify("Using phpmd configuration from file " .. configFile)
                     return { configFile }
                 end
-                print("Using phpmd with all rules")
+                vim.notify("Using phpmd with all rules")
                 return { "cleancode,codesize,controversial,design,naming,unusedcode" }
             end
-        }), -- shell script code actions
+        }),
     }
 })
 

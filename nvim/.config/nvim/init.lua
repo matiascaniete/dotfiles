@@ -80,7 +80,8 @@ require('packer').startup(function(use)
 
     use 'jose-elias-alvarez/null-ls.nvim'
     use "folke/which-key.nvim"
-    -- using packer.nvim
+    use 'rcarriga/nvim-notify'
+
     use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
     use {
         'goolord/alpha-nvim',
@@ -265,6 +266,23 @@ require('telescope').setup {
         },
     },
 }
+
+require("telescope").load_extension("notify")
+vim.notify = require("notify")
+
+function shellexec(cmd)
+    local handle = assert(io.popen(cmd, 'r'))
+    local output = assert(handle:read('*a'))
+
+    handle:close()
+
+    return output
+end
+
+local datetime = shellexec('date; echo $USER@$(hostname); pwd')
+vim.notify(datetime, vim.log.levels.INFO, {
+    title = 'System info'
+})
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
