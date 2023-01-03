@@ -31,7 +31,6 @@ require('packer').startup(function(use)
     }
 
     use "rafamadriz/friendly-snippets"
-
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-buffer'
 
@@ -43,8 +42,7 @@ require('packer').startup(function(use)
     }
 
     use 'p00f/nvim-ts-rainbow'
-
-    use { "windwp/nvim-autopairs" }
+    use "windwp/nvim-autopairs"
 
     use {
         'nvim-tree/nvim-tree.lua',
@@ -92,22 +90,14 @@ require('packer').startup(function(use)
         end
     }
     use 'pwntester/octo.nvim'
-    use { "ellisonleao/glow.nvim" }
+    use "ellisonleao/glow.nvim"
     use({ "iamcco/markdown-preview.nvim",
         run = "cd app && npm install",
         setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" },
     })
 
-    use {
-        "tpope/vim-surround",
-
-        -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
-        -- setup = function()
-        --  vim.o.timeoutlen = 500
-        -- end
-    }
-
-    use { 'RRethy/vim-illuminate' }
+    use "tpope/vim-surround"
+    use 'RRethy/vim-illuminate'
     use 'nacro90/numb.nvim'
     use "f-person/git-blame.nvim"
     use {
@@ -118,9 +108,7 @@ require('packer').startup(function(use)
             }
         end
     }
-    use {
-        "ray-x/lsp_signature.nvim",
-    }
+    use "ray-x/lsp_signature.nvim"
     use 'simrat39/symbols-outline.nvim'
     -- Lua
     use {
