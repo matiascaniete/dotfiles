@@ -34,6 +34,11 @@ install-configs() {
     sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
 }
 
+install-config() {
+    conf=$1
+    stow -vt ~ $conf
+}
+
 install-fonts() {
     echo "Installing fonts..."
 
