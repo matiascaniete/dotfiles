@@ -12,6 +12,12 @@ cd ~ && git clone git@github.com:matiascaniete/dotfiles.git && cd dotfiles
 ./dotfiles install-configs
 ```
 
+### Install concrete config
+
+```sh
+./dotfiles install-config [app]
+```
+
 ## Include shell configs
 
 Include this line in ~/.zshrc
