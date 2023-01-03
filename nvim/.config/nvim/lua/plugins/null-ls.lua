@@ -3,6 +3,7 @@ require("null-ls").setup({
     sources = {
         require("null-ls").builtins.hover.dictionary,
         require("null-ls").builtins.hover.printenv,
+        require("null-ls").builtins.formatting.prettier,
         require("null-ls").builtins.code_actions.shellcheck, -- shell script code actions
         require("null-ls").builtins.diagnostics.phpmd.with({
             extra_args = function()
