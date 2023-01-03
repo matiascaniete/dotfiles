@@ -43,9 +43,9 @@ install-fonts() {
 }
 
 adopt-config() {
+    program=$1
     echo "Adopting config from [$program]"
 
-    program=$1
     mkdir -p "$program"/.config/"$program"
     stow --adopt --verbose --target ~ "$program"
 }
