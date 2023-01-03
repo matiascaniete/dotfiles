@@ -206,6 +206,9 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 
 require "options"
 require "plugins.toggleterm"
+require "plugins.null-ls"
+require "plugins.lualine"
+require "plugins.glow"
 require "keymaps"
 
 -- [[ Highlight on yank ]]
@@ -219,39 +222,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     pattern = '*',
 })
 
--- Set lualine as statusline
--- See `:help lualine.txt`
-local function tabinfo()
-    return 'tabs:' .. vim.o.tabstop
-end
-
-local function project()
-    return 'prj:' .. vim.lsp.buf.list_workspace_folders()[1]
-end
-
-require('lualine').setup({
-    options = {
-        theme = 'gruvbox-material',
-    },
-    sections = {
-        lualine_c = { tabinfo, project }
-    }
-})
-require 'colorizer'.setup()
-
 require("nvim-tree").setup()
 require("which-key").setup()
 require("bufferline").setup {}
 require('numb').setup()
-require('octo').setup()
 require('nvim-autopairs').setup()
 require "lsp_signature".setup()
 require("symbols-outline").setup()
 require('neoscroll').setup()
-require('glow').setup({
-    style = "dark",
-    width = 120,
-})
+require('Comment').setup()
 require("nvim-treesitter.configs").setup {
     rainbow = {
         enable = true,
@@ -266,10 +245,6 @@ require 'treesitter-context'.setup({
     max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
 })
 
-vim.api.nvim_create_user_command('Issues', ':Octo issue list', { desc = 'Show issues from Github' })
-
--- Enable Comment.nvim
-require('Comment').setup()
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
 -- See `:help indent_blankline.txt`
@@ -302,54 +277,6 @@ require('telescope').setup {
         },
     },
 }
-
-require("null-ls").setup({
-    debug = true,
-    sources = {
-        require("null-ls").builtins.hover.dictionary,
-        require("null-ls").builtins.hover.printenv,
-        require("null-ls").builtins.code_actions.shellcheck, -- shell script code actions
-        require("null-ls").builtins.diagnostics.phpmd.with({
-            extra_args = function()
-                local configFile = "phpmd.xml"
-                if vim.fn.filereadable(configFile) == 1 then
-                    print("Using phpmd configuration from file " .. configFile)
-                    return { configFile }
-                end
-                print("Using phpmd with all rules")
-                return { "cleancode,codesize,controversial,design,naming,unusedcode" }
-            end
-        }), -- shell script code actions
-    }
-})
-
-local null_ls = require("null-ls")
-
-local shellcheck_formatter = {
-    name = 'custom_shellcheck',
-    method = null_ls.methods.FORMATTING,
-    filetypes = { "sh" },
-    generator = null_ls.formatter({
-        command = "sh",
-        args = { "-c", "tmp=$(mktemp); cat > $tmp; shellcheck $tmp --format=diff | patch $tmp -o-" },
-        to_stdin = true,
-        from_stderr = true,
-    }),
-}
-null_ls.register(shellcheck_formatter)
-
-local fmter = {
-    name = 'custom_beautysh',
-    method = null_ls.methods.FORMATTING,
-    filetypes = { "sh" },
-    generator = null_ls.formatter({
-        command = "sh",
-        args = { "-c", "beautysh - --force-function-style paronly" },
-        to_stdin = true,
-        from_stderr = true,
-    }),
-}
-null_ls.register(fmter)
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -484,9 +411,7 @@ end
 local servers = {
     -- clangd = {},
     -- gopls = {},
-    -- pyright = {},
     -- rust_analyzer = {},
-    -- tsserver = {},
     bashls = {},
     html = {},
     dockerls = {},
