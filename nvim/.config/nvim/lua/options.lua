@@ -36,3 +36,6 @@ vim.o.background = 'dark'
 vim.g.gruvbox_material_background = 'hard'
 vim.g.gruvbox_material_better_performance = 1
 vim.cmd [[colorscheme gruvbox-material]]
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'

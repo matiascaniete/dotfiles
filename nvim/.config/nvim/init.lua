@@ -1,4 +1,3 @@
-
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -207,11 +206,8 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 
 require "options"
 require "plugins.toggleterm"
-
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
-
 require "keymaps"
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
