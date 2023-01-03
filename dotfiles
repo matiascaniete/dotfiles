@@ -10,6 +10,7 @@ install-configs() {
         alacritty \
         bat \
         i3 \
+        kitty \
         mpv \
         neofetch \
         nvim \
@@ -28,6 +29,9 @@ install-configs() {
 
     git clone https://github.com/gpakosz/.tmux.git "$oh_my_tmux_path"
     ln -s -f "$oh_my_tmux_path"/.tmux.conf ~/.tmux.conf
+
+    echo "Installing NNN plugins..."
+    sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
 }
 
 install-fonts() {
