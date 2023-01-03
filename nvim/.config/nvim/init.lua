@@ -205,45 +205,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     pattern = vim.fn.expand '$MYVIMRC',
 })
 
--- [[ Setting options ]]
--- See `:help vim.o`
-
--- Set highlight on search
-vim.o.hlsearch = false
-
--- Make line numbers default
-vim.wo.number = true
-
--- Enable mouse mode
-vim.o.mouse = 'a'
-
--- Enable break indent
-vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
-
--- Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 0
-vim.o.expandtab = true
-vim.o.smarttab = true
-
--- Decrease update time
-vim.o.updatetime = 250
-vim.wo.signcolumn = 'yes'
-
--- Set colorscheme
-vim.o.termguicolors = true
-vim.o.background = 'dark'
-vim.g.gruvbox_material_background = 'hard'
-vim.g.gruvbox_material_better_performance = 1
-vim.cmd [[colorscheme gruvbox-material]]
-
+require "options"
 require("toggleterm").setup({
     size = 20,
     open_mapping = [[<c-\>]],
@@ -291,33 +253,11 @@ vim.api.nvim_create_user_command('LazyGit', function(_)
     print 'lg toggled!'
 end, { desc = 'LazyGit toggled!' })
 
-vim.keymap.set({ 'n', 't' }, '<leader>g', '<cmd>lua _lazygit_toggle()<CR>', { noremap = true, silent = true })
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- [[ Basic Keymaps ]]
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set('i', 'jj', '<Esc>', { noremap = true })
-
--- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set('n', '<leader>ff', '<cmd>NvimTreeToggle<CR>', { noremap = true })
-vim.keymap.set('n', '<C-k>', '<C-w>k<CR>', { silent = true, noremap = true })
-vim.keymap.set('n', '<C-j>', '<C-w>j<CR>', { silent = true, noremap = true })
-vim.keymap.set('n', '<C-h>', '<C-w>h<CR>', { silent = true, noremap = true })
-vim.keymap.set('n', '<C-l>', '<C-w>l<CR>', { silent = true, noremap = true })
-
-
+require "keymaps"
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -464,23 +404,6 @@ null_ls.register(fmter)
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
--- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>/', function()
-    -- You can pass additional configuration to telescope to change theme, layout, etc.
-    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        winblend = 10,
-        previewer = false,
-    })
-end, { desc = '[/] Fuzzily search in current buffer]' })
-
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
@@ -545,12 +468,6 @@ require('nvim-treesitter.configs').setup {
         },
     },
 }
-
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 vim.diagnostic.config({
     severity_sort = true,
@@ -720,13 +637,4 @@ cmp.setup {
     },
 }
 require("luasnip.loaders.from_vscode").lazy_load()
-
-if vim.g.neovide == true then
-    vim.g.neovide_scale_factor = 0.8
-    vim.g.neovide_transparency = 1
-    vim.g.neovide_fullscreen = true
-    vim.g.neovide_cursor_vfx_mode = "pixiedust"
-    vim.g.neovide_cursor_vfx_opacity = 1000
-    vim.g.neovide_cursor_vfx_particle_lifetime = 3
-    print("Neovide config loaded")
-end
+require("neovide")
