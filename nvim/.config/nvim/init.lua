@@ -728,4 +728,5 @@ if vim.g.neovide == true then
     vim.g.neovide_cursor_vfx_mode = "pixiedust"
     vim.g.neovide_cursor_vfx_opacity = 1000
     vim.g.neovide_cursor_vfx_particle_lifetime = 3
+    print("Neovide config loaded")
 end
