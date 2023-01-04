@@ -307,7 +307,10 @@ require('nvim-treesitter.configs').setup {
         'javascript', 'html', 'json', 'regex', 'markdown', 'gitcommit', 'scss', 'dockerfile', 'twig', 'yaml', 'css' },
 
 
-    highlight = { enable = true },
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = true -- <= THIS LINE is the magic!
+    },
     indent = { enable = true, disable = { 'python' } },
     incremental_selection = {
         enable = true,
