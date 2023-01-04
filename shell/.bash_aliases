@@ -12,8 +12,8 @@ alias vf='fzf | xargs "$EDITOR"'
 alias v="nvim"
 
 alias zzh="zsh-show-keybindings"
-alias ytdla="youtube-dl --extract-audio --audio-format mp3"
-alias ytdlv="youtube-dl"
+alias yta="youtube-dl --extract-audio --audio-format mp3"
+alias ytv="youtube-dl"
 alias mntp="mkdir ~/Phone && go-mtpfs ~/Phone &"
 alias umntp="fusermount -u ~/Phone"
 
