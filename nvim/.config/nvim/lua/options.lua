@@ -39,3 +39,9 @@ vim.cmd [[colorscheme gruvbox-material]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
+
+-- last status
+vim.o.ls = 0
+
+-- command height
+vim.o.ch = 0
