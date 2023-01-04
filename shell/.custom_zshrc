@@ -17,10 +17,10 @@ export PATH=$PATH:${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins
 export PATH="$PATH:$HOME/.cargo/bin"
 
 # shellcheck disable=SC1090
-source ~/.bash_aliases
+source ~/.antigen_custom
 
 # shellcheck disable=SC1090
-source ~/.antigen_custom
+source ~/.bash_aliases
 
 # antigen autocompletion issue workaround, but slows down shell starting time
 autoload -U +X bashcompinit && bashcompinit
