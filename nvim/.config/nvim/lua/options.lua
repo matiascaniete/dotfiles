@@ -45,3 +45,9 @@ vim.o.ls = 0
 
 -- command height
 vim.o.ch = 0
+
+-- spell
+vim.o.spell = 1
+vim.o.spelllang = 'es_es,en_us'
+-- z= for listing suggestions
+
