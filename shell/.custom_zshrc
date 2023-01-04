@@ -5,14 +5,17 @@ export VISUAL=nvim
 export PAGER=bat
 export BAT_PAGER=less
 export HIST_STAMPS="yyyy-mm-dd"
-export TERMINAL=alacritty
-# export PATH="$PATH:/home/$USER/bin"
 
+# nnn configs
 export NNN_PLUG='o:fzopen;m:nmount;x:!chmod +x $nnn;p:preview-tui'
 export NNN_FIFO=/tmp/nnn.fifo
 export NNN_OPENER=nuke
 export NNN_OPTS=c
 export PATH=$PATH:${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins
+
+# paths
+export PATH="$PATH:$HOME/.cargo/bin"
+
 # shellcheck disable=SC1090
 source ~/.bash_aliases
 
