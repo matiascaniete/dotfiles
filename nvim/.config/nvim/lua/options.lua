@@ -47,7 +47,7 @@ vim.o.ls = 0
 vim.o.ch = 0
 
 -- spell
-vim.o.spell = 1
+-- vim.o.spell = 1
 -- z= for listing suggestions
 vim.o.spelllang = 'es_es,en_us'
 vim.o.spellsuggest = 'best,9'
