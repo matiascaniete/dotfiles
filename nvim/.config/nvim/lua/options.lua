@@ -58,3 +58,5 @@ vim.o.ch = 0
 -- z= for listing suggestions
 vim.o.spelllang = 'es_es,en_us'
 vim.o.spellsuggest = 'best,9'
+
+vim.o.showtabline = 2

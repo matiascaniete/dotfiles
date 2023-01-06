@@ -93,7 +93,7 @@ require('packer').startup(function(use)
     use "folke/which-key.nvim"
     use 'rcarriga/nvim-notify'
 
-    use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
+    -- use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
     use {
         'goolord/alpha-nvim',
         requires = { 'nvim-tree/nvim-web-devicons' },
@@ -161,7 +161,9 @@ require('packer').startup(function(use)
     use "EdenEast/nightfox.nvim"
     use 'norcalli/nvim-colorizer.lua'
 
+    use 'nanozuki/tabby.nvim'
     use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+
     use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
     use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
     use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
@@ -226,7 +228,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 require("nvim-tree").setup()
 require("which-key").setup()
-require("bufferline").setup {}
+-- require("bufferline").setup {}
+require("tabby").setup()
 require('numb').setup()
 require('nvim-autopairs').setup()
 require "lsp_signature".setup()
