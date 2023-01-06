@@ -22,7 +22,7 @@ vim.o.smartcase = true
 
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
-vim.o.softtabstop = 0
+vim.o.softtabstop = 4
 vim.o.expandtab = true
 vim.o.smarttab = true
 
@@ -40,8 +40,9 @@ vim.o.termguicolors = true
 vim.o.background = 'dark'
 vim.g.gruvbox_material_background = 'hard'
 vim.g.gruvbox_material_better_performance = 1
-vim.api.nvim_command('colorscheme kanagawa')
+-- vim.api.nvim_command('colorscheme kanagawa')
 -- vim.api.nvim_command('colorscheme onedarker')
+vim.api.nvim_command('colorscheme nightfox')
 --
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'

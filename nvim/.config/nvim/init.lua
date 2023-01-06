@@ -158,6 +158,7 @@ require('packer').startup(function(use)
     use 'sainnhe/gruvbox-material'
     use "lunarvim/Onedarker.nvim"
     use "rebelot/kanagawa.nvim"
+    use "EdenEast/nightfox.nvim"
     use 'norcalli/nvim-colorizer.lua'
 
     use 'nvim-lualine/lualine.nvim' -- Fancier statusline
