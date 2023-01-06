@@ -30,6 +30,11 @@ vim.o.smarttab = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
+vim.o.splitbelow = true
+vim.o.splitright = true
+
+vim.o.clipboard = "unnamedplus"
+
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.o.background = 'dark'
