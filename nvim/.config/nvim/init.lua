@@ -60,7 +60,6 @@ require('packer').startup(function(use)
             "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim"
         }
-
     }
 
     -- Lua
@@ -199,10 +198,11 @@ end
 
 -- Automatically source and re-compile packer whenever you save this init.lua
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
+local pattern = vim.fn.expand '$MYVIMRC'
 vim.api.nvim_create_autocmd('BufWritePost', {
     command = 'source <afile> | PackerCompile',
     group = packer_group,
-    pattern = vim.fn.expand '$MYVIMRC',
+    pattern = pattern,
 })
 
 require "options"
