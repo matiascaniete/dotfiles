@@ -13,7 +13,7 @@ vim.keymap.set('i', 'jj', '<Esc>', { noremap = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set('n', '<leader>f', '<cmd>Neotree<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>f', '<cmd>Neotree toggle<CR>', { noremap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k<CR>', { silent = true, noremap = true })
 vim.keymap.set('n', '<C-j>', '<C-w>j<CR>', { silent = true, noremap = true })
 vim.keymap.set('n', '<C-h>', '<C-w>h<CR>', { silent = true, noremap = true })
