@@ -1,5 +1,5 @@
 {super, super + alt} + Return
-	alacritty
+	alacritty -o "window.startup_mode=Fullscreen"
 
 {super, super + alt} + r
     rofi -sorting-method fzf \
