@@ -5,12 +5,12 @@ right_format = "${battery}$memory_usage$hostname$time"
 [time]
 disabled = false
 format = ' [$time]($style)'
-time_format = '%T'
+time_format = '%H:%M'
 style = "yellow"
 
 [jobs]
 symbol = ""
-format = " [$symbol$number]($style)"
+format = "[ $symbol( $number)]($style)"
 
 [memory_usage]
 disabled = false
@@ -38,16 +38,16 @@ threshold = 50
 [status]
 symbol = ""
 style = "red"
-format = ' [\[$int:$symbol$common_meaning$signal_name$maybe_int!\]]($style)'
+format = ' [\[$int:$symbol$common_meaning$signal_name$maybe_int\]]($style)'
 map_symbol = false
 disabled = false
 
 [username]
-style_user = 'white bold'
-style_root = 'black bold'
-format = '[$user]($style) '
+style_user = 'white'
+style_root = 'black'
+format = '\[[$user]($style)\]'
 disabled = false
-show_always = true
+show_always = false
 
 [hostname]
 ssh_only = false
@@ -61,9 +61,9 @@ truncation_length = 2
 format = '[$path]($style)[$read_only]($read_only_style) '
 
 [character]
-success_symbol = "[❯](purple)"
+success_symbol = "[❯](green)"
 error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+vimcmd_symbol = "[❮](purple)"
 
 [git_branch]
 format = "[$branch]($style)"
@@ -79,5 +79,5 @@ format = '\([$state($progress_current/$progress_total)]($style)\)'
 style = "bright-black"
 
 [cmd_duration]
-format = "[$duration]($style) "
+format = " [$duration]($style)"
 style = "yellow"
