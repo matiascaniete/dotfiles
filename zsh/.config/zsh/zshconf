@@ -34,6 +34,10 @@ reload() {
     exec zsh
 }
 
+config() {
+    $EDITOR $ZDOTDIR/.zshrc
+}
+
 # Zsh zstyle configs
 zstyle ':completion:*' verbose yes
 
@@ -62,5 +66,8 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -1 --color=always $realpath' # r
 # Using a cache for the completion can speed up some commands, like apt for example. Let’s add the following in our file to enable it:
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+
+# Case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # vi: ft=sh
