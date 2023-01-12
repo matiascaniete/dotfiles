@@ -21,13 +21,17 @@ source ~/.local/share/zsh-plugins/fast-syntax-highlighting/fast-syntax-highlight
 source ~/.local/share/zsh-plugins/zsh-z/zsh-z.plugin.zsh
 fpath=(~/.local/share/zsh-plugins/zsh-completions/src $fpath)
 
-zsh-reload() {
+reload() {
     if [[ ! -f $ZDOTDIR/.zcompdump ]]; then
         echo "No file found"
         return 1
     fi
 
-    rm "$ZDOTDIR"/.zcompdump && compinit
+    rm "$ZDOTDIR"/.zcompdump
+    rm -rf "$XDG_CACHE_HOME/zsh/.zcompcache"
+
+    echo "zcompdump and zcompcache removed!"
+    exec zsh
 }
 
 # Zsh zstyle configs

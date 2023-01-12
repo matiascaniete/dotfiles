@@ -1,11 +1,11 @@
 # Emacs keybindings (^P preview history)
-# bindkey -e
+bindkey -e
 
 # Vim keybindings
-bindkey -v
-bindkey "^P" up-line-or-search
-bindkey "^N" down-line-or-search
-export KEYTIMEOUT=1
+# bindkey -v
+# bindkey "^P" up-line-or-search
+# bindkey "^N" down-line-or-search
+# export KEYTIMEOUT=1
 
 # History substring search up and down
 bindkey "$terminfo[kcuu1]" history-substring-search-up
