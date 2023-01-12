@@ -4,7 +4,14 @@
 # Vim keybindings
 bindkey -v
 bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
 export KEYTIMEOUT=1
+
+# History substring search up and down
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 # Editing Command Lines In Vim (hit v in normal mode)
 autoload -Uz edit-command-line

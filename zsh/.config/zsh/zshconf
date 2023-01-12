@@ -13,6 +13,7 @@ source ~/.config/zsh/aliases
 source ~/.config/zsh/keybind
 
 # Zsh plugins
+source ~/.local/share/zsh-plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 source ~/.local/share/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.local/share/zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
 source ~/.local/share/zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
@@ -20,17 +21,14 @@ fpath=(~/.local/share/zsh-plugins/zsh-completions/src $fpath)
 
 # Zsh zstyle configs
 zstyle ':completion:*' verbose yes
-zstyle ':completion:*' menu select
-# zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
-# zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
-# zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
-# zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
-# zstyle ':completion:*:*:-command-:*:*' group-order alias builtins functions commands
 
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 
-# # set descriptions format to enable group support
+# For the command cd, chdir and pushd, you can use a hyphen - for completing for an option
+zstyle ':completion:*' complete-options true
+
+# set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
 
 # switch group using `,` and `.`
@@ -44,3 +42,9 @@ zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
 # preview directory's content with exa when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -1 --color=always $realpath' # remember to use single quote here!!!
 # zstyle ':fzf-tab:complete:*:*' fzf-preview 'bat --color=always ${(Q)realpath}'
+
+# Caching the Completion
+# Using a cache for the completion can speed up some commands, like apt for example. Let’s add the following in our file to enable it:
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+
