@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=1090
+# shellcheck disable=1090,1091
 
 # Bash completion init
 autoload -U +X bashcompinit && bashcompinit
@@ -14,8 +14,8 @@ source ~/.config/zsh/aliases
 source ~/.config/zsh/keybind
 
 # FZF key-bindings and completions
-source $(dirname $FZF_BASE)/../shell/key-bindings.zsh
-source $(dirname $FZF_BASE)/../shell/completion.zsh
+source "$(dirname "$FZF_BASE")"/../shell/key-bindings.zsh
+source "$(dirname "$FZF_BASE")"/../shell/completion.zsh
 
 # Zsh plugins
 source ~/.local/share/zsh-plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -23,7 +23,7 @@ source ~/.local/share/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.local/share/zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
 source ~/.local/share/zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source ~/.local/share/zsh-plugins/zsh-z/zsh-z.plugin.zsh
-fpath=(~/.local/share/zsh-plugins/zsh-completions/src $fpath)
+fpath=(~/.local/share/zsh-plugins/zsh-completions/src "$fpath")
 
 reload() {
     if [[ ! -f $ZDOTDIR/.zcompdump ]]; then
@@ -39,7 +39,7 @@ reload() {
 }
 
 config() {
-    $EDITOR $ZDOTDIR/.zshrc
+    $EDITOR "$ZDOTDIR"/.zshrc
 }
 
 # Zsh zstyle configs
