@@ -1,20 +1,19 @@
 add_newline = false
-format = "$username$directory$git_branch$git_status$status${custom.erp}$cmd_duration$jobs$character"
+format = "$username $directory $git_branch$git_status${custom.erp}$cmd_duration$jobs$status$character"
 right_format = "${battery}$memory_usage$hostname$time"
 
 [time]
 disabled = false
-format = '[\[$time\]]($style)'
+format = ' [$time]($style)'
 time_format = '%T'
-# utc_time_offset = ''
-time_range = '10:00:00-22:00:00'
+style = "yellow"
 
 [memory_usage]
 disabled = false
 threshold = 50
-symbol = ' '
-style = 'bold dimmed green'
-format = '[${ram}]($style)'
+symbol = ''
+style = 'dimmed green'
+format = ' [${ram}]($style)'
 
 [custom.erp]
 command = 'erp servers | tr "\n" " "' # shows output of command
@@ -27,14 +26,14 @@ format = '\[servers:[$output]($style)\]'
 full_symbol = '🔋'
 charging_symbol = '⚡️'
 discharging_symbol = '💀'
-format = '[$symbol$percentage]($style)'
+format = '[$symbol $percentage]($style)'
 
 [[battery.display]]
-threshold = 25
+threshold = 50
 
 [status]
 symbol = ""
-format = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style)'
+format = '[\[$int:$symbol$common_meaning$signal_name$maybe_int\]]($style)'
 map_symbol = false
 disabled = false
 
@@ -47,13 +46,13 @@ show_always = true
 
 [hostname]
 ssh_only = false
-format = '[$hostname](bold red)'
-# trim_at = '.companyname.com'
+format = ' [$hostname](blue)'
 disabled = false
 
 [directory]
 style = "blue"
-truncation_symbol = '.../'
+truncation_symbol = './'
+truncation_length = 2
 format = '[$path]($style)[$read_only]($read_only_style)'
 
 [character]
@@ -67,11 +66,11 @@ style = "bright-black"
 
 [git_status]
 # format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
-format = '([\[$all_status$ahead_behind\]]($style) )'
+format = '([\[$all_status$ahead_behind\]]($style))'
 style = "cyan"
 
 [git_state]
-format = '\([$state( $progress_current/$progress_total)]($style)\)'
+format = '\([$state($progress_current/$progress_total)]($style)\)'
 style = "bright-black"
 
 [cmd_duration]
@@ -81,4 +80,3 @@ style = "yellow"
 [python]
 format = "[$virtualenv]($style)"
 style = "bright-black"
-
