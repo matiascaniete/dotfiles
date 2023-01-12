@@ -12,6 +12,7 @@ source ~/.config/zsh/aliases
 
 # Keybinds
 source ~/.config/zsh/keybind
+source $(dirname $FZF_BASE)/../shell/key-bindings.zsh
 
 # Zsh plugins
 source ~/.local/share/zsh-plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
