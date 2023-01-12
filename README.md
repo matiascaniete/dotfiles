@@ -20,10 +20,16 @@ cd ~ && git clone git@github.com:matiascaniete/dotfiles.git && cd dotfiles
 
 ## Include shell configs
 
-Include this line in ~/.zshrc
+> Include this line in ~/.config/zsh/.zshrc
 
 ```sh
-source ~/.custom_zshrc
+. $HOME/.config/zsh/zshconf
+```
+
+> Include this line in ~/.zshenv
+
+```sh
+. $HOME/.config/zsh/exports
 ```
 
 ## Include X11 Server config

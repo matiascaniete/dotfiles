@@ -1,18 +1,26 @@
 #!/usr/bin/env bash
 
-
-# shellcheck disable=SC1090
-# source ~/.antigen_custom
-
-# shellcheck disable=SC1090
-source ~/.bash_aliases
-
-# antigen autocompletion issue workaround, but slows down shell starting time
+# Bash completion init
 autoload -U +X bashcompinit && bashcompinit
+
+# Zsh completion init
 autoload -U +X compinit && compinit
 
-# zstyle ':completion:*' verbose yes
-# zstyle ':completion:*' menu select
+# Aliases
+source ~/.config/zsh/aliases
+
+# Keybinds
+source ~/.config/zsh/keybind
+
+# Zsh plugins
+source ~/.local/share/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.local/share/zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
+source ~/.local/share/zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+fpath=(~/.local/share/zsh-plugins/zsh-completions/src $fpath)
+
+# Zsh zstyle configs
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' menu select
 # zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
 # zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
 # zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'

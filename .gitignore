@@ -1,2 +1,5 @@
 nvim/.config/nvim/plugin/packer_compiled.lua
 nvim/.config/nvim/spell/*.*
+zsh/.config/zsh/.zshrc
+zsh/.config/zsh/.zhistory
+zsh/.config/zsh/.zcompdump

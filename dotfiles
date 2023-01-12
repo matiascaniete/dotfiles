@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
 FONT_URL=https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/JetBrainsMono.zip
+ZSH_PLUGINS_PATH=~/.local/share/zsh-plugins/
 oh_my_tmux_path=~/oh-my-tmux
 
 install-configs() {
@@ -17,9 +18,9 @@ install-configs() {
         qtile \
         ranger \
         rofi \
-        shell \
         sxhkd \
-        tmux
+        tmux \
+        zsh
 
     echo "Installing mpv shaders..."
 
@@ -31,7 +32,18 @@ install-configs() {
     ln -s -f "$oh_my_tmux_path"/.tmux.conf ~/.tmux.conf
 
     echo "Installing NNN plugins..."
+
     sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
+
+    echo "Installing Zsh plugins..."
+
+    mkdir -p $ZSH_PLUGINS_PATH
+    cd $ZSH_PLUGINS_PATH || return 1
+    git clone https://github.com/Aloxaf/fzf-tab
+    git clone https://github.com/zsh-users/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-completions.git
+    # git clone https://github.com/zsh-users/zsh-syntax-highlighting
+    git clone https://github.com/zdharma-continuum/fast-syntax-highlighting
 }
 
 install-config() {
