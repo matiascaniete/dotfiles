@@ -1,6 +1,20 @@
 add_newline = false
-format = "$username@$hostname$directory$git_branch$git_status$status${custom.erp}$cmd_duration$jobs$character"
-right_format = "${battery}"
+format = "$username$directory$git_branch$git_status$status${custom.erp}$cmd_duration$jobs$character"
+right_format = "${battery}$memory_usage$hostname$time"
+
+[time]
+disabled = false
+format = '[\[$time\]]($style)'
+time_format = '%T'
+# utc_time_offset = ''
+time_range = '10:00:00-22:00:00'
+
+[memory_usage]
+disabled = false
+threshold = 50
+symbol = ' '
+style = 'bold dimmed green'
+format = '[${ram}]($style)'
 
 [custom.erp]
 command = 'erp servers | tr "\n" " "' # shows output of command
@@ -16,7 +30,7 @@ discharging_symbol = '💀'
 format = '[$symbol$percentage]($style)'
 
 [[battery.display]]
-threshold = 100
+threshold = 25
 
 [status]
 symbol = ""
@@ -67,3 +81,4 @@ style = "yellow"
 [python]
 format = "[$virtualenv]($style)"
 style = "bright-black"
+
