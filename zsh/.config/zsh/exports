@@ -42,14 +42,14 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # FZF_COLORS="bg+:-1,fg:gray,fg+:white,border:black,spinner:0,hl:yellow,header:blue,info:green,pointer:red,marker:blue,prompt:gray,hl+:red"
-FZF_COLORS="fg:#D8DEE9,bg:-1,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C,pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B"
+FZF_COLORS="fg:#888888,bg:-1,hl:#A3BE8C,fg+:#FFFFFF,bg+:-1,hl+:#d7e3cd,pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B"
 
-export FZF_DEFAULT_OPTS="--height 60% \
+export FZF_DEFAULT_OPTS="--height 50% \
     --layout reverse-list \
     --color '$FZF_COLORS' \
     --prompt '∷ ' \
-    --pointer ▶ \
-    --marker *"
+    --pointer '▶' \
+    --marker '* '"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
 
 # vi: ft=sh
