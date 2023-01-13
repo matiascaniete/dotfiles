@@ -39,11 +39,23 @@ reload() {
     exec zsh
 }
 
-config() {
-    $EDITOR "$ZDOTDIR"/.zshrc
+zconf() {
+    declare -A FILES 
+    FILES[zshenv]=~/.zshenv
+    FILES[zshrc]="$ZDOTDIR"/.zshrc
+    FILES[exports]=$ZDOTDIR/exports
+    FILES[zshconf]=$ZDOTDIR/zshconf
+    FILES[keybind]=$ZDOTDIR/keybind
+    $EDITOR "${FILES[$1]}"
 }
 
-# Zsh zstyle configs
+_zconf(){
+    COMPREPLY=($(compgen -W "zshrc zshenv keybind zshconf exports" "${COMP_WORDS[1]}"))
+}
+
+complete -F _zconf zconf
+
+
 zstyle ':completion:*' verbose yes
 
 # disable sort when completing `git checkout`
