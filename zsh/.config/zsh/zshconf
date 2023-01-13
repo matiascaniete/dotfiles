@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 # shellcheck disable=1090,1091
 
+declare -A CONFIG_FILES
+CONFIG_FILES[zshenv]=~/.zshenv
+CONFIG_FILES[zshrc]="$ZDOTDIR"/.zshrc
+CONFIG_FILES[exports]=$ZDOTDIR/exports
+CONFIG_FILES[zshconf]=$ZDOTDIR/zshconf
+CONFIG_FILES[keybind]=$ZDOTDIR/keybind
+
 # Bash completion init
 autoload -U +X bashcompinit && bashcompinit
 
@@ -13,7 +20,7 @@ source ~/.config/zsh/aliases
 # Keybinds
 source ~/.config/zsh/keybind
 
-# FZF key-bindings and completions
+# FZF default key-bindings and completions
 source "$(dirname "$FZF_BASE")"/../shell/key-bindings.zsh
 source "$(dirname "$FZF_BASE")"/../shell/completion.zsh
 
@@ -24,6 +31,7 @@ source ~/.local/share/zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
 source ~/.local/share/zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source ~/.local/share/zsh-plugins/zsh-z/zsh-z.plugin.zsh
 # shellcheck disable=2206
+# fpath=(~/.local/share/zsh-plugins/zsh-completions/src $fpath)
 fpath=(~/.local/share/zsh-plugins/zsh-completions/src $fpath)
 
 reload() {
@@ -40,21 +48,30 @@ reload() {
 }
 
 zconf() {
-    declare -A FILES 
-    FILES[zshenv]=~/.zshenv
-    FILES[zshrc]="$ZDOTDIR"/.zshrc
-    FILES[exports]=$ZDOTDIR/exports
-    FILES[zshconf]=$ZDOTDIR/zshconf
-    FILES[keybind]=$ZDOTDIR/keybind
-    $EDITOR "${FILES[$1]}"
+    $EDITOR "${CONFIG_FILES[$1]}"
 }
 
-_zconf(){
-    COMPREPLY=($(compgen -W "zshrc zshenv keybind zshconf exports" "${COMP_WORDS[1]}"))
+_zconf() {
+    _commands() {
+        local commands=()
+        for i in "${(@k)CONFIG_FILES}"; do
+            commands+=("$i:Opens [$CONFIG_FILES[$i]]")
+        done
+        _describe zconf commands
+    }
+
+    _arguments -C \
+        "1: :_commands" \
+        "*::arg:->args"
 }
 
-complete -F _zconf zconf
+compdef _zconf zconf
 
+# _complete - This is the main completer we need to use for our completion.
+# _approximate - This one is similar to _complete, except that it will try to correct what you’ve typed already (the context) if no match is found.
+# _expand_alias - Expand an alias you’ve typed. It needs to be declared before _complete.
+# _extensions - Complete the glob *. with the possible file extensions.
+zstyle ':completion:*' completer _expand_alias _extensions _complete _approximate
 
 zstyle ':completion:*' verbose yes
 
@@ -86,5 +103,4 @@ zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
 
 # Case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
 # vi: ft=sh
