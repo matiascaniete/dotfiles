@@ -49,7 +49,7 @@ export FZF_DEFAULT_OPTS="--height 60% \
     --color '$FZF_COLORS' \
     --prompt '∷ ' \
     --pointer ▶ \
-    --marker ⇒"
+    --marker *"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -n 10'"
 
 # vi: ft=sh
