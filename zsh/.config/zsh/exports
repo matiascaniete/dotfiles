@@ -9,6 +9,8 @@ export HISTSIZE=10000                   # Maximum events for internal history
 export SAVEHIST=10000
 export HIST_STAMPS="yyyy-mm-dd"
 
+export TERM=xterm-256color
+export COLORTERM=truecolor
 export EDITOR=nvim
 export VISUAL=nvim
 export PAGER=bat
