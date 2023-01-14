@@ -8,12 +8,6 @@ CONFIG_FILES[exports]=$ZDOTDIR/exports
 CONFIG_FILES[zshconf]=$ZDOTDIR/zshconf
 CONFIG_FILES[keybind]=$ZDOTDIR/keybind
 
-# Bash completion init
-autoload -U +X bashcompinit && bashcompinit
-
-# Zsh completion init
-autoload -U +X compinit && compinit
-
 # Aliases
 source ~/.config/zsh/aliases
 
@@ -30,42 +24,33 @@ source ~/.local/share/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.local/share/zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
 source ~/.local/share/zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source ~/.local/share/zsh-plugins/zsh-z/zsh-z.plugin.zsh
-# shellcheck disable=2206
-# fpath=(~/.local/share/zsh-plugins/zsh-completions/src $fpath)
-fpath=(~/.local/share/zsh-plugins/zsh-completions/src $fpath)
 
+# shellcheck disable=2206
+fpath=(~/.local/share/zsh-plugins/zsh-completions/src $fpath)
+fpath=($ZDOTDIR/custom-completions $fpath)
+
+# Bash completion init
+autoload -U bashcompinit; bashcompinit
+
+# Zsh completion init
+autoload -Uz compinit
+compinit -uit
+
+# reload and zconf functions
 reload() {
     if [[ ! -f $ZDOTDIR/.zcompdump ]]; then
         echo "No file found"
         return 1
     fi
 
-    rm "$ZDOTDIR"/.zcompdump
-    rm -rf "$XDG_CACHE_HOME/zsh/.zcompcache"
-
-    echo "zcompdump and zcompcache removed!"
+    rm "$ZDOTDIR"/.zcompdump && echo "zcompdump removed."
+    rm -rf "$XDG_CACHE_HOME/zsh/.zcompcache" && echo "zcompcache removed."
     exec zsh
 }
 
 zconf() {
     $EDITOR "${CONFIG_FILES[$1]}"
 }
-
-_zconf() {
-    _commands() {
-        local commands=()
-        for i in "${(@k)CONFIG_FILES}"; do
-            commands+=("$i:Opens [$CONFIG_FILES[$i]]")
-        done
-        _describe zconf commands
-    }
-
-    _arguments -C \
-        "1: :_commands" \
-        "*::arg:->args"
-}
-
-compdef _zconf zconf
 
 # _complete - This is the main completer we need to use for our completion.
 # _approximate - This one is similar to _complete, except that it will try to correct what you’ve typed already (the context) if no match is found.

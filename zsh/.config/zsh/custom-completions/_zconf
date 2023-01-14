@@ -1,0 +1,19 @@
+#compdef zconf
+
+_zconf() {
+    _commands() {
+        local commands=()
+        for i in "${(@k)CONFIG_FILES}"; do
+            commands+=("$i:Opens [$CONFIG_FILES[$i]]")
+        done
+        _describe zconf commands
+    }
+
+    _arguments -C \
+        "1: :_commands" \
+        "*::arg:->args"
+}
+
+compdef _zconf zconf
+
+# vi: ft=sh
