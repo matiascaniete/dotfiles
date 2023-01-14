@@ -34,7 +34,17 @@ fpath=($ZDOTDIR/custom-completions $fpath)
 autoload -U bashcompinit && bashcompinit
 
 # Zsh completion init (IMPORTANT: this must go after fpath updates)
-autoload -Uz compinit && compinit -u
+# On slow systems, checking the cached .zcompdump file to see if it must be
+# regenerated adds a noticable delay to zsh startup.  This little hack restricts
+# it to once a day.  It should be pasted into your own completion file.
+# autoload -Uz compinit
+
+for dump in ~/.zcompdump(N.mh+24); do
+    compinit
+done
+# The check performed to see if there are new functions can be omitted by giving the option -C. In this case the dump file will only be created if there isn't one already.
+compinit -C
+
 
 # reload and zconf functions
 reload() {
