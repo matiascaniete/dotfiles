@@ -27,14 +27,14 @@ source ~/.local/share/zsh-plugins/zsh-z/zsh-z.plugin.zsh
 
 # shellcheck disable=2206
 fpath=(~/.local/share/zsh-plugins/zsh-completions/src $fpath)
+# shellcheck disable=2206,2128
 fpath=($ZDOTDIR/custom-completions $fpath)
 
 # Bash completion init
-autoload -U bashcompinit; bashcompinit
+autoload -U bashcompinit && bashcompinit
 
-# Zsh completion init
-autoload -Uz compinit
-compinit -uit
+# Zsh completion init (IMPORTANT: this must go after fpath updates)
+autoload -Uz compinit && compinit -u
 
 # reload and zconf functions
 reload() {
