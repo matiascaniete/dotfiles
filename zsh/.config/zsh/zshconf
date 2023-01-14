@@ -30,29 +30,8 @@ fpath=(~/.local/share/zsh-plugins/zsh-completions/src $fpath)
 # shellcheck disable=2206,2128
 fpath=($ZDOTDIR/custom-completions $fpath)
 
-# Bash completion init
-autoload -U bashcompinit && bashcompinit
-
-# Zsh completion init (IMPORTANT: this must go after fpath updates)
-# On slow systems, checking the cached .zcompdump file to see if it must be
-# regenerated adds a noticable delay to zsh startup.  This little hack restricts
-# it to once a day.  It should be pasted into your own completion file.
-# autoload -Uz compinit
-
-for dump in ~/.zcompdump(N.mh+24); do
-    compinit
-done
-# The check performed to see if there are new functions can be omitted by giving the option -C. In this case the dump file will only be created if there isn't one already.
-compinit -C
-
-
 # reload and zconf functions
 reload() {
-    if [[ ! -f $ZDOTDIR/.zcompdump ]]; then
-        echo "No file found"
-        return 1
-    fi
-
     rm "$ZDOTDIR"/.zcompdump && echo "zcompdump removed."
     rm -rf "$XDG_CACHE_HOME/zsh/.zcompcache" && echo "zcompcache removed."
     exec zsh
@@ -62,11 +41,19 @@ zconf() {
     $EDITOR "${CONFIG_FILES[$1]}"
 }
 
+timezsh() {
+    shell=${1-$SHELL}
+    for i in $(seq 1 4); do
+        /usr/bin/time -f "%E real\t%U user\t%S sys" $shell -i -c exit;
+    done
+}
+
 # _complete - This is the main completer we need to use for our completion.
 # _approximate - This one is similar to _complete, except that it will try to correct what you’ve typed already (the context) if no match is found.
 # _expand_alias - Expand an alias you’ve typed. It needs to be declared before _complete.
 # _extensions - Complete the glob *. with the possible file extensions.
-zstyle ':completion:*' completer _expand_alias _extensions _complete _approximate
+zstyle ':completion:*' completer _expand_alias _extensions _complete
+# zstyle ':completion:*' completer _expand_alias _extensions _complete _approximate
 
 zstyle ':completion:*' verbose yes
 
@@ -98,4 +85,12 @@ zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
 
 # Case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# Bash completion init
+autoload -U bashcompinit && bashcompinit
+
+# Zsh completion init (IMPORTANT: this must go after fpath updates)
+autoload -Uz compinit
+compinit -D
+
 # vi: ft=sh
