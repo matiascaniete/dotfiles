@@ -45,7 +45,7 @@ disabled = false
 [username]
 style_user = 'white'
 style_root = 'black'
-format = '\[[$user]($style)\]'
+format = '\[[$user]($style)\] '
 disabled = false
 show_always = false
 
