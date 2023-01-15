@@ -50,6 +50,7 @@ install-configs() {
 install-dependency() {
     command="$1"
     echo "--- Installing [$command] ---" | echo-header
+    echo
     eval "install-$command" | tabbed
     echo
     echo
