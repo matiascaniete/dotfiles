@@ -76,8 +76,7 @@ install-mpv-shaders() {
 }
 
 install-oh-my-tmux() {
-    git clone https://github.com/gpakosz/.tmux.git "$oh_my_tmux_path"
-    ln -s -f "$oh_my_tmux_path"/.tmux.conf ~/.tmux.conf
+    git clone https://github.com/gpakosz/.tmux.git "$oh_my_tmux_path" && ln -s -f "$oh_my_tmux_path"/.tmux.conf ~/.tmux.conf
 }
 
 install-nnn-plugins() {
@@ -85,14 +84,12 @@ install-nnn-plugins() {
 }
 
 install-fzf() {
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install --no-key-bindings --no-completion --no-update-rc
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install --no-key-bindings --no-completion --no-update-rc
 }
 
 install-zsh() {
     ZSH_TMP_DIR=/tmp/zsh-latest
-    git clone git://git.code.sf.net/p/zsh/code $ZSH_TMP_DIR
-    cd $ZSH_TMP_DIR && ./Util/preconfig && ./configure && make -j4 && sudo make install
+    git clone git://git.code.sf.net/p/zsh/code $ZSH_TMP_DIR && cd $ZSH_TMP_DIR && ./Util/preconfig && ./configure && make -j4 && sudo make install
 }
 
 install-zsh-plugins() {
