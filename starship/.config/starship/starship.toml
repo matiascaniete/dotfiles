@@ -1,5 +1,5 @@
 add_newline = false
-format = "$directory$git_branch$git_status${custom.erp}$cmd_duration$jobs$character"
+format = "$directory$git_branch$git_status${custom.erp}$cmd_duration$jobs $character"
 right_format = "$status${battery}$memory_usage$username$hostname$time"
 
 [time]
@@ -10,21 +10,21 @@ style = "yellow"
 
 [jobs]
 symbol = ""
-format = "[ $symbol($number)]($style)"
+format = "[ $symbol( $number)]($style)"
 
 [memory_usage]
 disabled = false
 threshold = 50
-symbol = ''
-style = 'dimmed green'
-format = ' [${ram}]($style)'
+symbol = ''
+style = 'purple'
+format = '[$symbol${ram}!]($style) '
 
 [custom.erp]
 command = 'erp servers | tr "\n" " "' # shows output of command
 # detect_folders = ['erp4'] # can specify filters but wildcards are not supported
 when = '[[ $PWD =~ erp ]]'
 # when = ''' true '''
-format = '\[servers:[$output]($style)\]'
+format = ' [{ srvs:[$output](green) }](dimmed black)'
 
 [battery]
 full_symbol = ''
@@ -57,13 +57,16 @@ disabled = false
 
 [directory]
 style = "blue"
-truncation_symbol = '·'
-truncation_length = 2
-format = '[$path]($style)[$read_only]($read_only_style)'
+repo_root_style = "cyan"
+truncation_symbol = ''
+truncation_length = 3
+read_only = ""
+format = '[$path]($style)[( $read_only)]($read_only_style)'
+repo_root_format = "[$before_root_path]($before_repo_root_style)[{ $repo_root}]($repo_root_style)[$path]($style)[$read_only]($read_only_style)"
 
 [character]
-success_symbol = "[❯](green)"
-error_symbol = "[❯](red)"
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
 vimcmd_symbol = "[❮](purple)"
 
 [git_branch]
