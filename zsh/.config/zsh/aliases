@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # history
-alias h="history -f"
+alias h="history -i"
 
 # fail2ban client
 alias f2b="sudo fail2ban-client"
