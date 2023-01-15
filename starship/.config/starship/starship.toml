@@ -1,6 +1,6 @@
 add_newline = false
-format = "$username$directory$git_branch$git_status${custom.erp}$cmd_duration$jobs$status$character"
-right_format = "${battery}$memory_usage$hostname$time"
+format = "$directory$git_branch$git_status${custom.erp}$cmd_duration$jobs$character"
+right_format = "$status${battery}$memory_usage$username$hostname$time"
 
 [time]
 disabled = false
@@ -10,7 +10,7 @@ style = "yellow"
 
 [jobs]
 symbol = ""
-format = "[ $symbol( $number)]($style)"
+format = "[ $symbol($number)]($style)"
 
 [memory_usage]
 disabled = false
@@ -36,29 +36,30 @@ format = '[$symbol $percentage]($style)'
 threshold = 50
 
 [status]
-symbol = ""
+symbol = "𥉉"
 style = "red"
-format = ' [\[$int:$symbol$common_meaning$signal_name$maybe_int\]]($style)'
+format = '[$symbol$common_meaning$signal_name$maybe_int]($style) '
 map_symbol = false
 disabled = false
 
 [username]
 style_user = 'white'
 style_root = 'black'
-format = '\[[$user]($style)\] '
+format = '[$user]($style)'
 disabled = false
-show_always = false
+show_always = true
 
 [hostname]
 ssh_only = false
-format = ' [$hostname](blue)'
+ssh_symbol = ""
+format = '@[$hostname](blue)'
 disabled = false
 
 [directory]
 style = "blue"
-truncation_symbol = './'
+truncation_symbol = '·'
 truncation_length = 2
-format = '[$path]($style)[$read_only]($read_only_style) '
+format = '[$path]($style)[$read_only]($read_only_style)'
 
 [character]
 success_symbol = "[❯](green)"
@@ -66,7 +67,7 @@ error_symbol = "[❯](red)"
 vimcmd_symbol = "[❮](purple)"
 
 [git_branch]
-format = "[$branch]($style)"
+format = " [$branch]($style)"
 style = "bright-black"
 
 [git_status]
