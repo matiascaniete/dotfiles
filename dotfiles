@@ -4,8 +4,17 @@ FONT_URL=https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/JetBra
 ZSH_PLUGINS_PATH=~/.local/share/zsh-plugins/
 oh_my_tmux_path=~/oh-my-tmux
 
+echo-header() {
+    lolcat
+}
+
+install-config() {
+    conf=$1
+    stow -vt ~ "$conf"
+}
+
 install-configs() {
-    echo "Installing configs..."
+    echo "Installing configs..." | echo-header
     stow -vt ~ \
         alacritty \
         bat \
@@ -21,23 +30,56 @@ install-configs() {
         sxhkd \
         tmux \
         zsh
+}
 
-    echo "Installing mpv shaders..."
+install-dependencies() {
+    install-apt-dependencies
+    install-mpv-shaders
+    install-oh-my-tmux
+    install-nnn-plugins
+    install-zsh
+    install-zsh-plugins
+    install-fzf
+}
+
+install-apt-dependencies() {
+    echo "Installing apt dependencies..." | echo-header
+    sudo apt install -y \
+        stow \
+        lolcat
+}
+
+install-mpv-shaders() {
+    echo "Installing mpv shaders..." | echo-header
     cp -vr _data/shaders ~/.config/mpv/
+}
 
-    echo "Installing Oh-my-tmux plugin..."
+install-oh-my-tmux() {
+    echo "Installing Oh-my-tmux plugin..." | echo-header
     git clone https://github.com/gpakosz/.tmux.git "$oh_my_tmux_path"
     ln -s -f "$oh_my_tmux_path"/.tmux.conf ~/.tmux.conf
+}
 
-    echo "Installing NNN plugins..."
+install-nnn-plugins() {
+    echo "Installing NNN plugins..." | echo-header
     sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
+}
 
-    echo "Installing latest version of zsh..."
+install-fzf() {
+    echo "Installing fzf..." | echo-header
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install --no-key-bindings --no-completion --no-update-rc
+}
+
+install-zsh() {
+    echo "Installing latest version of zsh..."|echo-header
     ZSH_TMP_DIR=/tmp/zsh-latest
     git clone git://git.code.sf.net/p/zsh/code $ZSH_TMP_DIR
     cd $ZSH_TMP_DIR && ./Util/preconfig && ./configure && make -j4 && sudo make install
+}
 
-    echo "Installing Zsh plugins..."
+install-zsh-plugins() {
+    echo "Installing Zsh plugins..."|echo-header
     mkdir -p $ZSH_PLUGINS_PATH
     cd $ZSH_PLUGINS_PATH || return 1
     git clone https://github.com/Aloxaf/fzf-tab
@@ -47,19 +89,10 @@ install-configs() {
     git clone https://github.com/zdharma-continuum/fast-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-history-substring-search
     git clone https://github.com/agkozak/zsh-z.git
-
-    echo "Installing fzf..."
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install --no-key-bindings --no-completion --no-update-rc
-}
-
-install-config() {
-    conf=$1
-    stow -vt ~ "$conf"
 }
 
 install-fonts() {
-    echo "Installing fonts..."
+    echo "Installing fonts..." | echo-header
 
     mkdir -p ~/.local/share/fonts
     cd ~/.local/share/fonts/ || exit

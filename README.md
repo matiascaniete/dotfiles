@@ -6,6 +6,12 @@
 cd ~ && git clone git@github.com:matiascaniete/dotfiles.git && cd dotfiles
 ```
 
+## Install dependencies
+
+```sh
+./dotfiles install-dependencies
+```
+
 ## Install configs
 
 ```sh
