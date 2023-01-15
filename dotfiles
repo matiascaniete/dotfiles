@@ -32,6 +32,11 @@ install-configs() {
     echo "Installing NNN plugins..."
     sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
 
+    echo "Installing latest version of zsh..."
+    ZSH_TMP_DIR=/tmp/zsh-latest
+    git clone git://git.code.sf.net/p/zsh/code $ZSH_TMP_DIR
+    cd $ZSH_TMP_DIR && ./Util/preconfig && ./configure && make -j4 && sudo make install
+
     echo "Installing Zsh plugins..."
     mkdir -p $ZSH_PLUGINS_PATH
     cd $ZSH_PLUGINS_PATH || return 1
