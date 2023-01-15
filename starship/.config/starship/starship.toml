@@ -24,7 +24,7 @@ command = 'erp servers | tr "\n" " "' # shows output of command
 # detect_folders = ['erp4'] # can specify filters but wildcards are not supported
 when = '[[ $PWD =~ erp ]]'
 # when = ''' true '''
-format = ' [{ srvs:[$output](green) }](dimmed black)'
+format = ' [{ srvs:[$output](green) }](dimmed white)'
 
 [battery]
 full_symbol = ''

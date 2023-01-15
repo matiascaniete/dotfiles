@@ -44,8 +44,9 @@ zconf() {
 
 timezsh() {
     shell=${1-$SHELL}
-    for i in $(seq 1 4); do
-        /usr/bin/time -f "%E real\t%U user\t%S sys" $shell -i -c exit;
+    for i in $(seq 1 5); do
+        printf "run #%s\t" "$i"
+        /usr/bin/time -f "%E real\t%U user\t%S sys" "$shell" -i -c exit;
     done
 }
 
