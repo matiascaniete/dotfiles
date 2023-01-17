@@ -39,7 +39,8 @@ reload() {
 }
 
 zconf() {
-    $EDITOR "${CONFIG_FILES[$1]}"
+    file_key=${1:-zshconf}
+    $EDITOR "${CONFIG_FILES[$file_key]}"
 }
 
 timezsh() {
