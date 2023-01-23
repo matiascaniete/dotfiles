@@ -49,8 +49,8 @@ map_symbol = false
 disabled = false
 
 [username]
-style_user = 'white'
-style_root = 'black'
+style_user = '#E3F2F1'
+style_root = 'red'
 format = '[$user]($style)'
 disabled = false
 show_always = true
@@ -58,7 +58,7 @@ show_always = true
 [hostname]
 ssh_only = false
 ssh_symbol = ""
-format = '@[$hostname](blue)'
+format = '[@](#E3F2F1)[$hostname](blue)'
 disabled = false
 
 [directory]
