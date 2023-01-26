@@ -6,4 +6,4 @@ configuration {
   dpi:          1;
 }
 
-@import "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
+@import "/usr/share/rofi/themes/Pop-Dark.rasi"
