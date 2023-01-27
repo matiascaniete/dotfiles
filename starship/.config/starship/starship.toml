@@ -1,5 +1,5 @@
 add_newline = false
-format = "$directory$git_branch$git_status${custom.erp}$cmd_duration$jobs $character"
+format = " גּ $directory$git_branch$git_status${custom.erp}$cmd_duration$jobs $character"
 right_format = "$status${battery}$memory_usage$username$hostname$time"
 
 [time]
@@ -49,7 +49,7 @@ map_symbol = false
 disabled = false
 
 [username]
-style_user = 'cyan'
+style_user = 'blue'
 style_root = 'red'
 format = '[$user]($style)'
 disabled = false
@@ -58,7 +58,7 @@ show_always = true
 [hostname]
 ssh_only = false
 ssh_symbol = ""
-format = '[@](gray)[$hostname](purple)'
+format = '[ ﱦ ](gray)[$hostname](bright-blue)'
 disabled = false
 
 [directory]
