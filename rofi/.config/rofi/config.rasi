@@ -6,4 +6,3 @@ configuration {
   dpi:          1;
 }
 
-@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
