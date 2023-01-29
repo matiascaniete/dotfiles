@@ -2,18 +2,13 @@
 	alacritty -o "window.startup_mode=Fullscreen"
 
 {super, super + alt} + r
-    rofi -sorting-method fzf \
-        -show combi drun run ssh keys \
-        -modi combi,drun,run,ssh,keys
+    ~/myshell/scripts/rmenu-apps
 
 super + alt + l
     lpass-select
 
 {super, super + alt} + o
-	echo "systemctl suspend|systemctl reboot|systemctl poweroff" \
-    | rofi -dmenu -sep "|" -i -u 2 -a 1 -width -25 -window-title "Exit Options" -lines 3 \
-    | head -n 1 \
-    | xargs -i"XXX" --no-run-if-empty bash -c "XXX"
+    ~/myshell/scripts/rmenu-exit
 
 # Restarts sxhkd daemon
 {super, super + alt} + x
