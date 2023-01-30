@@ -105,6 +105,7 @@ install-zsh-plugins() {
     git clone https://github.com/zdharma-continuum/fast-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-history-substring-search
     git clone https://github.com/agkozak/zsh-z.git
+    git clone https://github.com/marzocchi/zsh-notify.git
 }
 
 install-fonts() {

@@ -25,6 +25,7 @@ source ~/.local/share/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.local/share/zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
 source ~/.local/share/zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source ~/.local/share/zsh-plugins/zsh-z/zsh-z.plugin.zsh
+source ~/.local/share/zsh-plugins/zsh-notify/notify.plugin.zsh
 
 # shellcheck disable=2206
 fpath=(~/.local/share/zsh-plugins/zsh-completions/src $fpath)
