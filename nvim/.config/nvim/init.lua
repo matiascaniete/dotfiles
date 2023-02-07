@@ -284,7 +284,7 @@ require('telescope').setup {
 }
 
 require("telescope").load_extension("notify")
--- vim.notify = require("notify")
+vim.notify = require("notify")
 --
 -- function shellexec(cmd)
 --     local handle = assert(io.popen(cmd, 'r'))

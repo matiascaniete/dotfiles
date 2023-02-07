@@ -1,9 +1,21 @@
+-- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
 require("null-ls").setup({
     debug = true,
     sources = {
         require("null-ls").builtins.hover.dictionary,
         require("null-ls").builtins.hover.printenv,
         require("null-ls").builtins.formatting.prettier,
+        require("null-ls").builtins.formatting.phpcsfixer.with({
+            -- command = './vendor/bin/php-cs-fixer',
+            env = {
+                PHP_CS_FIXER_IGNORE_ENV = true,
+            }
+        }),
+        require("null-ls").builtins.diagnostics.phpcs.with({
+            command = './vendor/bin/phpcs'
+        }),
+
         require("null-ls").builtins.code_actions.shellcheck, -- shell script code actions
         require("null-ls").builtins.diagnostics.phpmd.with({
             extra_args = function()
@@ -16,6 +28,20 @@ require("null-ls").setup({
                 return { "cleancode,codesize,controversial,design,naming,unusedcode" }
             end
         }),
+        -- on_attach = function(client, bufnr)
+        --     vim.notify('on-attach')
+        --     if client.supports_method("textDocument/formatting") then
+        --         vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        --         vim.api.nvim_create_autocmd("BufWritePre", {
+        --             group = augroup,
+        --             buffer = bufnr,
+        --             callback = function()
+        --                 vim.notify('formatin')
+        --                 vim.lsp.buf.format({ bufnr = bufnr })
+        --             end,
+        --         })
+        --     end
+        -- end,
     }
 })
 
