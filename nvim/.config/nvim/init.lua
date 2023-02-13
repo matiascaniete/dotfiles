@@ -103,9 +103,11 @@ require('packer').startup(function(use)
     }
     use 'pwntester/octo.nvim'
     use "ellisonleao/glow.nvim"
-    use({ "iamcco/markdown-preview.nvim",
+    use({
+        "iamcco/markdown-preview.nvim",
         run = "cd app && npm install",
-        setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" },
+        setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+        ft = { "markdown" },
     })
 
     use "tpope/vim-surround"
@@ -285,20 +287,6 @@ require('telescope').setup {
 
 require("telescope").load_extension("notify")
 vim.notify = require("notify")
---
--- function shellexec(cmd)
---     local handle = assert(io.popen(cmd, 'r'))
---     local output = assert(handle:read('*a'))
---
---     handle:close()
---
---     return output
--- end
---
--- local datetime = shellexec('date; echo $USER@$(hostname); pwd')
--- vim.notify(datetime, vim.log.levels.INFO, {
---     title = 'System info'
--- })
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -307,8 +295,30 @@ pcall(require('telescope').load_extension, 'fzf')
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'bash', 'php',
-        'javascript', 'html', 'json', 'regex', 'markdown', 'gitcommit', 'scss', 'dockerfile', 'twig', 'yaml', 'css' },
+    ensure_installed = {
+        'bash',
+        'c',
+        'cpp',
+        'css',
+        'dockerfile',
+        'gitcommit',
+        'go',
+        'help',
+        'html',
+        'javascript',
+        'json',
+        'lua',
+        'markdown',
+        'php',
+        'python',
+        'regex',
+        'rust',
+        'scss',
+        'twig',
+        'typescript',
+        'vue',
+        'yaml',
+    },
 
 
     highlight = {
@@ -425,7 +435,6 @@ local on_attach = function(_, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'CodeActions', function(_)
         vim.lsp.buf.code_action()
     end, { desc = 'Code action for current buffer with LSP' });
-
 end
 
 -- Enable the following language servers
@@ -503,7 +512,7 @@ cmp.setup {
         end,
     },
     mapping = cmp.mapping.preset.insert {
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-d>'] = cmp.mapping.scroll_docs( -4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<CR>'] = cmp.mapping.confirm {
@@ -522,8 +531,8 @@ cmp.setup {
         ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
+            elseif luasnip.jumpable( -1) then
+                luasnip.jump( -1)
             else
                 fallback()
             end
