@@ -447,28 +447,28 @@ local servers = {
     -- gopls = {},
     -- rust_analyzer = {},
     bashls = {},
-    html = {},
     dockerls = {},
     emmet_ls = {},
-    jsonls = {},
-    tsserver = {},
-    marksman = {},
+    html = {},
     intelephense = {},
-    psalm = {},
-    pyright = {},
-    stylelint_lsp = {},
-    taplo = {},
-    vuels = {},
+    jsonls = {},
     lemminx = {},
-    yamlls = {},
-    -- twigcs doesn't work, install it manually!!!
-    -- twiwcs = {},
-    sumneko_lua = {
+    lua_ls = {
         Lua = {
             workspace = { checkThirdParty = false },
             telemetry = { enable = false },
         },
     },
+    marksman = {},
+    psalm = {},
+    pyright = {},
+    stylelint_lsp = {},
+    taplo = {},
+    tsserver = {},
+    vuels = {},
+    yamlls = {},
+    -- twigcs doesn't work, install it manually!!!
+    -- twiwcs = {},
 }
 
 -- Setup neovim lua configuration
