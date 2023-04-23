@@ -70,8 +70,26 @@ install-dependencies() {
 
 install-apt-dependencies() {
     sudo apt install -y \
+        exa \
+        nnn \
+        ranger \
+        tmux \
         stow \
         lolcat
+}
+
+install-pacman-dependencies() {
+    sudo pacman -S \
+        alacritty \
+        bat \
+        exa \
+        lolcat \
+        mpv \
+        nnn \
+        ranger \
+        starship \
+        stow \
+        tmux
 }
 
 install-mpv-shaders() {
