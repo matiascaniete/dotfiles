@@ -164,11 +164,11 @@ require('packer').startup(function(use)
     use 'norcalli/nvim-colorizer.lua'
 
     use 'nanozuki/tabby.nvim'
-    use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+    use 'nvim-lualine/lualine.nvim'           -- Fancier statusline
 
     use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
-    use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-    use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+    use 'numToStr/Comment.nvim'               -- "gc" to comment visual regions/lines
+    use 'tpope/vim-sleuth'                    -- Detect tabstop and shiftwidth automatically
 
     -- Fuzzy Finder (files, lsp, etc)
     use {
@@ -257,9 +257,9 @@ require("nvim-treesitter.configs").setup {
     }
 }
 require 'treesitter-context'.setup({
-    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+    enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
     throttle = true, -- Throttles plugin updates (may improve performance)
-    max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+    max_lines = 0,   -- How many lines the window should span. Values <= 0 mean no limit.
 })
 
 
@@ -476,7 +476,14 @@ local servers = {
     marksman = {},
     psalm = {},
     pyright = {},
-    stylelint_lsp = {},
+    stylelint_lsp = {
+        stylelintplus = {
+            -- see available options in stylelint-lsp documentation
+            configOverrides = {
+                ignoreFiles = { '**/*.ts' }
+            }
+        }
+    },
     taplo = {},
     tsserver = {},
     vuels = {},
@@ -526,7 +533,7 @@ cmp.setup {
         end,
     },
     mapping = cmp.mapping.preset.insert {
-        ['<C-d>'] = cmp.mapping.scroll_docs( -4),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<CR>'] = cmp.mapping.confirm {
@@ -545,8 +552,8 @@ cmp.setup {
         ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif luasnip.jumpable( -1) then
-                luasnip.jump( -1)
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
             else
                 fallback()
             end
