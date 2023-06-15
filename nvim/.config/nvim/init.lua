@@ -163,7 +163,7 @@ require('packer').startup(function(use)
     use "EdenEast/nightfox.nvim"
     use 'norcalli/nvim-colorizer.lua'
 
-    use 'nanozuki/tabby.nvim'
+    -- use 'nanozuki/tabby.nvim'
     use 'nvim-lualine/lualine.nvim'           -- Fancier statusline
 
     use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
@@ -241,7 +241,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require("nvim-tree").setup()
 require("which-key").setup()
 -- require("bufferline").setup {}
-require("tabby").setup()
+-- require("tabby").setup()
 require('numb').setup()
 require('nvim-autopairs').setup()
 require "lsp_signature".setup()
