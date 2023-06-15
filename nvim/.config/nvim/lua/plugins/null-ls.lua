@@ -5,16 +5,17 @@ require("null-ls").setup({
     sources = {
         require("null-ls").builtins.hover.dictionary,
         require("null-ls").builtins.hover.printenv,
+        require("null-ls").builtins.formatting.stylua,
         require("null-ls").builtins.formatting.prettier,
         require("null-ls").builtins.formatting.eslint_d,
         require("null-ls").builtins.formatting.phpcsfixer.with({
             -- command = './vendor/bin/php-cs-fixer',
             env = {
                 PHP_CS_FIXER_IGNORE_ENV = true,
-            }
+            },
         }),
         require("null-ls").builtins.diagnostics.phpcs.with({
-            command = './vendor/bin/phpcs'
+            command = "./vendor/bin/phpcs",
         }),
 
         require("null-ls").builtins.code_actions.shellcheck, -- shell script code actions
@@ -28,7 +29,7 @@ require("null-ls").setup({
                 end
                 -- vim.notify("Using phpmd with all rules")
                 return { "cleancode,codesize,controversial,design,naming,unusedcode" }
-            end
+            end,
         }),
         -- on_attach = function(client, bufnr)
         --     vim.notify('on-attach')
@@ -44,13 +45,13 @@ require("null-ls").setup({
         --         })
         --     end
         -- end,
-    }
+    },
 })
 
 local null_ls = require("null-ls")
 
 local shellcheck_formatter = {
-    name = 'custom_shellcheck',
+    name = "custom_shellcheck",
     method = null_ls.methods.FORMATTING,
     filetypes = { "sh" },
     generator = null_ls.formatter({
@@ -63,7 +64,7 @@ local shellcheck_formatter = {
 null_ls.register(shellcheck_formatter)
 
 local fmter = {
-    name = 'custom_beautysh',
+    name = "custom_beautysh",
     method = null_ls.methods.FORMATTING,
     filetypes = { "sh" },
     generator = null_ls.formatter({
