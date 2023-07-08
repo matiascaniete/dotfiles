@@ -193,7 +193,24 @@ require("packer").startup(function(use)
     -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
     use({ "akinsho/toggleterm.nvim", tag = "*" })
-    use("Exafunction/codeium.vim")
+    use({
+        "Exafunction/codeium.vim",
+        config = function()
+            -- Change '<C-g>' here to any keycode you like.
+            vim.keymap.set("i", "<a-CR>", function()
+                return vim.fn["codeium#Accept"]()
+            end, { expr = true })
+            vim.keymap.set("i", "<a-n>", function()
+                return vim.fn["codeium#CycleCompletions"](1)
+            end, { expr = true })
+            vim.keymap.set("i", "<a-p>", function()
+                return vim.fn["codeium#CycleCompletions"](-1)
+            end, { expr = true })
+            vim.keymap.set("i", "<a-x>", function()
+                return vim.fn["codeium#Clear"]()
+            end, { expr = true })
+        end,
+    })
 
     -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
     local has_plugins, plugins = pcall(require, "custom.plugins")
@@ -227,6 +244,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     group = packer_group,
     pattern = pattern,
 })
+
+vim.g.codeium_disable_bindings = 1
 
 require("options")
 require("plugins.toggleterm")
