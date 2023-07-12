@@ -118,6 +118,7 @@ require("packer").startup(function(use)
     })
 
     use("tpope/vim-surround")
+    use("tpope/vim-repeat")
     use("RRethy/vim-illuminate")
     use("nacro90/numb.nvim")
     use("f-person/git-blame.nvim")
