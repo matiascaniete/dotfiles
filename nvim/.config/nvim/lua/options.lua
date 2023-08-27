@@ -10,7 +10,7 @@ vim.o.hlsearch = false
 vim.wo.number = true
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -30,7 +30,7 @@ vim.o.smarttab = true
 
 -- Decrease update time
 vim.o.updatetime = 250
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 
 vim.o.splitbelow = true
 vim.o.splitright = true
@@ -39,15 +39,15 @@ vim.o.clipboard = "unnamedplus"
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.o.background = 'dark'
-vim.g.gruvbox_material_background = 'hard'
+vim.o.background = "dark"
+vim.g.gruvbox_material_background = "hard"
 vim.g.gruvbox_material_better_performance = 1
--- vim.api.nvim_command('colorscheme kanagawa')
+vim.api.nvim_command("colorscheme kanagawa")
 -- vim.api.nvim_command('colorscheme onedarker')
-vim.api.nvim_command('colorscheme nightfox')
+-- vim.api.nvim_command('colorscheme nightfox')
 --
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = "menuone,noselect"
 
 -- last status
 vim.o.ls = 0
@@ -58,7 +58,7 @@ vim.o.ch = 0
 -- spell
 -- vim.o.spell = 1
 -- z= for listing suggestions
-vim.o.spelllang = 'es_es,en_us'
-vim.o.spellsuggest = 'best,9'
+vim.o.spelllang = "es_es,en_us"
+vim.o.spellsuggest = "best,9"
 
 vim.o.showtabline = 2
