@@ -172,11 +172,11 @@ require("packer").startup(function(use)
     use("norcalli/nvim-colorizer.lua")
 
     -- use 'nanozuki/tabby.nvim'
-    use("nvim-lualine/lualine.nvim")        -- Fancier statusline
+    use("nvim-lualine/lualine.nvim")           -- Fancier statusline
 
     use("lukas-reineke/indent-blankline.nvim") -- Add indentation guides even on blank lines
-    use("numToStr/Comment.nvim")            -- "gc" to comment visual regions/lines
-    use("tpope/vim-sleuth")                 -- Detect tabstop and shiftwidth automatically
+    use("numToStr/Comment.nvim")               -- "gc" to comment visual regions/lines
+    use("tpope/vim-sleuth")                    -- Detect tabstop and shiftwidth automatically
 
     -- Fuzzy Finder (files, lsp, etc)
     use({
@@ -300,6 +300,26 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 require("nvim-tree").setup()
 require("which-key").setup()
+local wk = require("which-key")
+wk.register({
+    c = {
+        name = "ChatGPT",
+        c = { "<cmd>ChatGPT<CR>", "ChatGPT" },
+        e = { "<cmd>ChatGPTEditWithInstruction<CR>", "Edit with instruction", mode = { "n", "v" } },
+        g = { "<cmd>ChatGPTRun grammar_correction<CR>", "Grammar Correction", mode = { "n", "v" } },
+        t = { "<cmd>ChatGPTRun translate<CR>", "Translate", mode = { "n", "v" } },
+        k = { "<cmd>ChatGPTRun keywords<CR>", "Keywords", mode = { "n", "v" } },
+        d = { "<cmd>ChatGPTRun docstring<CR>", "Docstring", mode = { "n", "v" } },
+        a = { "<cmd>ChatGPTRun add_tests<CR>", "Add Tests", mode = { "n", "v" } },
+        o = { "<cmd>ChatGPTRun optimize_code<CR>", "Optimize Code", mode = { "n", "v" } },
+        s = { "<cmd>ChatGPTRun summarize<CR>", "Summarize", mode = { "n", "v" } },
+        f = { "<cmd>ChatGPTRun fix_bugs<CR>", "Fix Bugs", mode = { "n", "v" } },
+        x = { "<cmd>ChatGPTRun explain_code<CR>", "Explain Code", mode = { "n", "v" } },
+        r = { "<cmd>ChatGPTRun roxygen_edit<CR>", "Roxygen Edit", mode = { "n", "v" } },
+        l = { "<cmd>ChatGPTRun code_readability_analysis<CR>", "Code Readability Analysis", mode = { "n", "v" } },
+    },
+})
+
 -- require("bufferline").setup {}
 -- require("tabby").setup()
 require("numb").setup()
@@ -317,9 +337,9 @@ require("nvim-treesitter.configs").setup({
     },
 })
 require("treesitter-context").setup({
-    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+    enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
     throttle = true, -- Throttles plugin updates (may improve performance)
-    max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+    max_lines = 0,   -- How many lines the window should span. Values <= 0 mean no limit.
 })
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
