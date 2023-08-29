@@ -40,8 +40,9 @@ vim.o.clipboard = "unnamedplus"
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.o.background = "dark"
-vim.g.gruvbox_material_background = "hard"
-vim.g.gruvbox_material_better_performance = 1
+
+-- vim.g.gruvbox_material_background = "hard"
+-- vim.g.gruvbox_material_better_performance = 1
 vim.api.nvim_command("colorscheme kanagawa")
 -- vim.api.nvim_command('colorscheme onedarker')
 -- vim.api.nvim_command('colorscheme nightfox')
