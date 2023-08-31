@@ -172,11 +172,11 @@ require("packer").startup(function(use)
     use("norcalli/nvim-colorizer.lua")
 
     -- use 'nanozuki/tabby.nvim'
-    use("nvim-lualine/lualine.nvim")           -- Fancier statusline
+    use("nvim-lualine/lualine.nvim")        -- Fancier statusline
 
     use("lukas-reineke/indent-blankline.nvim") -- Add indentation guides even on blank lines
-    use("numToStr/Comment.nvim")               -- "gc" to comment visual regions/lines
-    use("tpope/vim-sleuth")                    -- Detect tabstop and shiftwidth automatically
+    use("numToStr/Comment.nvim")            -- "gc" to comment visual regions/lines
+    use("tpope/vim-sleuth")                 -- Detect tabstop and shiftwidth automatically
 
     -- Fuzzy Finder (files, lsp, etc)
     use({
@@ -337,9 +337,9 @@ require("nvim-treesitter.configs").setup({
     },
 })
 require("treesitter-context").setup({
-    enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
+    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
     throttle = true, -- Throttles plugin updates (may improve performance)
-    max_lines = 0,   -- How many lines the window should span. Values <= 0 mean no limit.
+    max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
 })
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
