@@ -170,6 +170,7 @@ require("packer").startup(function(use)
     use("rebelot/kanagawa.nvim")
     use("EdenEast/nightfox.nvim")
     use("norcalli/nvim-colorizer.lua")
+    use({ "catppuccin/nvim", as = "catppuccin" })
 
     -- use 'nanozuki/tabby.nvim'
     use("nvim-lualine/lualine.nvim")        -- Fancier statusline

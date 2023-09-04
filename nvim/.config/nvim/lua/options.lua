@@ -43,9 +43,10 @@ vim.o.background = "dark"
 
 -- vim.g.gruvbox_material_background = "hard"
 -- vim.g.gruvbox_material_better_performance = 1
-vim.api.nvim_command("colorscheme kanagawa")
+-- vim.api.nvim_command("colorscheme kanagawa")
 -- vim.api.nvim_command('colorscheme onedarker')
 -- vim.api.nvim_command('colorscheme nightfox')
+vim.api.nvim_command("colorscheme catppuccin")
 --
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
