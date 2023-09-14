@@ -4,3 +4,4 @@ zsh/.config/zsh/.zshrc
 zsh/.config/zsh/.zhistory
 zsh/.config/zsh/.zcompdump
 mpv/.config/mpv/shaders
+tmux2/.config/tmux/plugins
