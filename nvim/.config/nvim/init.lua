@@ -144,7 +144,7 @@ require("packer").startup(function(use)
             })
         end,
     })
-    use("karb94/neoscroll.nvim")
+    -- use("karb94/neoscroll.nvim")
     -- Lua
     use({
         "folke/todo-comments.nvim",
@@ -326,7 +326,7 @@ require("numb").setup()
 require("nvim-autopairs").setup()
 require("lsp_signature").setup()
 require("symbols-outline").setup()
-require("neoscroll").setup()
+-- require("neoscroll").setup()
 require("Comment").setup()
 require("nvim-treesitter.configs").setup({
     rainbow = {
