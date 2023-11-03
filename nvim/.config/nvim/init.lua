@@ -172,11 +172,11 @@ require("packer").startup(function(use)
     use({ "catppuccin/nvim", as = "catppuccin" })
 
     -- use 'nanozuki/tabby.nvim'
-    use("nvim-lualine/lualine.nvim")           -- Fancier statusline
+    use("nvim-lualine/lualine.nvim")        -- Fancier statusline
 
     use("lukas-reineke/indent-blankline.nvim") -- Add indentation guides even on blank lines
-    use("numToStr/Comment.nvim")               -- "gc" to comment visual regions/lines
-    use("tpope/vim-sleuth")                    -- Detect tabstop and shiftwidth automatically
+    use("numToStr/Comment.nvim")            -- "gc" to comment visual regions/lines
+    use("tpope/vim-sleuth")                 -- Detect tabstop and shiftwidth automatically
 
     -- Fuzzy Finder (files, lsp, etc)
     use({
@@ -337,9 +337,9 @@ require("nvim-treesitter.configs").setup({
     },
 })
 require("treesitter-context").setup({
-    enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
+    enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
     throttle = true, -- Throttles plugin updates (may improve performance)
-    max_lines = 0,   -- How many lines the window should span. Values <= 0 mean no limit.
+    max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
 })
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
@@ -357,7 +357,7 @@ local highlight = {
     "RainbowViolet",
     "RainbowCyan",
 }
-local hooks = require "ibl.hooks"
+local hooks = require("ibl.hooks")
 -- create the highlight groups in the highlight setup hook, so they are reset
 -- every time the colorscheme changes
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
@@ -371,12 +371,12 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
 end)
 
 vim.g.rainbow_delimiters = { highlight = highlight }
-require("ibl").setup {
+require("ibl").setup({
     indent = {
         char = "¦",
     },
-    scope = { highlight = highlight }
-}
+    scope = { highlight = highlight },
+})
 
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
