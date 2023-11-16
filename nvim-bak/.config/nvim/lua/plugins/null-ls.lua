@@ -9,7 +9,6 @@ require("null-ls").setup({
         require("null-ls").builtins.formatting.prettier,
         require("null-ls").builtins.formatting.eslint_d,
         require("null-ls").builtins.formatting.phpcsfixer.with({
-            -- command = './vendor/bin/php-cs-fixer',
             env = {
                 PHP_CS_FIXER_IGNORE_ENV = true,
             },
