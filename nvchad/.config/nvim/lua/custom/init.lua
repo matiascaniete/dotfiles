@@ -25,6 +25,10 @@ opt.softtabstop = 4
 opt.expandtab = true
 opt.smarttab = true
 
+opt.wrap = false
+-- vim.wo.wrap = true
+-- vim.wo.linebreak = true
+-- vim.wo.list = false -- extra option I set in addition to the ones in your question
 -------------------------------------- commands ------------------------------------------
 local new_cmd = vim.api.nvim_create_user_command
 
