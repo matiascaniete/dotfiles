@@ -64,13 +64,13 @@ local plugins = {
 			require("alpha").setup(require("alpha.themes.startify").config)
 		end,
 	},
-	{
-		"j-hui/fidget.nvim",
-		lazy = false,
-		config = function()
-			require("fidget").setup({})
-		end,
-	},
+	-- {
+	-- 	"j-hui/fidget.nvim",
+	-- 	lazy = false,
+	-- 	config = function()
+	-- 		require("fidget").setup({})
+	-- 	end,
+	-- },
 	{ "RRethy/vim-illuminate", event = "BufRead" },
 	{
 		"hrsh7th/nvim-cmp",
