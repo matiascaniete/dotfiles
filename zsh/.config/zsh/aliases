@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+alias gpt4="gpt --model='gpt-4-1106-preview'"
+
 # history
 alias h="history -i"
 
