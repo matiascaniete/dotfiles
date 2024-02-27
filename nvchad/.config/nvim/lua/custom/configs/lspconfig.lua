@@ -31,6 +31,16 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
+lspconfig.intelephense.setup({
+	settings = {
+		intelephense = {
+			files = {
+				maxSize = 5000000,
+			},
+		},
+	},
+})
+
 lspconfig.lua_ls.setup({
 	settings = {
 		Lua = {
