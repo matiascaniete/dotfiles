@@ -20,6 +20,7 @@ M.treesitter = {
 		"python",
 		"regex",
 		"scss",
+		"go",
 		"tsx",
 		"twig",
 		"typescript",

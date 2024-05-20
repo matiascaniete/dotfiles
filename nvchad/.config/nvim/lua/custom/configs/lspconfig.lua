@@ -10,6 +10,7 @@ local servers = {
 	"cssls",
 	"dockerls",
 	"emmet_ls",
+	"gopls",
 	"html",
 	"intelephense",
 	"jsonls",
@@ -19,7 +20,6 @@ local servers = {
 	"pyright",
 	"stylelint_lsp",
 	"taplo",
-	"tsserver",
 	"tsserver",
 	"vuels",
 	"yamlls",
@@ -31,6 +31,16 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
+
+-- lspconfig.intelephense.setup({
+-- 	settings = {
+-- 		intelephense = {
+-- 			files = {
+-- 				maxSize = 5000000,
+-- 			},
+-- 		},
+-- 	},
+-- })
 
 lspconfig.lua_ls.setup({
 	settings = {
