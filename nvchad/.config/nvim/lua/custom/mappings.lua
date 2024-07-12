@@ -3,9 +3,14 @@ local M = {}
 
 M.general = {
   n = {
+    ["<leader><enter>"] = { "<cmd>.!zsh<CR>", "Execute in zsh the command in the selection" },
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
   },
+  i = {
+    ["<C-z>"] = { "<cmd>.!zsh<CR>", "Execute in zsh the command in the selection" },
+  },
   v = {
+    ["<leader><enter>"] = { " y:'<,'>!zsh<CR><C-R>\"<CR>", "Execute in zsh all the commands in the selection" },
     [">"] = { ">gv", "indent" },
   },
 }
