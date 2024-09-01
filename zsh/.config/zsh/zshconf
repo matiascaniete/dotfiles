@@ -37,8 +37,14 @@ fpath=($ZDOTDIR/custom-completions $fpath)
 
 # reload and zconf functions
 reload() {
-    rm "$ZDOTDIR"/.zcompdump && echo "zcompdump removed."
-    rm -rf "$XDG_CACHE_HOME/zsh/.zcompcache" && echo "zcompcache removed."
+    if [[ -f "$ZDOTDIR/.zcompdump" ]]; then
+        rm "$ZDOTDIR"/.zcompdump && echo "zcompdump removed."
+    fi
+
+    if [[ -f "$XDG_CACHE_HOME/zsh/.zcompcache" ]]; then
+        rm "$XDG_CACHE_HOME/zsh/.zcompcache" && echo "zcompcache removed."
+    fi
+
     exec zsh
 }
 
@@ -51,7 +57,7 @@ timezsh() {
     shell=${1-$SHELL}
     for i in $(seq 1 5); do
         printf "run #%s\t" "$i"
-        /usr/bin/time -f "%E real\t%U user\t%S sys" "$shell" -i -c exit;
+        /usr/bin/time -f "%E real\t%U user\t%S sys" "$shell" -i -c exit
     done
 }
 
