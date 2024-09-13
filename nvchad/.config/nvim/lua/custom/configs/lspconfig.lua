@@ -20,7 +20,7 @@ local servers = {
 	"pyright",
 	"stylelint_lsp",
 	"taplo",
-	"tsserver",
+	"ts_ls",
 	"vuels",
 	"yamlls",
 }
