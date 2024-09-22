@@ -13,7 +13,6 @@ opt.swapfile = false
 
 -- Disable highlighting of search results
 opt.hlsearch = false
-
 -- Case insensitive searching UNLESS /C or capital in search
 opt.ignorecase = true
 opt.smartcase = true

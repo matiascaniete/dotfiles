@@ -20,6 +20,7 @@ local servers = {
 	"stylelint_lsp",
 	"taplo",
 	"ts_ls",
+	-- "twiggy_language_server",
 	"vuels",
 	"yamlls",
 }

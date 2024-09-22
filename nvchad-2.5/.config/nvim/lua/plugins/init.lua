@@ -153,13 +153,27 @@ return {
 		end,
 	},
 
-	-- {
-	-- 	"nvim-treesitter/nvim-treesitter",
-	-- 	opts = {
-	-- 		ensure_installed = {
-	-- 			"vim", "lua", "vimdoc",
-	--      "html", "css"
-	-- 		},
-	-- 	},
-	-- },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		opts = {
+			ensure_installed = {
+				"css",
+				"html",
+				"lua",
+				"php",
+				"twig",
+				"vim",
+				"vimdoc",
+				"yaml",
+				"markdown",
+				"markdown_inline",
+				"json",
+				"javascript",
+				"typescript",
+				"bash",
+				"python",
+				"dockerfile",
+			},
+		},
+	},
 }
