@@ -3,7 +3,8 @@
 ## Install dotfiles command
 
 ```sh
-git clone git@github.com:matiascaniete/dotfiles.git ~/myapps/dotfiles && ln -s ~/myapps/dotfiles/bin/dotfiles ~/.local/bin
+git clone git@github.com:matiascaniete/dotfiles.git ~/myapps/dotfiles \
+    && ln -s ~/myapps/dotfiles/bin/dotfiles ~/.local/bin
 ```
 
 ### Configure dotfiles command
