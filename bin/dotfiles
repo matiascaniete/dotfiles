@@ -19,6 +19,11 @@ _self-update() {
 }
 
 _commit-and-push() {
+    if [ -z "$1" ]; then
+        error "No commit message provided"
+        return 1
+    fi
+
     git -C "$ROOT_DIR" add . && git -C "$ROOT_DIR" commit -m "$1" && git -C "$ROOT_DIR" push
 }
 
