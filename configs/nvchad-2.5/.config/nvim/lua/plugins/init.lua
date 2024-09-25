@@ -14,6 +14,16 @@ return {
 	},
 
 	-- Custom plugins
+
+	{
+		"rcarriga/nvim-notify",
+		lazy = false,
+		config = function()
+			require("notify").setup({ background_colour = "#000000" })
+			vim.notify = require("notify")
+		end,
+	},
+
 	{
 		"jose-elias-alvarez/null-ls.nvim",
 		lazy = false,
@@ -117,7 +127,6 @@ return {
 
 	{
 		"p00f/nvim-ts-rainbow",
-		-- lazy = false,
 		event = "BufRead",
 		config = function()
 			require("nvim-treesitter.configs").setup({

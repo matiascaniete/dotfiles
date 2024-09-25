@@ -29,18 +29,41 @@ opt.wrap = false
 -- vim.wo.list = false -- extra option I set in addition to the ones in your question
 
 -------------------------------------- commands ------------------------------------------
+
+local load_addons = function(filename)
+	-- check if a file called addons.lua exists in the project root directory
+	local file = vim.fs.find({ filename }, { upward = true })
+	if file ~= nil and #file > 0 then
+		-- source the addons.lua file
+		print("Sourcing " .. file[1])
+		dofile(file[1])
+	end
+end
+
+P = function(v)
+	print(vim.inspect(v))
+	return v
+end
+
+RELOAD = function(...)
+	return require("plenary.reload").reload_module(...)
+end
+
+R = function(name)
+	RELOAD(name)
+	return require(name)
+end
+
 local new_cmd = vim.api.nvim_create_user_command
 
 new_cmd("Format", function()
 	vim.lsp.buf.format()
 end, {})
 
+new_cmd("ReloadLocalAddons", function()
+	load_addons("nvim.local.lua")
+end, {})
+
 vim.schedule(function()
-	-- check if a file called addons.lua exists in the project root directory
-	local file = vim.fs.find({ "nvim.local.lua" }, { upward = true })
-	if file ~= nil and #file > 0 then
-		-- source the addons.lua file
-		print("Sourcing nvim.local.lua at " .. file[1])
-		dofile(file[1])
-	end
+	load_addons("nvim.local.lua")
 end)
