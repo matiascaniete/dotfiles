@@ -9,6 +9,7 @@ _dotfiles() {
             "dependencies:Dependencies module"
             "fonts:Fonts module"
             "init:Initialize dotfiles"
+            "self-update:Update dotfiles"
         )
 
         _describe 'dotfiles' subcommands

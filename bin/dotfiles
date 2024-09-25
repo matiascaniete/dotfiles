@@ -14,4 +14,8 @@ _print_completions() {
     cat $ROOT_DIR/bin/_dotfiles
 }
 
+_self-update() {
+    git -C "$ROOT_DIR" pull
+}
+
 _run "$@"
