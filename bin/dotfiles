@@ -18,4 +18,8 @@ _self-update() {
     git -C "$ROOT_DIR" pull
 }
 
+_commit-and-push() {
+    git -C "$ROOT_DIR" add . && git -C "$ROOT_DIR" commit -m "$1" && git -C "$ROOT_DIR" push
+}
+
 _run "$@"
