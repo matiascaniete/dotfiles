@@ -1,7 +1,7 @@
-nvim/.config/nvim/plugin/packer_compiled.lua
-nvim/.config/nvim/spell/*.*
-zsh/.config/zsh/.zshrc
-zsh/.config/zsh/.zhistory
-zsh/.config/zsh/.zcompdump
-mpv/.config/mpv/shaders
-tmux2/.config/tmux/plugins
+configs/nvim/.config/nvim/plugin/packer_compiled.lua
+configs/nvim/.config/nvim/spell/*.*
+configs/zsh/.config/zsh/.zshrc
+configs/zsh/.config/zsh/.zhistory
+configs/zsh/.config/zsh/.zcompdump
+configs/mpv/.config/mpv/shaders
+configs/tmux2/.config/tmux/plugins

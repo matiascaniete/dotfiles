@@ -1,0 +1,53 @@
+#compdef rec
+
+_dotfiles() {
+    local line
+    _subcommands() {
+        local -a subcommands
+        subcommands=(
+            "init:Initialize dotfiles"
+            "config:Config module"
+            "fonts:Fonts module"
+            "check-dependencies:Check dependencies"
+        )
+
+        _describe 'dotfiles' subcommands
+    }
+
+    _arguments -C \
+        "1: :_subcommands" \
+        "*:: :->args"
+
+    _dotfiles_"${line[1]}" 2> /dev/null
+}
+
+_dotfiles_config() {
+    local line
+    _subcommands() {
+        local -a subcommands
+        subcommands=(
+            "list:List configs"
+            "install:Install configs"
+            "install-all:Install all configs"
+            "adopt:Adopt config from ~/.config"
+        )
+
+        _describe 'config' subcommands
+    }
+
+    _arguments -C \
+        "1: :_subcommands" \
+        "*:: :->args"
+
+    _dotfiles_config_"${line[1]}" 2> /dev/null
+}
+
+_dotfiles_config_install() {
+    _values 'config to install' $(dotfiles config list)
+}
+
+_dotfiles_config_adopt() {
+    _values 'config to adopt' $(dotfiles config adopt-list)
+}
+
+compdef _dotfiles dotfiles
