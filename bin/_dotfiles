@@ -48,6 +48,7 @@ _dotfiles_config() {
             "install:Install configs"
             "install-all:Install all configs"
             "adopt:Adopt config from ~/.config"
+            "edit:Edit config"
         )
 
         _describe 'config' subcommands
@@ -66,6 +67,10 @@ _dotfiles_config_install() {
 
 _dotfiles_config_adopt() {
     _values 'config to adopt' $(dotfiles config adopt-list)
+}
+
+_dotfiles_config_edit() {
+    _values 'config to edit' $(dotfiles config list)
 }
 
 compdef _dotfiles dotfiles

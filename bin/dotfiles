@@ -14,12 +14,4 @@ _print_completions() {
     cat $ROOT_DIR/bin/_dotfiles
 }
 
-# adopt-config() {
-#     program=$1
-#     echo "Adopting config from [$program]"
-#
-#     mkdir -p "$program"/.config/"$program"
-#     stow --adopt --verbose --target ~ "$program"
-# }
-
 _run "$@"

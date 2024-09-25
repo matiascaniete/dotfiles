@@ -42,8 +42,17 @@ _adopt() {
     for conf in $configs; do
         echo "Adopting config [$conf]..." | echo-header
 
-        mkdir -p "$ROOT_DIR/configs/$conf/.config/$conf"
-        #     stow --adopt --verbose --target ~ "$program"
-        stow --adopt --verbose --target ~/.config "$conf" --dir "$ROOT_DIR/configs"
+        mkdir -p "$ROOT_DIR/configs/$conf"
+        stow --adopt --verbose --target ~ "$conf" --dir "$ROOT_DIR/configs/"
     done
+}
+
+_edit-list() {
+    config_dir="$ROOT_DIR/configs/$1"
+
+    find "$config_dir" -type f
+}
+
+_edit() {
+    _edit-list "$1" | fzf --preview "bat --color=always {}" | xargs $EDITOR
 }

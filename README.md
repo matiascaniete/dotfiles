@@ -1,6 +1,8 @@
 # Dotfiles
 
-## Install dotfiles command
+## Installation
+
+### Install dotfiles command
 
 ```sh
 git clone git@github.com:matiascaniete/dotfiles.git ~/myapps/dotfiles \
@@ -34,7 +36,7 @@ source ~/.custom_xinitrc
 ### List dependencies
 
 ```sh
-dotfiles dependencies List
+dotfiles dependencies list
 ```
 
 ### Install apps dependencies
