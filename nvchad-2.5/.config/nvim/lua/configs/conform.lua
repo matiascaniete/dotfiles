@@ -5,6 +5,7 @@ local options = {
 		twig = { "twig-cs-fixer" },
 		css = { "prettier" },
 		html = { "prettier" },
+		ts = { "eslint_d" },
 	},
 
 	-- format_on_save = {

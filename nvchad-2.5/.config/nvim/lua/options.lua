@@ -27,6 +27,7 @@ opt.wrap = false
 -- vim.wo.wrap = true
 -- vim.wo.linebreak = true
 -- vim.wo.list = false -- extra option I set in addition to the ones in your question
+
 -------------------------------------- commands ------------------------------------------
 local new_cmd = vim.api.nvim_create_user_command
 
@@ -34,3 +35,12 @@ new_cmd("Format", function()
 	vim.lsp.buf.format()
 end, {})
 
+vim.schedule(function()
+	-- check if a file called addons.lua exists in the project root directory
+	local file = vim.fs.find({ "nvim.local.lua" }, { upward = true })
+	if file ~= nil and #file > 0 then
+		-- source the addons.lua file
+		print("Sourcing nvim.local.lua at " .. file[1])
+		dofile(file[1])
+	end
+end)

@@ -14,6 +14,13 @@ return {
 	},
 
 	-- Custom plugins
+	{
+		"jose-elias-alvarez/null-ls.nvim",
+		lazy = false,
+		config = function()
+			require("configs.nullls")
+		end,
+	},
 
 	{
 		"max397574/better-escape.nvim",
@@ -23,9 +30,14 @@ return {
 		end,
 	},
 
-	{ "folke/trouble.nvim", cmd = "TroubleToggle", opts = { use_diagnostic_signs = true } },
+	{ "folke/trouble.nvim", cmd = "TroubleToggle", opts = {
+		use_diagnostic_signs = true,
+	} },
+
 	{ "f-person/git-blame.nvim", event = "BufRead" },
+
 	{ "tpope/vim-sleuth", lazy = false },
+
 	{
 		"nacro90/numb.nvim",
 		lazy = false,
@@ -36,12 +48,14 @@ return {
 
 	{
 		"goolord/alpha-nvim",
+		lazy = false,
 		config = function()
 			require("alpha").setup(require("alpha.themes.startify").config)
 		end,
 	},
 
 	{ "RRethy/vim-illuminate", event = "BufRead" },
+
 	{
 		"hrsh7th/nvim-cmp",
 		opts = function()
@@ -52,6 +66,7 @@ return {
 			return options
 		end,
 	},
+
 	{
 		"Exafunction/codeium.vim",
 		event = "BufEnter",
@@ -71,6 +86,7 @@ return {
 			end, { expr = true })
 		end,
 	},
+
 	{
 		"Exafunction/codeium.nvim",
 		event = "BufEnter",
@@ -118,6 +134,7 @@ return {
 			vim.fn["mkdp#util#install"]()
 		end,
 	},
+
 	{
 		"jackMort/ChatGPT.nvim",
 		cmd = { "ChatGPT", "ChatGPTRun", "ChatGPTActAs", "ChatGPTRunSetup", "ChatGPTEditWithInstructions" },
@@ -157,22 +174,28 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		opts = {
 			ensure_installed = {
+				"bash",
 				"css",
+				"dockerfile",
+				"gitcommit",
+				"go",
 				"html",
+				"javascript",
+				"json",
 				"lua",
-				"php",
-				"twig",
-				"vim",
-				"vimdoc",
-				"yaml",
 				"markdown",
 				"markdown_inline",
-				"json",
-				"javascript",
-				"typescript",
-				"bash",
+				"php",
 				"python",
-				"dockerfile",
+				"regex",
+				"scss",
+				"tsx",
+				"twig",
+				"typescript",
+				"vim",
+				"vimdoc",
+				"vue",
+				"yaml",
 			},
 		},
 	},
