@@ -1,69 +1,82 @@
-# Readme
+# Dotfiles
 
-## Clone the repo
+## Install dotfiles command
 
 ```sh
-cd ~ && git clone git@github.com:matiascaniete/dotfiles.git && cd dotfiles
+git clone git@github.com:matiascaniete/dotfiles.git ~/myapps/dotfiles && ln -s ~/myapps/dotfiles/bin/dotfiles ~/.local/bin
 ```
 
-## Install dependencies
+### Configure dotfiles command
 
 ```sh
-./dotfiles install-dependencies
-```
+# ~/.config/zsh/.zshrc
 
-## Install configs
-
-```sh
-./dotfiles install-configs
-```
-
-### Install concrete config
-
-```sh
-./dotfiles install-config [app]
-```
-
-## Include shell configs
-
-> Include this line in ~/.config/zsh/.zshrc
-
-```sh
 . $HOME/.config/zsh/zshconf
+
+eval "$(dotfiles init)"
 ```
 
-> Include this line in ~/.zshenv
-
 ```sh
+# ~/.zshenv
+
 . $HOME/.config/zsh/exports
 ```
 
-## Include X11 Server config
-
-Include this line in the ~/.xinitrc
-
 ```sh
+# ~/.xinitrc
+
 source ~/.custom_xinitrc
 ```
 
-## Install plugins
+## dependencies
+
+### List dependencies
 
 ```sh
-bash ./install-plugins.sh
+dotfiles dependencies List
 ```
 
-## Install JetBrains fonts
+### Install apps dependencies
 
 ```sh
-./dotfiles install-fonts
+dotfiles dependencies install [app1] [app2] ... [appN]
 ```
 
-> Based on [https://www.jetbrains.com/lp/mono/#how-to-install](https://www.jetbrains.com/lp/mono/#how-to-install)
+## Configs
 
-## Adopting configs
+### List Configs
 
 ```sh
-./dotfiles adopt-config [package]
+dotfiles config list
+```
+
+### Install a config or configs
+
+```sh
+dotfiles config install [config1] [config2] ... [configN]
+```
+
+### List adoptable configs
+
+```sh
+dotfiles config adopt-list
+```
+
+### Adopting configs
+
+```sh
+dotfiles config adopt [package]
 ```
 
 > Based on https://apiumhub.com/tech-blog-barcelona/managing-dotfiles-with-stow/
+
+## Fonts
+
+### Install JetBrains fonts
+
+```sh
+dotfiles fonts install
+```
+
+> Based on
+> [https://www.jetbrains.com/lp/mono/#how-to-install](https://www.jetbrains.com/lp/mono/#how-to-install)
