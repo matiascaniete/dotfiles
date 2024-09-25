@@ -21,6 +21,11 @@ _dotfiles() {
     _dotfiles_"${line[1]}" 2> /dev/null
 }
 
+_dotfiles_fonts() {
+    _arguments -C \
+        "1: :(install)"
+}
+
 _dotfiles_config() {
     local line
     _subcommands() {
@@ -51,3 +56,5 @@ _dotfiles_config_adopt() {
 }
 
 compdef _dotfiles dotfiles
+
+# vim:ft=bash
