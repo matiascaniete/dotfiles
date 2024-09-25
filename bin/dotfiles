@@ -4,35 +4,7 @@ BIN_DIR=$(dirname "$(readlink -f "$0")")
 ROOT_DIR=$(realpath "$BIN_DIR/../")
 MODULES_DIR=$(realpath "$ROOT_DIR/modules")
 
-ZSH_PLUGINS_PATH=~/.local/share/zsh-plugins/
-oh_my_tmux_path=~/oh-my-tmux
-
-error() {
-    RED='\033[0;31m'
-    NC='\033[0m' # No Color
-    printf "${RED}%s${NC}\n" "$1"
-}
-
-pipe-error() {
-    RED='\033[0;31m'
-    NC='\033[0m' # No Color
-    while read -r line; do
-        icon=$([[ $line != "" ]] && echo " " || echo "")
-        printf "${RED}$icon%s${NC}\n" "$line"
-    done
-}
-
-tabbed() {
-    while read -r line; do printf "\t%s\n" "$line"; done
-}
-
-# exec 2> >(pipe-error)
-
-echo-header() {
-    lolcat -f
-}
-
-# --- helpers ---
+. "$MODULES_DIR/helpers.sh"
 
 _init() {
     printf "source <(dotfiles print_completions)\n"
@@ -42,86 +14,6 @@ _print_completions() {
     cat $ROOT_DIR/bin/_dotfiles
 }
 
-install-dependency() {
-    command="$1"
-    echo "--- Installing [$command] ---" | echo-header
-    {
-        echo ""
-        eval "install-$command"
-        echo ""
-        echo ""
-    } | tabbed
-}
-
-install-dependencies() {
-    install-dependency apt-dependencies
-    install-dependency mpv-shaders
-    install-dependency oh-my-tmux
-    install-dependency nnn-plugins
-    install-dependency zsh
-    install-dependency zsh-plugins
-    install-dependency fzf
-}
-
-install-apt-dependencies() {
-    sudo apt install -y \
-        exa \
-        nnn \
-        ranger \
-        tmux \
-        stow \
-        lolcat
-}
-
-install-pacman-dependencies() {
-    sudo pacman -S \
-        alacritty \
-        bat \
-        exa \
-        lolcat \
-        mpv \
-        nnn \
-        ranger \
-        starship \
-        stow \
-        tmux
-}
-
-install-mpv-shaders() {
-    cp -vr _data/shaders ~/.config/mpv/
-}
-
-install-oh-my-tmux() {
-    git clone https://github.com/gpakosz/.tmux.git "$oh_my_tmux_path" && ln -s -f "$oh_my_tmux_path"/.tmux.conf ~/.tmux.conf
-}
-
-install-nnn-plugins() {
-    sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
-}
-
-install-fzf() {
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install --no-key-bindings --no-completion --no-update-rc
-}
-
-install-zsh() {
-    ZSH_TMP_DIR=/tmp/zsh-latest
-    git clone git://git.code.sf.net/p/zsh/code $ZSH_TMP_DIR && cd $ZSH_TMP_DIR && ./Util/preconfig && ./configure && make -j4 && sudo make install
-}
-
-install-zsh-plugins() {
-    mkdir -p $ZSH_PLUGINS_PATH
-    cd $ZSH_PLUGINS_PATH || return 1
-    git clone https://github.com/Aloxaf/fzf-tab
-    git clone https://github.com/zsh-users/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-completions.git
-    # git clone https://github.com/zsh-users/zsh-syntax-highlighting
-    git clone https://github.com/zdharma-continuum/fast-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-history-substring-search
-    git clone https://github.com/agkozak/zsh-z.git
-    git clone https://github.com/marzocchi/zsh-notify.git
-}
-
-
 # adopt-config() {
 #     program=$1
 #     echo "Adopting config from [$program]"
@@ -130,37 +22,4 @@ install-zsh-plugins() {
 #     stow --adopt --verbose --target ~ "$program"
 # }
 
-_module_exists() {
-    [[ -f "$MODULES_DIR/$1.sh" ]]
-}
-
-_command_exists() {
-    command -v "$1" &> /dev/null
-}
-
-_run() {
-    if _command_exists "_$1"; then
-        cmd="_$1"
-        shift
-        $cmd "$@"
-
-        return
-    fi
-
-    if _module_exists "$1"; then
-        source "$MODULES_DIR/$1.sh"
-        shift
-        cmd="_$1"
-        shift
-        $cmd "$@"
-
-        return
-    fi
-
-    error "Module or command [$1] does not exist"
-    return 1
-}
-
 _run "$@"
-
-# "$@"

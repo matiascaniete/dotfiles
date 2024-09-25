@@ -5,10 +5,10 @@ _dotfiles() {
     _subcommands() {
         local -a subcommands
         subcommands=(
-            "init:Initialize dotfiles"
             "config:Config module"
+            "dependencies:Dependencies module"
             "fonts:Fonts module"
-            "check-dependencies:Check dependencies"
+            "init:Initialize dotfiles"
         )
 
         _describe 'dotfiles' subcommands
@@ -24,6 +24,19 @@ _dotfiles() {
 _dotfiles_fonts() {
     _arguments -C \
         "1: :(install)"
+}
+
+_dotfiles_dependencies() {
+    local line
+    _arguments -C \
+        "1: :(list install install-all)" \
+        "*:: :->args"
+
+    _dotfiles_dependencies_"${line[1]}" 2> /dev/null
+}
+
+_dotfiles_dependencies_install() {
+    _values 'dependencies' $(dotfiles dependencies list)
 }
 
 _dotfiles_config() {
