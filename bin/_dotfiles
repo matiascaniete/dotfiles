@@ -1,4 +1,4 @@
-#compdef rec
+#compdef _dotfiles
 
 _dotfiles() {
     local line

@@ -10,6 +10,12 @@ _list() {
 }
 
 _install() {
+    for dependency in "$@"; do
+        _install_dependency "$dependency"
+    done
+}
+
+_install_dependency() {
     command="$1"
     echo "--- Installing [$command] ---" | echo-header
     {
@@ -21,13 +27,13 @@ _install() {
 }
 
 _install-all() {
-    install-dependency apt-dependencies
-    install-dependency mpv-shaders
-    install-dependency oh-my-tmux
-    install-dependency nnn-plugins
-    install-dependency zsh
-    install-dependency zsh-plugins
-    install-dependency fzf
+    _install-dependency apt-dependencies
+    _install-dependency mpv-shaders
+    _install-dependency oh-my-tmux
+    _install-dependency nnn-plugins
+    _install-dependency zsh
+    _install-dependency zsh-plugins
+    _install-dependency fzf
 }
 
 # dependencies
@@ -61,7 +67,8 @@ __install-mpv-shaders() {
 }
 
 __install-oh-my-tmux() {
-    git clone https://github.com/gpakosz/.tmux.git "$OH_MY_TMUX_PATH" && ln -s -f "$OH_MY_TMUX_PATH"/.tmux.conf ~/.tmux.conf
+    git clone https://github.com/gpakosz/.tmux.git "$OH_MY_TMUX_PATH" \
+        && ln -s -f "$OH_MY_TMUX_PATH"/.tmux.conf ~/.tmux.conf
 }
 
 __install-nnn-plugins() {
@@ -69,12 +76,18 @@ __install-nnn-plugins() {
 }
 
 __install-fzf() {
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install --no-key-bindings --no-completion --no-update-rc
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
+        && ~/.fzf/install --no-key-bindings --no-completion --no-update-rc
 }
 
 __install-zsh() {
     ZSH_TMP_DIR=/tmp/zsh-latest
-    git clone git://git.code.sf.net/p/zsh/code $ZSH_TMP_DIR && cd $ZSH_TMP_DIR && ./Util/preconfig && ./configure && make -j4 && sudo make install
+    git clone git://git.code.sf.net/p/zsh/code $ZSH_TMP_DIR \
+        && cd $ZSH_TMP_DIR \
+        && ./Util/preconfig \
+        && ./configure \
+        && make -j4 \
+        && sudo make install
 }
 
 __install-zsh-plugins() {
