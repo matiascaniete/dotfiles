@@ -10,6 +10,7 @@ _dotfiles() {
             "fonts:Fonts module"
             "init:Initialize dotfiles"
             "self-update:Update dotfiles"
+            "commit-and-push:Commit and push changes"
         )
 
         _describe 'dotfiles' subcommands
