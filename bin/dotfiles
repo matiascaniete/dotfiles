@@ -22,4 +22,24 @@ _commit-and-push() {
     git -C "$ROOT_DIR" add . && git -C "$ROOT_DIR" commit -m "$1" && git -C "$ROOT_DIR" push
 }
 
+_check-system-dependencies() {
+    dependencies=(
+        "git"
+        "zsh"
+        "wmctrl"
+    )
+
+    for dependency in "${dependencies[@]}"; do
+        if ! command -v "$dependency" &> /dev/null; then
+            error "Missing dependency: $dependency"
+        else
+            success "Found dependency: $dependency"
+        fi
+    done
+}
+
+_health-check() {
+    _check-system-dependencies
+}
+
 _run "$@"

@@ -6,6 +6,12 @@ error() {
     printf "${RED}%s${NC}\n" "$1"
 }
 
+success() {
+    GREEN='\033[0;32m'
+    NC='\033[0m' # No Color
+    printf "${GREEN}%s${NC}\n" "$1"
+}
+
 pipe-error() {
     RED='\033[0;31m'
     NC='\033[0m' # No Color

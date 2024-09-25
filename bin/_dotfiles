@@ -11,6 +11,7 @@ _dotfiles() {
             "init:Initialize dotfiles"
             "self-update:Update dotfiles"
             "commit-and-push:Commit and push changes"
+            "health-check:Health check"
         )
 
         _describe 'dotfiles' subcommands
