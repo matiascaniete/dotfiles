@@ -96,9 +96,9 @@ __install-zsh-plugins() {
     git clone https://github.com/Aloxaf/fzf-tab
     git clone https://github.com/zsh-users/zsh-autosuggestions
     git clone https://github.com/zsh-users/zsh-completions.git
-    # git clone https://github.com/zsh-users/zsh-syntax-highlighting
     git clone https://github.com/zdharma-continuum/fast-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-history-substring-search
     git clone https://github.com/agkozak/zsh-z.git
     git clone https://github.com/marzocchi/zsh-notify.git
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 }

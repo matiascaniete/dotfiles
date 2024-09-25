@@ -7,10 +7,10 @@ MODULES_DIR=$(realpath "$ROOT_DIR/modules")
 . "$MODULES_DIR/helpers.sh"
 
 _init() {
-    printf "source <(dotfiles print_completions)\n"
+    printf "source <(dotfiles print-completions)\n"
 }
 
-_print_completions() {
+_print-completions() {
     cat $ROOT_DIR/bin/_dotfiles
 }
 
