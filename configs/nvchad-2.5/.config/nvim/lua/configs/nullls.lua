@@ -75,6 +75,3 @@ local fmter = {
 	}),
 }
 null_ls.register(fmter)
-
--- vim.print(vim.inspect(sources))
-print("null-ls loaded")

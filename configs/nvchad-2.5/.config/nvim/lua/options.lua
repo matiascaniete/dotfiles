@@ -50,6 +50,7 @@ RELOAD = function(...)
 end
 
 R = function(name)
+	print("Reloading " .. name)
 	RELOAD(name)
 	return require(name)
 end

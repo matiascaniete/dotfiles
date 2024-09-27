@@ -16,6 +16,14 @@ return {
 	-- Custom plugins
 
 	{
+		dir = "~/Documentos/ndorma/repos/nvim-ndorma-plugin.nvim",
+		lazy = false,
+		config = function()
+			require("nvim-ndorma-plugin").setup()
+		end,
+	},
+
+	{
 		"rcarriga/nvim-notify",
 		lazy = false,
 		config = function()
