@@ -5,3 +5,4 @@ configs/zsh/.config/zsh/.zhistory
 configs/zsh/.config/zsh/.zcompdump
 configs/mpv/.config/mpv/shaders
 configs/tmux2/.config/tmux/plugins
+configs/nvchad-2.5/.config/nvim/lazy-lock.json
