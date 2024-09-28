@@ -29,9 +29,14 @@ _commit-and-push() {
 
 _check-system-dependencies() {
     dependencies=(
+        "npm"
+        "go"
+        "unzip"
+        "composer"
         "git"
         "zsh"
         "wmctrl"
+        "xdotool"
     )
 
     for dependency in "${dependencies[@]}"; do
