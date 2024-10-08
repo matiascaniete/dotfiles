@@ -9,3 +9,4 @@ map("i", "jk", "<ESC>")
 map("i", "jj", "<ESC>")
 
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+map("n", "<leader>tk", "<cmd>Telescope keymaps<cr>")

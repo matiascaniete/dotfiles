@@ -15,20 +15,20 @@ return {
 
 	-- Custom plugins
 
-	{
-		dir = "~/Documentos/ndorma/repos/nvim-ndorma-plugin.nvim",
-		lazy = false,
-		config = function()
-			require("nvim-ndorma-plugin").setup()
-		end,
-	},
+	-- {
+	-- 	dir = "~/Documentos/ndorma/repos/nvim-ndorma-plugin.nvim",
+	-- 	lazy = false,
+	-- 	config = function()
+	-- 		require("nvim-ndorma-plugin").setup()
+	-- 	end,
+	-- },
 
 	{
 		"rcarriga/nvim-notify",
 		lazy = false,
 		config = function()
-			require("notify").setup({ background_colour = "#000000" })
-			vim.notify = require("notify")
+			require("notify").setup()
+			-- vim.notify = require("notify")
 		end,
 	},
 
