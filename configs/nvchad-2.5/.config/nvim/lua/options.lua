@@ -23,6 +23,9 @@ opt.softtabstop = 4
 opt.expandtab = true
 opt.smarttab = true
 
+opt.virtualedit = "block"
+-- opt.inccommand = "split"
+
 opt.wrap = false
 -- vim.wo.wrap = true
 -- vim.wo.linebreak = true
