@@ -54,5 +54,7 @@ _edit-list() {
 }
 
 _edit() {
+    config_dir="$ROOT_DIR/configs/$1"
+    cd "$config_dir" || exit
     _edit-list "$1" | fzf --preview "bat --color=always {}" | xargs $EDITOR
 }
