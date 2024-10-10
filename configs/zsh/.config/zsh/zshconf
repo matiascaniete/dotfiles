@@ -66,7 +66,7 @@ buffer2gpt-generate() {
     newcommand="gpt --model gpt-4o-mini 'Write a zsh command that does the following: \"$input\". Return the result as a single string as plain text, no formatting, ready to send directly into the terminal, with no comments, and no explanations, no markdown'"
     fc -R =(printf '%s # %s\n' "$newcommand" "$input" )
     # zle -R "" "Gpt command: $newcommand"
-    
+
     zle -R "GPTing (generating) ..."
     output=$(eval "$newcommand")
     zle -R ""
@@ -86,9 +86,9 @@ buffer2gpt-query() {
 
 buffer2gpt-menu() {
     {
-    echo "buffer2gpt-generate|GPTing (generating)"
-    echo "buffer2gpt-query|GPTing (asking)"
-    } | fzf --delimiter='|' | cut -d '|' -f 1 | while read -r cmd; do
+        echo "buffer2gpt-generate|GPTing (generating)"
+        echo "buffer2gpt-query|GPTing (asking)"
+        } | fzf --delimiter='|' | cut -d '|' -f 1 | while read -r cmd; do
         zle reset-prompt
         $cmd
     done
@@ -104,6 +104,33 @@ zle -N buffer2gpt-menu
 zle -N reload
 # bindkey '^g' buffer2gpt-generate
 bindkey '^g' buffer2gpt-menu
+
+# zsh autocompletion helpers functions
+
+__zshac_further_execute() {
+    if [ ! -z "${line[1]}" ]; then
+        if command -v "$1_${line[1]}" &>/dev/null; then
+            "$1_${line[1]}" 2>/dev/null
+        fi
+    fi
+}
+
+__zshac_generic_subcommands() {
+    nextcommand="$1"
+    shift
+    subcommands=("$@")
+
+    _subcommands() {
+        _describe "ohm $nextcommand" subcommands
+    }
+
+    _arguments -C \
+        "1: :_subcommands" \
+        "*::arg:->args"
+
+    __zshac_further_execute "$nextcommand"
+}
+
 
 
 # _complete - This is the main completer we need to use for our completion.
