@@ -61,6 +61,51 @@ timezsh() {
     done
 }
 
+buffer2gpt-generate() {
+    input=$BUFFER
+    newcommand="gpt --model gpt-4o-mini 'Write a zsh command that does the following: \"$input\". Return the result as a single string as plain text, no formatting, ready to send directly into the terminal, with no comments, and no explanations, no markdown'"
+    fc -R =(printf '%s # %s\n' "$newcommand" "$input" )
+    # zle -R "" "Gpt command: $newcommand"
+    
+    zle -R "GPTing (generating) ..."
+    output=$(eval "$newcommand")
+    zle -R ""
+
+    BUFFER=$output
+    CURSOR=$#BUFFER
+}
+
+buffer2gpt-query() {
+    input=$BUFFER
+    newcommand="gpt --model gpt-4o-mini 'Explain in few words the following zsh command: \"$input\"'"
+    zle -R "GPTing (asking) ..."
+    output=$(eval "$newcommand")
+    zle -R ""
+    zle -M "$output"
+}
+
+buffer2gpt-menu() {
+    {
+    echo "buffer2gpt-generate|GPTing (generating)"
+    echo "buffer2gpt-query|GPTing (asking)"
+    } | fzf --delimiter='|' | cut -d '|' -f 1 | while read -r cmd; do
+        zle reset-prompt
+        $cmd
+    done
+}
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey '^g^e' edit-command-line
+
+zle -N buffer2gpt-generate
+zle -N buffer2gpt-query
+zle -N buffer2gpt-menu
+zle -N reload
+# bindkey '^g' buffer2gpt-generate
+bindkey '^g' buffer2gpt-menu
+
+
 # _complete - This is the main completer we need to use for our completion.
 # _approximate - This one is similar to _complete, except that it will try to correct what you’ve typed already (the context) if no match is found.
 # _expand_alias - Expand an alias you’ve typed. It needs to be declared before _complete.

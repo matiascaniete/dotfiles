@@ -25,6 +25,8 @@ opt.smarttab = true
 
 opt.virtualedit = "block"
 -- opt.inccommand = "split"
+opt.relativenumber = true
+opt.scrolloff = 999
 
 opt.wrap = false
 -- vim.wo.wrap = true
