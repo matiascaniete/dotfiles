@@ -48,9 +48,13 @@ return {
 		end,
 	},
 
-	{ "folke/trouble.nvim", cmd = "TroubleToggle", opts = {
-		use_diagnostic_signs = true,
-	} },
+	{
+		"folke/trouble.nvim",
+		cmd = "TroubleToggle",
+		opts = {
+			use_diagnostic_signs = true,
+		},
+	},
 
 	{ "f-person/git-blame.nvim", event = "BufRead" },
 
@@ -76,34 +80,31 @@ return {
 
 	{
 		"hrsh7th/nvim-cmp",
-		opts = function()
-			local options = require("nvchad.configs.cmp")
-			-- vim.print(vim.inspect(options.sources))
-			-- add codeium to the sources table
-			table.insert(options.sources, 1, { name = "codeium" })
-			return options
+		opts = function(_, opts)
+			table.insert(opts.sources, 1, { name = "codeium" })
+			return opts
 		end,
 	},
 
-	{
-		"Exafunction/codeium.vim",
-		event = "BufEnter",
-		config = function()
-			vim.g.codeium_disable_bindings = 1
-			vim.keymap.set("i", "<a-CR>", function()
-				return vim.fn["codeium#Accept"]()
-			end, { expr = true })
-			vim.keymap.set("i", "<a-n>", function()
-				return vim.fn["codeium#CycleCompletions"](1)
-			end, { expr = true })
-			vim.keymap.set("i", "<a-p>", function()
-				return vim.fn["codeium#CycleCompletions"](-1)
-			end, { expr = true })
-			vim.keymap.set("i", "<a-x>", function()
-				return vim.fn["codeium#Clear"]()
-			end, { expr = true })
-		end,
-	},
+	-- {
+	-- 	"Exafunction/codeium.vim",
+	-- 	event = "BufEnter",
+	-- 	config = function()
+	-- 		vim.g.codeium_disable_bindings = 1
+	-- 		vim.keymap.set("i", "<a-CR>", function()
+	-- 			return vim.fn["codeium#Accept"]()
+	-- 		end, { expr = true })
+	-- 		vim.keymap.set("i", "<a-n>", function()
+	-- 			return vim.fn["codeium#CycleCompletions"](1)
+	-- 		end, { expr = true })
+	-- 		vim.keymap.set("i", "<a-p>", function()
+	-- 			return vim.fn["codeium#CycleCompletions"](-1)
+	-- 		end, { expr = true })
+	-- 		vim.keymap.set("i", "<a-x>", function()
+	-- 			return vim.fn["codeium#Clear"]()
+	-- 		end, { expr = true })
+	-- 	end,
+	-- },
 
 	{
 		"Exafunction/codeium.nvim",
