@@ -33,6 +33,7 @@ opt.wrap = false
 -- vim.wo.linebreak = true
 -- vim.wo.list = false -- extra option I set in addition to the ones in your question
 
+
 -------------------------------------- commands ------------------------------------------
 
 local load_addons = function(filename)
@@ -73,3 +74,11 @@ end, {})
 vim.schedule(function()
 	load_addons("nvim.local.lua")
 end)
+
+-- make background transparent
+vim.cmd([[
+  highlight Normal guibg=none
+  highlight NonText guibg=none
+  highlight Normal ctermbg=none
+  highlight NonText ctermbg=none
+]])

@@ -7,6 +7,17 @@ local M = {}
 
 M.ui = {
 	theme = "catppuccin",
+	transparency = true,
+	statusline = {
+		order = { "mode", "file", "git", "%=", "lsp_msg", "claca", "%=", "diagnostics", "lsp", "cwd", "cursor" },
+		modules = {
+			claca = function()
+				return "claca"
+			end,
+		},
+		theme = "minimal",
+		separator_style = "arrow",
+	},
 
 	-- hl_override = {
 	-- 	Comment = { italic = true },
