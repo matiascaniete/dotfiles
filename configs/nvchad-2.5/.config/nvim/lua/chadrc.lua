@@ -9,10 +9,12 @@ M.ui = {
 	theme = "catppuccin",
 	transparency = true,
 	statusline = {
-		order = { "mode", "file", "git", "%=", "lsp_msg", "claca", "%=", "diagnostics", "lsp", "cwd", "cursor" },
+		order = { "mode", "file", "git", "%=", "lsp_msg", "wc", "%=", "diagnostics", "lsp", "cwd", "cursor" },
 		modules = {
-			claca = function()
-				return "claca"
+			wc = function()
+				local wordcount = vim.fn.wordcount().words
+				local charcount = vim.fn.wordcount().chars
+				return "wc:" .. wordcount .. "w|" .. charcount .. "c"
 			end,
 		},
 		theme = "minimal",
