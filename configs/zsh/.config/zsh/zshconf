@@ -107,6 +107,14 @@ zle -N reload
 # bindkey '^g' buffer2gpt-generate
 bindkey '^g' buffer2gpt-menu
 
+rmenu-exit-zsh() {
+    rmenu-exit
+}
+
+zle -N rmenu-exit-zsh
+# bindkey meta+o 
+bindkey '^[o' rmenu-exit-zsh
+
 # zsh autocompletion helpers functions
 
 __zshac_further_execute() {
