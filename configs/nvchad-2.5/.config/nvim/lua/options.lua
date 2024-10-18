@@ -33,7 +33,6 @@ opt.wrap = false
 -- vim.wo.linebreak = true
 -- vim.wo.list = false -- extra option I set in addition to the ones in your question
 
-
 -------------------------------------- commands ------------------------------------------
 
 local load_addons = function(filename)

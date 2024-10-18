@@ -16,7 +16,7 @@ M.ui = {
 			end,
 		},
 		theme = "minimal",
-		separator_style = "arrow",
+		separator_style = "block",
 	},
 
 	-- hl_override = {
