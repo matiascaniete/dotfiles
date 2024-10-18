@@ -4,19 +4,6 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
-# history
-# You can make zsh add a bit more data (timestamp in unix epoch time and elapsed time of the command) by setting the EXTENDED_HISTORY shell option.
-setopt EXTENDED_HISTORY
-# share history across multiple zsh sessions
-setopt SHARE_HISTORY
-# append to history
-setopt APPEND_HISTORY
-# adds commands as they are typed, not at shell exit
-setopt INC_APPEND_HISTORY
-#ignore duplicates when searching
-setopt HIST_FIND_NO_DUPS
-# removes blank lines from history
-setopt HIST_REDUCE_BLANKS
 export HISTFILE="$ZDOTDIR/.zhistory"    # History filepath
 export HISTSIZE=10000                   # Maximum events for internal history
 export SAVEHIST=10000
