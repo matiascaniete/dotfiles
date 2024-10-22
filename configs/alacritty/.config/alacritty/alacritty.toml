@@ -73,6 +73,24 @@ mods = "None"
 action = "ToggleFullscreen"
 key = "F11"
 
+[[keyboard.bindings]]
+command = { program = "alacritty", args = [
+    "msg",
+    "config",
+    "window.opacity=0.85",
+] }
+key = "T"
+mods = "Super"
+
+[[keyboard.bindings]]
+command = { program = "alacritty", args = [
+    "msg",
+    "config",
+    "window.opacity=1",
+] }
+key = "I"
+mods = "Super"
+
 [mouse]
 hide_when_typing = true
 

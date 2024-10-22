@@ -2,6 +2,7 @@ configs/nvim/.config/nvim/plugin/packer_compiled.lua
 configs/nvim/.config/nvim/spell/*.*
 configs/zsh/.config/zsh/.zshrc
 configs/zsh/.config/zsh/.zhistory
+configs/zsh/.config/zsh/.zsh_history
 configs/zsh/.config/zsh/.zcompdump
 configs/mpv/.config/mpv/shaders
 configs/tmux2/.config/tmux/plugins
