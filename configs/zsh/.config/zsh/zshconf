@@ -28,7 +28,7 @@ source ~/.local/share/zsh-plugins/zsh-history-substring-search/zsh-history-subst
 source ~/.local/share/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.local/share/zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
 source ~/.local/share/zsh-plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source ~/.local/share/zsh-plugins/zsh-z/zsh-z.plugin.zsh
+# source ~/.local/share/zsh-plugins/zsh-z/zsh-z.plugin.zsh
 
 if [[ $DISABLE_ZSH_PLUGIN_NOTIFY != 1 ]]; then
     source ~/.local/share/zsh-plugins/zsh-notify/notify.plugin.zsh
@@ -71,19 +71,19 @@ setopt HIST_REDUCE_BLANKS
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt hist_save_no_dups
-setopt hist_ignore_dups    ## Options section
+setopt hist_ignore_dups ## Options section
 
 # from garuda defaults .zshrc
 # setopt correct                                                  # Auto correct mistakes
-setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
-setopt nocaseglob                                               # Case insensitive globbing
-setopt rcexpandparam                                            # Array expension with parameters
-setopt nocheckjobs                                              # Don't warn about running processes when exiting
-setopt numericglobsort                                          # Sort filenames numerically when it makes sense
-setopt nobeep                                                   # No beep
-setopt appendhistory                                            # Immediately append history instead of overwriting
-setopt histignorealldups                                        # If a new command is a duplicate, remove the older one
-setopt autocd                                                   # if only directory path is entered, cd there.
+setopt extendedglob      # Extended globbing. Allows using regular expressions with *
+setopt nocaseglob        # Case insensitive globbing
+setopt rcexpandparam     # Array expension with parameters
+setopt nocheckjobs       # Don't warn about running processes when exiting
+setopt numericglobsort   # Sort filenames numerically when it makes sense
+setopt nobeep            # No beep
+setopt appendhistory     # Immediately append history instead of overwriting
+setopt histignorealldups # If a new command is a duplicate, remove the older one
+setopt autocd            # if only directory path is entered, cd there.
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt pushdminus
@@ -99,8 +99,8 @@ zstyle ':completion:*' verbose yes
 
 # For the command cd, chdir and pushd, you can use a hyphen - for completing for an option
 zstyle ':completion:*' complete-options true
-        
-zstyle ':completion:*' rehash true                              # automatically find new executables in path
+
+zstyle ':completion:*' rehash true # automatically find new executables in path
 # zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
 zstyle ':completion:*' menu select
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
@@ -147,5 +147,7 @@ oh_my_posh_theme=1_shell
 oh_my_posh_theme=pure
 install-oh-my-posh-theme $oh_my_posh_theme
 init-oh-my-posh $oh_my_posh_theme
+
+eval "$(zoxide init --cmd cd zsh)"
 
 # vi: ft=sh
