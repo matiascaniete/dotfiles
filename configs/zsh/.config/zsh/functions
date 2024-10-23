@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+
+install-oh-my-posh-theme() {
+    local oh_my_posh_theme="$1"
+
+    if [ -z "$oh_my_posh_theme" ]; then
+        echo "Please specify the theme you want to install"
+        return 1
+    fi
+
+    if [ ! -f ~/.config/oh-my-posh/themes/"$oh_my_posh_theme".omp.json ]; then
+        echo "Installing $oh_my_posh_theme theme"
+        mkdir -p ~/.config/oh-my-posh/themes
+        curl -s https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/"$oh_my_posh_theme".omp.json -o ~/.config/oh-my-posh/themes/"$oh_my_posh_theme".omp.json
+    fi
+}
+
+init-oh-my-posh() {
+    local theme="$1"
+    eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/"$theme".omp.json)"
+    eval "$(oh-my-posh completion zsh)"
+}
+
+# ------ zsh custom functions ------
+
+# reload and zconf functions
+reload() {
+    if [[ -f "$ZDOTDIR/.zcompdump" ]]; then
+        rm "$ZDOTDIR"/.zcompdump && echo "zcompdump removed."
+    fi
+
+    if [[ -f "$XDG_CACHE_HOME/zsh/.zcompcache" ]]; then
+        rm "$XDG_CACHE_HOME/zsh/.zcompcache" && echo "zcompcache removed."
+    fi
+
+    exec zsh
+}
+
+zconf() {
+    file_key=${1:-zshrc}
+    $EDITOR "${CONFIG_FILES[$file_key]}"
+}
+
+timezsh() {
+    shell=${1-$SHELL}
+    for i in $(seq 1 5); do
+        printf "run #%s\t" "$i"
+        /usr/bin/time -f "%E real\t%U user\t%S sys" "$shell" -i -c exit
+    done
+}
+
+buffer2gpt-generate() {
+    input=$BUFFER
+    newcommand="gpt --model gpt-4o-mini 'Write a zsh command that does the following: \"$input\". Return the result as a single string as plain text, no formatting, ready to send directly into the terminal, with no comments, and no explanations, no markdown'"
+    fc -R =(printf '%s # %s\n' "$newcommand" "$input" )
+    # zle -R "" "Gpt command: $newcommand"
+
+    zle -R "GPTing (generating) ..."
+    output=$(eval "$newcommand")
+    zle -R ""
+
+    BUFFER=$output
+    CURSOR=$#BUFFER
+}
+
+buffer2gpt-query() {
+    input=$BUFFER
+    newcommand="gpt --model gpt-4o-mini 'Explain in few words the following zsh command: \"$input\"'"
+    zle -R "GPTing (asking) ..."
+    output=$(eval "$newcommand")
+    zle -R ""
+    zle -M "$output"
+}
+
+buffer2gpt-menu() {
+    {
+        echo "buffer2gpt-generate|GPTing (generating)"
+        echo "buffer2gpt-query|GPTing (asking)"
+        } | fzf --delimiter='|' | cut -d '|' -f 1 | while read -r cmd; do
+        zle reset-prompt
+        $cmd
+    done
+}
+
+
+# zsh autocompletion helpers functions
+
+__zshac_further_execute() {
+    if [ ! -z "${line[1]}" ]; then
+        if command -v "$1_${line[1]}" &>/dev/null; then
+            "$1_${line[1]}" 2>/dev/null
+        fi
+    fi
+}
+
+__zshac_generic_subcommands() {
+    nextcommand="$1"
+    shift
+    subcommands=("$@")
+
+    _subcommands() {
+        _describe "ohm $nextcommand" subcommands
+    }
+
+    _arguments -C \
+        "1: :_subcommands" \
+        "*::arg:->args"
+
+    __zshac_further_execute "$nextcommand"
+}
