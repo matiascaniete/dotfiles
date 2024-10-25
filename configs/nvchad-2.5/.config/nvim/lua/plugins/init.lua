@@ -72,7 +72,9 @@ return {
 		"goolord/alpha-nvim",
 		lazy = false,
 		config = function()
-			require("alpha").setup(require("alpha.themes.startify").config)
+			local opts = require("alpha.themes.theta").config
+			opts.layout[2].val = vim.fn.systemlist('date +"%d %m %Y" | figlet -f slant')
+			require("alpha").setup(opts)
 		end,
 	},
 
