@@ -11,7 +11,8 @@ install-oh-my-posh-theme() {
     if [ ! -f ~/.config/oh-my-posh/themes/"$oh_my_posh_theme".omp.json ]; then
         echo "Installing $oh_my_posh_theme theme"
         mkdir -p ~/.config/oh-my-posh/themes
-        curl -s https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/"$oh_my_posh_theme".omp.json -o ~/.config/oh-my-posh/themes/"$oh_my_posh_theme".omp.json
+        curl -s https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/"$oh_my_posh_theme".omp.json \
+            -o ~/.config/oh-my-posh/themes/"$oh_my_posh_theme".omp.json
     fi
 }
 
