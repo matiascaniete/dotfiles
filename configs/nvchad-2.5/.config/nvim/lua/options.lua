@@ -137,3 +137,6 @@ vim.cmd([[
   highlight Normal ctermbg=none
   highlight NonText ctermbg=none
 ]])
+
+-- Restore beam cursor when exiting vim
+vim.cmd("au VimLeave * set guicursor=a:ver25-blinkon0")
