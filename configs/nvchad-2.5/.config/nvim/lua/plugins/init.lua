@@ -58,7 +58,7 @@ return {
 
 	{ "f-person/git-blame.nvim", event = "BufRead" },
 
-	{ "tpope/vim-sleuth", lazy = false },
+	{ "tpope/vim-sleuth",        lazy = false },
 
 	{
 		"nacro90/numb.nvim",
@@ -84,6 +84,7 @@ return {
 		"hrsh7th/nvim-cmp",
 		opts = function(_, opts)
 			table.insert(opts.sources, 1, { name = "codeium" })
+			table.insert(opts.sources, 2, { name = "emoji" })
 			return opts
 		end,
 	},
@@ -178,6 +179,29 @@ return {
 		end,
 		build = function()
 			vim.cmd("GoInstallDeps")
+		end,
+	},
+	{
+		"allaman/emoji.nvim",
+		lazy = false,
+		-- version = "1.0.0", -- optionally pin to a tag
+		-- ft = "markdown", -- adjust to your needs
+
+		dependencies = {
+			-- optional for nvim-cmp integration
+			"hrsh7th/nvim-cmp",
+			-- optional for telescope integration
+			"nvim-telescope/telescope.nvim",
+		},
+		opts = {
+			-- default is false
+			enable_cmp_integration = true,
+		},
+		config = function(_, opts)
+			require("emoji").setup(opts)
+			-- optional for telescope integration
+			local ts = require("telescope").load_extension("emoji")
+			vim.keymap.set("n", "<leader>fe", ts.emoji, { desc = "[F]ind [E]moji" })
 		end,
 	},
 
