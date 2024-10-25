@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 install-oh-my-posh-theme() {
     local oh_my_posh_theme="$1"
@@ -50,38 +50,52 @@ timezsh() {
 }
 
 buffer2gpt-generate() {
-    input=$BUFFER
-    newcommand="gpt --model gpt-4o-mini 'Write a zsh command that does the following: \"$input\". Return the result as a single string as plain text, no formatting, ready to send directly into the terminal, with no comments, and no explanations, no markdown'"
-    fc -R =(printf '%s # %s\n' "$newcommand" "$input" )
-    # zle -R "" "Gpt command: $newcommand"
+    instructions=$BUFFER
+    cmd="gpt --model gpt-4o-mini 'Write a zsh command that does the following: \"$instructions\". Return the result as a single line, plain text, no formatting, ready to send directly into the terminal, with no comments, no explanations and no markdown'"
+    # adds instructions and cmd into history
+    fc -R =(printf '%s\n' "$instructions")
+    fc -R =(printf '%s\n' "$cmd")
 
-    zle -R "GPTing (generating) ..."
-    output=$(eval "$newcommand")
+    zle -R "generating command using gpt ..."
+    result=$(eval "$cmd")
     zle -R ""
 
-    BUFFER=$output
+    BUFFER=$result
     CURSOR=$#BUFFER
 }
 
-buffer2gpt-query() {
+buffer2gpt-explain() {
     input=$BUFFER
     newcommand="gpt --model gpt-4o-mini 'Explain in few words the following zsh command: \"$input\"'"
-    zle -R "GPTing (asking) ..."
+    zle -R "asking command's explanation to gpt ..."
     output=$(eval "$newcommand")
     zle -R ""
     zle -M "$output"
 }
 
 buffer2gpt-menu() {
-    {
-        echo "buffer2gpt-generate|GPTing (generating)"
-        echo "buffer2gpt-query|GPTing (asking)"
-        } | fzf --delimiter='|' | cut -d '|' -f 1 | while read -r cmd; do
+    buffer2gpt-menu-controller | fzf | while read -r cmd; do
         zle reset-prompt
-        $cmd
+        buffer2gpt-menu-controller "$cmd"
     done
 }
 
+buffer2gpt-menu-controller() {
+    declare -A commands
+    commands["Generate command using GPT"]=buffer2gpt-generate
+    commands["Explain command using GPT"]=buffer2gpt-explain
+    command="$1"
+
+    if [ -z "$command" ]; then
+        # list keys of commands associative array
+        for cmd in ${(@k)commands}; do
+            echo "$cmd" | tr -d "\""
+        done
+        return
+    fi
+
+    eval "$commands[\"$command\"]"
+}
 
 # zsh autocompletion helpers functions
 
