@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # shellcheck disable=1090,1091
 
 declare -A CONFIG_FILES
@@ -43,12 +43,8 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey '^g^e' edit-command-line
 
-zle -N buffer2gpt-generate
-zle -N buffer2gpt-query
-zle -N buffer2gpt-menu
-zle -N reload
-# bindkey '^g' buffer2gpt-generate
-bindkey '^g' buffer2gpt-menu
+zle -N _buffer2gpt-menu
+bindkey '^g' _buffer2gpt-menu
 
 # ------ zsh options -------
 
