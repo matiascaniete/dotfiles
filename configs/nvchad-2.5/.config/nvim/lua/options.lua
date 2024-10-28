@@ -131,11 +131,15 @@ end
 
 -- Map the function to a keybinding for quick access
 vim.api.nvim_set_keymap("n", "<leader>p", ":lua Popup_at_cursor()<CR>", { noremap = true, silent = true })
+
+-- Set background transparent, including the terminal
 vim.cmd([[
   highlight Normal guibg=none
   highlight NonText guibg=none
   highlight Normal ctermbg=none
   highlight NonText ctermbg=none
+  highlight NormalFloat guibg=none
+  "highlight NonTextFloat guibg=none
 ]])
 
 -- Restore beam cursor when exiting vim
