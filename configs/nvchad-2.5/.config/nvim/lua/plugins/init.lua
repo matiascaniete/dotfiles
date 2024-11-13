@@ -22,6 +22,7 @@ return {
 	-- 		require("nvim-ndorma-plugin").setup()
 	-- 	end,
 	-- },
+	--
 
 	{
 		"rcarriga/nvim-notify",
@@ -58,7 +59,7 @@ return {
 
 	{ "f-person/git-blame.nvim", event = "BufRead" },
 
-	{ "tpope/vim-sleuth",        lazy = false },
+	{ "tpope/vim-sleuth", lazy = false },
 
 	{
 		"nacro90/numb.nvim",
@@ -159,7 +160,7 @@ return {
 
 	{
 		"jackMort/ChatGPT.nvim",
-		event = "VeryLazy",
+		lazy = false,
 		config = function()
 			require("chatgpt").setup()
 		end,
