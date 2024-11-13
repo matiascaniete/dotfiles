@@ -118,6 +118,10 @@ zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*:descriptions' format '[%d]'
 # zstyle ':completion:*:descriptions' format '%U%F{cyan}%d%f%u'
 
+# ssh completion for hosts, and ~/.ssh/config
+zstyle ':completion:*:ssh:*' hosts $(cat ~/.ssh/config | grep "^Host" | awk '{print $2}')
+# zstyle ':completion:*:(ssh|scp|sftp|rsh|sshfs):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}[,# ]*})'
+
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':fzf-tab:*' show-group full
