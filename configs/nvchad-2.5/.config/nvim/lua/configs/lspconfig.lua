@@ -17,7 +17,7 @@ local servers = {
 	"marksman",
 	"psalm",
 	-- "pyright",
-	"ruff_lsp",
+	"ruff",
 	"stylelint_lsp",
 	"taplo",
 	"ts_ls",
