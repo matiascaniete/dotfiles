@@ -13,19 +13,20 @@ local servers = {
 	"html",
 	"intelephense",
 	"jsonls",
+	"lemminx",
 	"lua_ls",
 	"marksman",
 	"psalm",
-	-- "pyright",
 	"ruff",
 	"stylelint_lsp",
 	"taplo",
 	"ts_ls",
-	-- "twiggy_language_server",
 	"vuels",
+	"yamlls",
+	-- "pyright",
+	-- "twiggy_language_server",
 	-- "vetur-vls",
 	-- "vue-language-server",
-	"yamlls",
 }
 local nvlsp = require("nvchad.configs.lspconfig")
 
