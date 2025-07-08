@@ -14,7 +14,7 @@ local servers = {
 	"lemminx",
 	"lua_ls",
 	"marksman",
-	"psalm",
+	-- "psalm",
 	"ruff",
 	"stylelint_lsp",
 	"taplo",

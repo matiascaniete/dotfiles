@@ -55,6 +55,10 @@ RELOAD = function(...)
 end
 
 R = function(name)
+	if not name then
+		print("No module name given")
+		return
+	end
 	print("Reloading " .. name)
 	RELOAD(name)
 	return require(name)
@@ -64,7 +68,24 @@ local new_cmd = vim.api.nvim_create_user_command
 
 new_cmd("Format", function()
 	vim.lsp.buf.format()
-end, {})
+end, {
+	desc = "Format current buffer with LSP",
+})
+
+new_cmd("Src", function()
+	local fname = vim.fn.expand("%")
+	local ext = vim.fn.fnamemodify(fname, ":e")
+	if not (ext == "lua") then
+		vim.notify("File must be a lua file!")
+		return
+	end
+	vim.cmd.source(fname)
+	vim.notify(fname .. " sourced at " .. vim.fn.strftime("%H:%M:%S") .. "!")
+end, {
+	desc = "Source current buffer",
+})
+
+vim.api.nvim_set_keymap("n", "<leader>sr", ":Src<cr>", { desc = "Source current buffer" })
 
 new_cmd("ReloadLocalAddons", function()
 	load_addons("nvim.local.lua")
@@ -77,16 +98,19 @@ end)
 -- Function to create a popup window at the cursor position and make it dismissible
 function Popup_at_cursor()
 	-- Get the current cursor position
-	local cursor_pos = vim.api.nvim_win_get_cursor(0)
-	local row = cursor_pos[1]
-	local col = cursor_pos[2]
+	-- local cursor_pos = vim.api.nvim_win_get_cursor(0)
+	-- local row = cursor_pos[1]
+	-- local col = cursor_pos[2]
 
 	-- Define the content of the popup
-	local current_line = vim.api.nvim_get_current_line()
+	-- local current_line = vim.api.nvim_get_current_line()
 	local start_line = vim.fn.line(".")
 	local end_line = vim.fn.search("^$", "n") - 1
 	local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
-	local paragraph = table.concat(lines, "\n")
+	-- local paragraph = table.concat(lines, "\n")
+
+	-- append text to a new line
+	table.insert(lines, "Press Esc or q close")
 
 	-- print(paragraph)
 	-- local lines = { "Hello from Neovim!", "claca", "lipsum", "Press Esc to close" }
@@ -94,8 +118,8 @@ function Popup_at_cursor()
 	-- Define the window options
 	local win_opts = {
 		relative = "cursor", -- Position relative to the cursor
-		row = 0, -- Position one row below the cursor
-		col = 0, -- Position at the same column as the cursor
+		row = 2, -- Position one row below the cursor
+		col = 2, -- Position at the same column as the cursor
 		width = 80, -- Set the width of the popup window
 		height = 10, -- Set the height of the popup window
 		style = "minimal", -- Disable line numbers, sign column, etc.
@@ -144,3 +168,14 @@ vim.cmd([[
 
 -- Restore beam cursor when exiting vim
 vim.cmd("au VimLeave * set guicursor=a:ver25-blinkon0")
+
+-- Set tab size for lua
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lua",
+	callback = function()
+		vim.opt_local.tabstop = 4
+		vim.opt_local.shiftwidth = 4
+		vim.opt_local.softtabstop = 4
+		vim.opt_local.expandtab = true
+	end,
+})
