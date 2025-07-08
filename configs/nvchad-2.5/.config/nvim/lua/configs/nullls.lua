@@ -8,10 +8,10 @@ local sources = {
 	b.formatting.stylua,
 	b.formatting.prettier,
 	-- b.formatting.eslint_d,
-	b.code_actions.shellcheck, -- shell script code actions
+	-- b.code_actions.shellcheck, -- shell script code actions
 	-- b.diagnostics.eslint_d,
 	-- webdev stuff
-	b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
+	-- b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast! DEPRECATED in the migration from null_ls to none-ls
 	b.formatting.prettier.with({ filetypes = { "html", "markdown", "css" } }), -- so prettier works only on these filetypes
 	b.formatting.phpcsfixer.with({
 		env = {

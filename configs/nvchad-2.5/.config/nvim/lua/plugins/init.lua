@@ -34,7 +34,7 @@ return {
 	},
 
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		lazy = false,
 		config = function()
 			require("configs.nullls")
