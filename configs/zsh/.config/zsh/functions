@@ -19,7 +19,7 @@ install-oh-my-posh-theme() {
 init-oh-my-posh() {
     local theme="$1"
     eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/"$theme".omp.json)"
-    eval "$(oh-my-posh completion zsh)"
+    # eval "$(oh-my-posh completion zsh)"
 }
 
 # ------ zsh custom functions ------
