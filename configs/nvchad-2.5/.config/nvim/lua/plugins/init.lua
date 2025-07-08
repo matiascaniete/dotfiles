@@ -59,7 +59,7 @@ return {
 
 	{ "f-person/git-blame.nvim", event = "BufRead" },
 
-	{ "tpope/vim-sleuth", lazy = false },
+	{ "tpope/vim-sleuth",        lazy = false },
 
 	{
 		"nacro90/numb.nvim",
@@ -89,26 +89,6 @@ return {
 			return opts
 		end,
 	},
-
-	-- {
-	-- 	"Exafunction/codeium.vim",
-	-- 	event = "BufEnter",
-	-- 	config = function()
-	-- 		vim.g.codeium_disable_bindings = 1
-	-- 		vim.keymap.set("i", "<a-CR>", function()
-	-- 			return vim.fn["codeium#Accept"]()
-	-- 		end, { expr = true })
-	-- 		vim.keymap.set("i", "<a-n>", function()
-	-- 			return vim.fn["codeium#CycleCompletions"](1)
-	-- 		end, { expr = true })
-	-- 		vim.keymap.set("i", "<a-p>", function()
-	-- 			return vim.fn["codeium#CycleCompletions"](-1)
-	-- 		end, { expr = true })
-	-- 		vim.keymap.set("i", "<a-x>", function()
-	-- 			return vim.fn["codeium#Clear"]()
-	-- 		end, { expr = true })
-	-- 	end,
-	-- },
 
 	{
 		"Exafunction/codeium.nvim",
@@ -140,22 +120,18 @@ return {
 	},
 
 	{
-		"p00f/nvim-ts-rainbow",
+		"HiPhish/rainbow-delimiters.nvim",
 		event = "BufRead",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				rainbow = { enable = true, extended_mode = true, max_file_lines = 1000 },
-			})
-		end,
 	},
 
 	{
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown" },
-		build = function()
-			vim.fn["mkdp#util#install"]()
+		build = "cd app && yarn install",
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown" }
 		end,
+		ft = { "markdown" },
 	},
 
 	{
@@ -175,11 +151,8 @@ return {
 	{
 		"olexsmir/gopher.nvim",
 		ft = "go",
-		config = function(_, opts)
-			require("gopher").setup(opts)
-		end,
 		build = function()
-			vim.cmd("GoInstallDeps")
+			-- vim.cmd.GoInstallDeps()
 		end,
 	},
 	{

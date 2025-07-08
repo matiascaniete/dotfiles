@@ -19,7 +19,7 @@ local sources = {
 		},
 	}),
 	b.diagnostics.phpcs.with({
-		command = "./vendor/bin/phpcs",
+		command = "phpcs",
 	}),
 	b.diagnostics.phpmd.with({
 		extra_args = function()
