@@ -50,6 +50,12 @@ timezsh() {
     done
 }
 
+list-ssh-hosts() {
+    if [ -f ~/.ssh/config ]; then
+        cat ~/.ssh/config | grep "^Host" | awk '{print $2}'
+    fi
+}
+
 _buffer2gpt-generate() {
     instructions=$BUFFER
     cmd="gpt --model gpt-4o-mini 'Write a zsh command that does the following: \"$instructions\". Return the result as a single line, plain text, no formatting, ready to send directly into the terminal, with no comments, no explanations and no markdown'"
