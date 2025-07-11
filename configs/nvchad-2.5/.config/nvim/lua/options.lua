@@ -48,5 +48,13 @@ vim.cmd("au VimLeave * set guicursor=a:ver25-blinkon0")
 
 -- Setup diagnostics
 vim.diagnostic.config({
-	virtual_lines = true,
+	-- virtual_lines = true,
+	float = {
+		border = "rounded",
+	},
 })
+
+vim.keymap.set("n", "gK", function()
+	local new_config = not vim.diagnostic.config().virtual_lines
+	vim.diagnostic.config({ virtual_lines = new_config })
+end, { desc = "Toggle diagnostic virtual_lines" })
