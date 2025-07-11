@@ -36,7 +36,7 @@ return {
 	{
 		"nvimtools/none-ls.nvim",
 		lazy = false,
-		config = function()
+		nonfig = function()
 			require("configs.nullls")
 		end,
 	},
@@ -59,7 +59,7 @@ return {
 
 	{ "f-person/git-blame.nvim", event = "BufRead" },
 
-	{ "tpope/vim-sleuth",        lazy = false },
+	{ "tpope/vim-sleuth", lazy = false },
 
 	{
 		"nacro90/numb.nvim",
@@ -206,6 +206,42 @@ return {
 				"vue",
 				"yaml",
 			},
+			highlight = {
+				enable = true,
+			},
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "<Leader>ss", -- set to `false` to disable one of the mappings
+					node_incremental = "<Leader>si",
+					scope_incremental = "<Leader><Leader>",
+					node_decremental = "<Leader>sd",
+				},
+			},
+			textobjects = {
+				select = {
+					enable = true,
+					-- Automatically jump forward to textobj, similar to targets
+					lookahead = true,
+					keymaps = {
+						-- Built-in captures.
+						["af"] = "@function.outer",
+						["if"] = "@function.inner",
+						["al"] = "@loop.outer",
+						["il"] = "@loop.inner",
+						["ac"] = "@conditional.outer",
+						["ic"] = "@conditional.inner",
+						["ihs"] = "@assignment.lhs",
+						["ahs"] = "@assignment.rhs",
+					},
+				},
+			},
 		},
+	},
+
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		event = "BufRead",
+		dependencies = "nvim-treesitter",
 	},
 }
