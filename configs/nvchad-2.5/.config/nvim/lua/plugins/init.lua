@@ -28,8 +28,10 @@ return {
 		"rcarriga/nvim-notify",
 		lazy = false,
 		config = function()
-			require("notify").setup()
-			-- vim.notify = require("notify")
+			require("notify").setup({
+				background_colour = "#000000",
+			})
+			vim.notify = require("notify")
 		end,
 	},
 
@@ -91,14 +93,14 @@ return {
 	},
 
 	{
-		"Exafunction/codeium.nvim",
+		"Exafunction/windsurf.nvim",
 		event = "BufEnter",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"hrsh7th/nvim-cmp",
 		},
 		config = function()
-			require("codeium").setup({})
+			require("configs.windsurf")
 		end,
 	},
 
@@ -158,22 +160,15 @@ return {
 	{
 		"allaman/emoji.nvim",
 		lazy = false,
-		-- version = "1.0.0", -- optionally pin to a tag
-		-- ft = "markdown", -- adjust to your needs
-
 		dependencies = {
-			-- optional for nvim-cmp integration
 			"hrsh7th/nvim-cmp",
-			-- optional for telescope integration
 			"nvim-telescope/telescope.nvim",
 		},
 		opts = {
-			-- default is false
 			enable_cmp_integration = true,
 		},
 		config = function(_, opts)
 			require("emoji").setup(opts)
-			-- optional for telescope integration
 			local ts = require("telescope").load_extension("emoji")
 			vim.keymap.set("n", "<leader>fe", ts.emoji, { desc = "[F]ind [E]moji" })
 		end,
@@ -192,106 +187,14 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		opts = {
-			ensure_installed = {
-				"bash",
-				"css",
-				"dockerfile",
-				"gitcommit",
-				"go",
-				"html",
-				"javascript",
-				"json",
-				"lua",
-				"markdown",
-				"markdown_inline",
-				"php",
-				"python",
-				"regex",
-				"scss",
-				"tsx",
-				"twig",
-				"typescript",
-				"vim",
-				"vimdoc",
-				"vue",
-				"yaml",
-			},
-			highlight = {
-				enable = true,
-			},
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<C-space>", -- set to `false` to disable one of the mappings
-					node_incremental = "<C-space>",
-					scope_incremental = false,
-					node_decremental = "<backspace>",
-				},
-			},
-		},
+		opts = require("configs.treesitter"),
 	},
 
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		event = "BufRead",
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				textobjects = {
-					select = {
-						enable = true,
-						-- Automatically jump forward to textobj, similar to targets
-						lookahead = true,
-						keymaps = {
-							-- Built-in captures.
-							["ac"] = "@class.outer",
-							["ic"] = "@class.inner",
-
-							["am"] = "@function.outer",
-							["im"] = "@function.inner",
-
-							["af"] = "@call.outer",
-							["if"] = "@call.inner",
-
-							["al"] = "@loop.outer",
-							["il"] = "@loop.inner",
-
-							["ai"] = "@conditional.outer",
-							["ii"] = "@conditional.inner",
-
-							["a="] = "@assignment.outer",
-							["i="] = "@assignment.inner",
-							["l="] = "@assignment.lhs",
-							["r="] = "@assignment.rhs",
-
-							["aa"] = "@parameter.outer",
-							["ia"] = "@parameter.inner",
-						},
-					},
-					swap = {
-						enable = true,
-						swap_next = {
-							["<leader>na"] = "@parameter.inner",
-							["<leader>nm"] = "@function.inner",
-						},
-						swap_previous = {
-							["<leader>pa"] = "@parameter.inner",
-							["<leader>pm"] = "@function.inner",
-						},
-					},
-					move = {
-						enable = true,
-						goto_next_start = {
-							["]m"] = "@function.outer",
-							["]c"] = "@class.outer",
-						},
-						goto_previous_start = {
-							["[m"] = "@function.outer",
-							["[c"] = "@class.outer",
-						},
-					},
-				},
-			})
+			require("configs.treesitter-textobjects")
 		end,
 	},
 }
