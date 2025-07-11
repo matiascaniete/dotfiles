@@ -14,6 +14,7 @@ alias lps="lpass-select"
 # neovim
 alias vf='fzf | xargs "$EDITOR"'
 alias v="nvim"
+alias vv="neovide"
 
 # zsh
 alias zzh="zsh-show-keybindings"
