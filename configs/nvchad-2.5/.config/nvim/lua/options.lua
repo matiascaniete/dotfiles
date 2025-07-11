@@ -45,3 +45,8 @@ vim.cmd([[
 
 -- Restore beam cursor when exiting vim
 vim.cmd("au VimLeave * set guicursor=a:ver25-blinkon0")
+
+-- Setup diagnostics
+vim.diagnostic.config({
+	virtual_lines = true,
+})
