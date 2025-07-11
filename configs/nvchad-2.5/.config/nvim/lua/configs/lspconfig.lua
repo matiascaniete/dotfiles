@@ -39,35 +39,35 @@ local function continue()
 		})
 	end
 
-	lspconfig.lua_ls.setup({
-		on_attach = nvlsp.on_attach,
-		on_init = nvlsp.on_init,
-		capabilities = nvlsp.capabilities,
-		settings = {
-			Lua = {
-				runtime = {
-					-- Tell the language server which version of Lua you're using
-					-- (most likely LuaJIT in the case of Neovim)
-					version = "LuaJIT",
-				},
-				diagnostics = {
-					-- Get the language server to recognize the `vim` global
-					globals = {
-						"vim",
-						"require",
-					},
-				},
-				workspace = {
-					-- Make the server aware of Neovim runtime files
-					library = vim.api.nvim_get_runtime_file("", true),
-				},
-				-- Do not send telemetry data containing a randomized but unique identifier
-				telemetry = {
-					enable = false,
-				},
-			},
-		},
-	})
+	-- lspconfig.lua_ls.setup({
+	-- 	on_attach = nvlsp.on_attach,
+	-- 	on_init = nvlsp.on_init,
+	-- 	capabilities = nvlsp.capabilities,
+	-- 	settings = {
+	-- 		Lua = {
+	-- 			runtime = {
+	-- 				-- Tell the language server which version of Lua you're using
+	-- 				-- (most likely LuaJIT in the case of Neovim)
+	-- 				version = "LuaJIT",
+	-- 			},
+	-- 			diagnostics = {
+	-- 				-- Get the language server to recognize the `vim` global
+	-- 				globals = {
+	-- 					"vim",
+	-- 					"require",
+	-- 				},
+	-- 			},
+	-- 			workspace = {
+	-- 				-- Make the server aware of Neovim runtime files
+	-- 				library = vim.api.nvim_get_runtime_file("", true),
+	-- 			},
+	-- 			-- Do not send telemetry data containing a randomized but unique identifier
+	-- 			telemetry = {
+	-- 				enable = false,
+	-- 			},
+	-- 		},
+	-- 	},
+	-- })
 
 	local util = require("lspconfig/util")
 
@@ -92,7 +92,7 @@ local function continue()
 	vim.notify("lsp custom config done!")
 end
 
-continue()
+-- continue()
 
 -- config for vue
 local vue_language_server_path = vim.fn.stdpath("data")

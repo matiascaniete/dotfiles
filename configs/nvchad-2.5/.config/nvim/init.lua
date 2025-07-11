@@ -11,6 +11,14 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+---This function is used to print the value of a variable
+---@param var any
+---@return any
+P = function(var)
+	print(vim.inspect(var))
+	return var
+end
+
 local lazy_config = require("configs.lazy")
 
 -- load plugins

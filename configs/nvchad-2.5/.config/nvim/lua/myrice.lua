@@ -8,11 +8,6 @@ local load_addons = function(filename)
 	end
 end
 
-P = function(v)
-	print(vim.inspect(v))
-	return v
-end
-
 RELOAD = function(...)
 	return require("plenary.reload").reload_module(...)
 end
@@ -58,13 +53,17 @@ vim.schedule(function()
 	load_addons("nvim.local.lua")
 end)
 
--- Set tab size for lua
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "lua",
-	callback = function()
-		vim.opt_local.tabstop = 4
-		vim.opt_local.shiftwidth = 4
-		vim.opt_local.softtabstop = 4
-		vim.opt_local.expandtab = true
+return {
+	---@param text string
+	---@return nil
+	claca = function(text)
+		if not text then
+			return
+		end
+		if type(text) == "number" then
+			print("error")
+			return
+		end
+		print(text)
 	end,
-})
+}
