@@ -50,13 +50,12 @@ require("configs.neovide")
 
 -- Setup diagnostics
 vim.diagnostic.config({
-	-- virtual_lines = true,
-	float = {
-		border = "rounded",
-	},
+	virtual_lines = true,
+	virtual_text = false,
 })
 
 vim.keymap.set("n", "gK", function()
-	local new_config = not vim.diagnostic.config().virtual_lines
-	vim.diagnostic.config({ virtual_lines = new_config })
-end, { desc = "Toggle diagnostic virtual_lines" })
+	local vl = not vim.diagnostic.config().virtual_lines
+	local vt = not vim.diagnostic.config().virtual_text
+	vim.diagnostic.config({ virtual_lines = vl, virtual_text = vt })
+end, { desc = "Toggle diagnostic virtual_lines and virtual_text" })

@@ -6,7 +6,7 @@ local sources = {
 	b.hover.dictionary,
 	b.hover.printenv,
 	b.formatting.stylua,
-	b.formatting.prettier,
+	-- b.formatting.prettier,
 	-- b.formatting.eslint_d,
 	-- b.code_actions.shellcheck, -- shell script code actions
 	-- b.diagnostics.eslint_d,

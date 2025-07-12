@@ -45,7 +45,7 @@ return {
     {
         "nvimtools/none-ls.nvim",
         lazy = false,
-        nonfig = function()
+        config = function()
             require("configs.nullls")
         end,
     },
