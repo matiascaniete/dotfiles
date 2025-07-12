@@ -14,3 +14,9 @@ map("n", "<leader>tk", "<cmd>Telescope keymaps<cr>")
 
 local ts = require("telescope").load_extension("emoji")
 map("n", "<leader>fe", ts.emoji, { desc = "[F]ind [E]moji" })
+
+vim.keymap.set("n", "gK", function()
+	local vl = not vim.diagnostic.config().virtual_lines
+	local vt = not vim.diagnostic.config().virtual_text
+	vim.diagnostic.config({ virtual_lines = vl, virtual_text = vt, underline = false })
+end, { desc = "Toggle diagnostic virtual_lines and virtual_text" })

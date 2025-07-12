@@ -150,3 +150,10 @@ local vue_ls_config = {
 vim.lsp.config("vtsls", vtsls_config)
 vim.lsp.config("vue_ls", vue_ls_config)
 vim.lsp.enable({ "vtsls", "vue_ls" })
+
+-- Setup diagnostics
+vim.diagnostic.config({
+	virtual_lines = true,
+	virtual_text = false,
+	underline = false,
+})

@@ -47,15 +47,3 @@ vim.cmd([[
 vim.cmd("au VimLeave * set guicursor=a:ver25-blinkon0")
 
 require("configs.neovide")
-
--- Setup diagnostics
-vim.diagnostic.config({
-	virtual_lines = true,
-	virtual_text = false,
-})
-
-vim.keymap.set("n", "gK", function()
-	local vl = not vim.diagnostic.config().virtual_lines
-	local vt = not vim.diagnostic.config().virtual_text
-	vim.diagnostic.config({ virtual_lines = vl, virtual_text = vt })
-end, { desc = "Toggle diagnostic virtual_lines and virtual_text" })
