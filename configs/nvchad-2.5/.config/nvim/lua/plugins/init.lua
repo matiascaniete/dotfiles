@@ -185,9 +185,56 @@ return {
     },
 
     {
+        "kylechui/nvim-surround",
+        version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end,
+    },
+
+    {
         "mason-org/mason-lspconfig.nvim",
         opts = {
-            ensure_installed = { "lua_ls", "rust_analyzer", "vtusls" },
+            ensure_installed = {
+                "lua_ls",
+                "rust_analyzer",
+                "vtsls",
+                "bash-language-server,",
+                "beautysh",
+                "css-lsp",
+                "deno",
+                "dockerfile-language-server",
+                "emmet-ls",
+                "eslint_d",
+                "gopls",
+                "html-lsp",
+                "intelephense",
+                "json-lsp",
+                "lemminx",
+                "lua-language-server",
+                "marksman",
+                "php-cs-fixer",
+                "phpmd",
+                "prettier",
+                "prettierd",
+                "psalm",
+                "pyright",
+                "ruff",
+                "stylelint-lsp",
+                "stylua",
+                "taplo",
+                "twig-cs-fixer",
+                "twigcs",
+                "twiggy-language-server",
+                "typescript-language-server",
+                "vetur-vls",
+                "vtsls",
+                "vue-language-server",
+                "yaml-language-server",
+            },
         },
         dependencies = {
             { "mason-org/mason.nvim", opts = {} },
