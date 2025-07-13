@@ -5,14 +5,14 @@ local b = null_ls.builtins
 local sources = {
 	b.hover.dictionary,
 	b.hover.printenv,
-	b.formatting.stylua,
+	-- b.formatting.stylua,
 	-- b.formatting.prettier,
 	-- b.formatting.eslint_d,
 	-- b.code_actions.shellcheck, -- shell script code actions
 	-- b.diagnostics.eslint_d,
 	-- webdev stuff
 	-- b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast! DEPRECATED in the migration from null_ls to none-ls
-	b.formatting.prettier.with({ filetypes = { "html", "markdown", "css" } }), -- so prettier works only on these filetypes
+	-- b.formatting.prettier.with({ filetypes = { "html", "markdown", "css" } }), -- so prettier works only on these filetypes
 	b.formatting.phpcsfixer.with({
 		env = {
 			PHP_CS_FIXER_IGNORE_ENV = true,
@@ -34,7 +34,7 @@ local sources = {
 	}),
 
 	-- Lua
-	b.formatting.stylua,
+	-- b.formatting.stylua,
 
 	-- cpp
 	b.formatting.clang_format,
