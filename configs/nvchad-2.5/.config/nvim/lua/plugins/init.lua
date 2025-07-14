@@ -343,6 +343,7 @@ return {
 
 	{
 		"mason-org/mason-lspconfig.nvim",
+		lazy = false,
 		opts = require("configs.mason"),
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
