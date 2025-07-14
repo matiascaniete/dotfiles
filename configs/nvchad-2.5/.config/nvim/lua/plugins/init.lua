@@ -315,20 +315,20 @@ return {
 		end,
 	},
 
-	{
-		"allaman/emoji.nvim",
-		-- lazy = false,
-		dependencies = {
-			"hrsh7th/nvim-cmp",
-			"nvim-telescope/telescope.nvim",
-		},
-		opts = {
-			-- enable_cmp_integration = true,
-		},
-		config = function(_, opts)
-			require("emoji").setup(opts)
-		end,
-	},
+	-- {
+	-- 	"allaman/emoji.nvim",
+	-- 	-- lazy = false,
+	-- 	dependencies = {
+	-- 		"hrsh7th/nvim-cmp",
+	-- 		"nvim-telescope/telescope.nvim",
+	-- 	},
+	-- 	opts = {
+	-- 		-- enable_cmp_integration = true,
+	-- 	},
+	-- 	config = function(_, opts)
+	-- 		require("emoji").setup(opts)
+	-- 	end,
+	-- },
 
 	{
 		"kylechui/nvim-surround",

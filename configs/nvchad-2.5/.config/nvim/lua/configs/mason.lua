@@ -1,7 +1,6 @@
 return {
 	ensure_installed = {
 		"bash-language-server",
-		"bash-language-server,",
 		"beautysh",
 		"css-lsp",
 		"deno",
