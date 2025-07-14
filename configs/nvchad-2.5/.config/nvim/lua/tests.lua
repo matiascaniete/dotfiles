@@ -58,3 +58,82 @@ end
 
 -- Map the function to a keybinding for quick access
 vim.api.nvim_set_keymap("n", "<leader>p", ":lua Popup_at_cursor()<CR>", { noremap = true, silent = true })
+
+function Define_colors_picker()
+	local pickers = require("telescope.pickers")
+	local finders = require("telescope.finders")
+	local previewers = require("telescope.previewers")
+	local conf = require("telescope.config").values
+	local actions = require("telescope.actions")
+	local action_state = require("telescope.actions.state")
+
+	local color_previewer = previewers.new_buffer_previewer({
+		title = "Color Preview",
+		define_preview = function(self, entry)
+			local color_name = entry.value[1]
+			local color_hex = entry.value[2]
+
+			local lines = {
+				"Name: " .. color_name,
+				"Hex: " .. color_hex,
+				"",
+				"Preview:",
+				string.rep("█", 30) .. " ← swatch of " .. color_hex,
+			}
+
+			vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
+
+			-- Optionally use syntax highlighting or set filetype
+			-- vim.api.nvim_buf_set_option(self.state.bufnr, "filetype", "txt")
+		end,
+	})
+	-- our picker function: colors
+	local colors = function(opts)
+		opts = opts or {}
+		pickers
+			.new(opts, {
+				prompt_title = "colors",
+				finder = finders.new_table({
+					results = {
+						{ "red", "#ff0000" },
+						{ "green", "#00ff00" },
+						{ "blue", "#0000ff" },
+					},
+					entry_maker = function(entry)
+						return {
+							value = entry,
+							display = entry[1] .. " (" .. entry[2] .. ")",
+							ordinal = entry[1],
+						}
+					end,
+				}),
+				sorter = conf.generic_sorter(opts),
+				previewer = color_previewer,
+				layout_strategy = "vertical",
+				attach_mappings = function(prompt_bufnr, _)
+					actions.select_default:replace(function()
+						actions.close(prompt_bufnr)
+						local selection = action_state.get_selected_entry()
+						print(vim.inspect(selection))
+						vim.api.nvim_put({ selection.value[2] }, "", false, true)
+					end)
+					return true
+				end,
+			})
+			:find()
+	end
+
+	-- to execute the function
+	colors(vim.tbl_deep_extend("force", require("telescope.themes").get_dropdown(), {
+		previewer = true,
+		layout_strategy = "horizontal",
+		layout_config = {
+			horizontal = {
+				preview_width = 0.5,
+			},
+			width = 0.8,
+			height = 0.5,
+		},
+	}))
+end
+vim.api.nvim_set_keymap("n", "<leader>cp", ":lua Define_colors_picker()<CR>", { noremap = true, silent = true })
