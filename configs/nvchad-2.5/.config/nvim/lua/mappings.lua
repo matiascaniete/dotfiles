@@ -11,6 +11,23 @@ map("i", "jj", "<ESC>", { desc = "Exit insert mode more quickly" })
 
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 map("n", "<leader>tk", "<cmd>Telescope keymaps<cr>")
+map("n", "<leader>ffh", function()
+	require("telescope.builtin").find_files({
+		hidden = true,
+		find_command = {
+			"rg",
+			"--files",
+			"--hidden",
+			"--glob=!**/.git/*",
+			"--glob=!**/.idea/*",
+			"--glob=!**/.vscode/*",
+			"--glob=!**/build/*",
+			"--glob=!**/dist/*",
+			"--glob=!**/yarn.lock",
+			"--glob=!**/package-lock.json",
+		},
+	})
+end)
 
 -- local ts = require("telescope").load_extension("emoji")
 -- map("n", "<leader>fe", ts.emoji, { desc = "[F]ind [E]moji" })
