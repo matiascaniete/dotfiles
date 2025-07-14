@@ -235,7 +235,8 @@ return {
 		event = "BufEnter",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"hrsh7th/nvim-cmp",
+			-- "hrsh7th/nvim-cmp",
+			"saghen/blink.cmp",
 		},
 		config = function()
 			require("configs.windsurf")
