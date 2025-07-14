@@ -341,15 +341,14 @@ return {
 		end,
 	},
 
-	{
-		"mason-org/mason-lspconfig.nvim",
-		lazy = false,
-		opts = require("configs.mason"),
-		dependencies = {
-			{ "mason-org/mason.nvim", opts = {} },
-			"neovim/nvim-lspconfig",
-		},
-	},
+	-- {
+	-- 	"mason-org/mason-lspconfig.nvim",
+	-- 	opts = require("configs.mason"),
+	-- 	dependencies = {
+	-- 		{ "mason-org/mason.nvim", opts = {} },
+	-- 		"neovim/nvim-lspconfig",
+	-- 	},
+	-- },
 
 	{
 		"nvim-treesitter/nvim-treesitter",

@@ -31,7 +31,7 @@ return {
 		-- "twig-cs-fixer",
 		"twiggy_language_server",
 		"ts_ls",
-		"vue_ls",
+		-- "vue_ls",
 		"vtsls",
 		"yamlls",
 	},
