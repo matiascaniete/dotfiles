@@ -13,6 +13,8 @@ local sources = {
 	-- webdev stuff
 	-- b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast! DEPRECATED in the migration from null_ls to none-ls
 	-- b.formatting.prettier.with({ filetypes = { "html", "markdown", "css" } }), -- so prettier works only on these filetypes
+
+	-- PHP
 	b.formatting.phpcsfixer.with({
 		env = {
 			PHP_CS_FIXER_IGNORE_ENV = true,
@@ -25,16 +27,13 @@ local sources = {
 		extra_args = function()
 			local configFile = "phpmd.xml"
 			if vim.fn.filereadable(configFile) == 1 then
-				-- vim.notify("Using phpmd configuration from file " .. configFile)
+				vim.notify("null_ls: Using phpmd configuration from file " .. configFile)
 				return { configFile }
 			end
-			-- vim.notify("Using phpmd with all rules")
+			vim.notify("null_ls: Using phpmd with all rules")
 			return { "cleancode,codesize,controversial,design,naming,unusedcode" }
 		end,
 	}),
-
-	-- Lua
-	-- b.formatting.stylua,
 
 	-- cpp
 	b.formatting.clang_format,

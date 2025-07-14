@@ -26,13 +26,15 @@ local function windsurf_custom_status()
 end
 
 M.ui = {
-	theme = "catppuccin",
+	theme = "kanagawa",
 	transparency = true,
 	statusline = {
 		order = {
 			"mode",
 			"file",
 			"git",
+			"%=",
+			"lsp_msg",
 			"%=",
 			"lsp_msg",
 			"wc",
