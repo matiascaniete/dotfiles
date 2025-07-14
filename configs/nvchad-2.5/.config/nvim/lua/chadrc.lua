@@ -25,9 +25,13 @@ local function windsurf_custom_status()
 	return " 0 "
 end
 
-M.ui = {
-	theme = "kanagawa",
+M.base46 = {
+	-- theme = "kanagawa",
+	theme = "kanagawa-dragon",
 	transparency = true,
+}
+
+M.ui = {
 	statusline = {
 		order = {
 			"mode",

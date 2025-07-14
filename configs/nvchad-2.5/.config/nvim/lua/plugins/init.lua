@@ -2,7 +2,11 @@ return {
 	{
 
 		"hrsh7th/nvim-cmp",
-		enabled = false,
+		opts = {
+			-- this is is a hack to make nvim-cmp work with the 'blink' option appearance.use_nvim_cmp = true
+			-- See https://cmp.saghen.dev/configuration/reference.html#appearance
+			sources = {},
+		},
 	},
 
 	{
@@ -45,6 +49,7 @@ return {
 				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
 				-- Adjusts spacing to ensure icons are aligned
 				nerd_font_variant = "mono",
+				use_nvim_cmp_as_default = true,
 			},
 
 			-- (Default) Only show the documentation popup when manually triggered
@@ -52,10 +57,11 @@ return {
 				menu = {
 					border = "solid",
 					draw = {
+						treesitter = { "lsp" },
 						columns = {
 							{ "kind_icon" },
-							{ "source_id", gap = 1 },
-							{ "label", gap = 1 },
+							{ "label" },
+							{ "source_id" },
 						},
 						components = {
 							label = {
@@ -73,13 +79,13 @@ return {
 					window = {
 						border = "solid",
 					},
-					auto_show = false,
+					auto_show = true,
 				},
 			},
 			signature = {
 				enabled = true,
 				window = {
-					show_documentation = false,
+					show_documentation = true,
 					border = "solid",
 				},
 			},
