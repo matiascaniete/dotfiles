@@ -11,9 +11,7 @@ return {
 
 	{
 		"saghen/blink.cmp",
-		lazy = false,
-		-- enabled = false,
-		-- optional: provides snippets for the snippet source
+		event = "InsertEnter",
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 			"Exafunction/windsurf.nvim",
@@ -132,23 +130,11 @@ return {
 		end,
 	},
 
-	-- {
-	-- 	dir = "~/Documentos/local.nvim/",
-	-- 	lazy = false,
-	-- 	config = function()
-	-- 		require("local-nvim").setup({ filename = "nvim.local.lua" })
-	-- 	end,
-	-- },
-
 	{
 		"rcarriga/nvim-notify",
 		lazy = false,
 		config = function()
-			require("notify").setup({
-				merge_duplicates = true,
-				background_colour = "#000000",
-			})
-
+			require("notify").setup({ background_colour = "#000000", merge_duplicates = true })
 			vim.notify = require("notify")
 		end,
 	},
@@ -169,25 +155,14 @@ return {
 		end,
 	},
 
-	{
-		"folke/trouble.nvim",
-		cmd = "TroubleToggle",
-		opts = {
-			use_diagnostic_signs = true,
-		},
-	},
-
+	{ "folke/trouble.nvim", cmd = "TroubleToggle", opts = { use_diagnostic_signs = true } },
 	{ "f-person/git-blame.nvim", event = "BufRead" },
-
 	{ "tpope/vim-sleuth", lazy = false },
-
-	{
-		"nacro90/numb.nvim",
-		lazy = false,
-		config = function()
-			require("numb").setup({})
-		end,
-	},
+	{ "nacro90/numb.nvim", lazy = false, opts = {} },
+	{ "ellisonleao/glow.nvim", cmd = "Glow", ft = { "markdown" }, opts = {} },
+	{ "HiPhish/rainbow-delimiters.nvim", event = "BufRead" },
+	{ "kylechui/nvim-surround", version = "^3.0.0", event = "VeryLazy", opts = {} },
+	{ "simrat39/symbols-outline.nvim", cmd = "SymbolsOutline", opts = {} },
 
 	{
 		"goolord/alpha-nvim",
@@ -199,7 +174,13 @@ return {
 		end,
 	},
 
-	{ "RRethy/vim-illuminate", event = "BufRead" },
+	{
+		"RRethy/vim-illuminate",
+		event = "BufRead",
+		config = function()
+			require("illuminate").configure({ delay = 1000 })
+		end,
+	},
 
 	-- {
 	-- 	"hrsh7th/nvim-cmp",
@@ -262,28 +243,6 @@ return {
 	},
 
 	{
-		"ellisonleao/glow.nvim",
-		cmd = "Glow",
-		ft = { "markdown" },
-		config = function()
-			require("glow").setup()
-		end,
-	},
-
-	{
-		"simrat39/symbols-outline.nvim",
-		cmd = "SymbolsOutline",
-		config = function()
-			require("symbols-outline").setup()
-		end,
-	},
-
-	{
-		"HiPhish/rainbow-delimiters.nvim",
-		event = "BufRead",
-	},
-
-	{
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		build = "cd app && yarn install",
@@ -295,10 +254,8 @@ return {
 
 	{
 		"jackMort/ChatGPT.nvim",
+		opts = {},
 		lazy = false,
-		config = function()
-			require("chatgpt").setup()
-		end,
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"nvim-lua/plenary.nvim",
@@ -312,32 +269,6 @@ return {
 		ft = "go",
 		build = function()
 			-- vim.cmd.GoInstallDeps()
-		end,
-	},
-
-	-- {
-	-- 	"allaman/emoji.nvim",
-	-- 	-- lazy = false,
-	-- 	dependencies = {
-	-- 		"hrsh7th/nvim-cmp",
-	-- 		"nvim-telescope/telescope.nvim",
-	-- 	},
-	-- 	opts = {
-	-- 		-- enable_cmp_integration = true,
-	-- 	},
-	-- 	config = function(_, opts)
-	-- 		require("emoji").setup(opts)
-	-- 	end,
-	-- },
-
-	{
-		"kylechui/nvim-surround",
-		version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
-		event = "VeryLazy",
-		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
 		end,
 	},
 
@@ -365,11 +296,9 @@ return {
 
 	{
 		"folke/lazydev.nvim",
-		ft = "lua", -- only load on lua files
+		ft = "lua",
 		opts = {
 			library = {
-				-- See the configuration section for more details
-				-- Load luvit types when the `vim.uv` word is found
 				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 			},
 		},
