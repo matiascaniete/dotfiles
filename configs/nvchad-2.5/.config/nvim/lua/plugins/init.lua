@@ -53,7 +53,7 @@ return {
 			-- (Default) Only show the documentation popup when manually triggered
 			completion = {
 				menu = {
-					border = "solid",
+					border = "single",
 					draw = {
 						treesitter = { "lsp" },
 						columns = {
@@ -75,7 +75,7 @@ return {
 				},
 				documentation = {
 					window = {
-						border = "solid",
+						border = "single",
 					},
 					auto_show = true,
 				},
@@ -84,7 +84,7 @@ return {
 				enabled = true,
 				window = {
 					show_documentation = true,
-					border = "solid",
+					border = "single",
 				},
 			},
 
