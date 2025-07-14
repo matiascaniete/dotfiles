@@ -27,7 +27,7 @@ end
 
 M.base46 = {
 	-- theme = "kanagawa",
-	theme = "kanagawa-dragon",
+	theme = "kanagawa",
 	transparency = true,
 }
 
