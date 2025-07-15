@@ -244,6 +244,12 @@ return {
 	},
 
 	{
+		"robitx/gp.nvim",
+		opts = {},
+		lazy = false,
+	},
+
+	{
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		build = "cd app && yarn install",
@@ -251,18 +257,6 @@ return {
 			vim.g.mkdp_filetypes = { "markdown" }
 		end,
 		ft = { "markdown" },
-	},
-
-	{
-		"jackMort/ChatGPT.nvim",
-		opts = {},
-		lazy = false,
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"folke/trouble.nvim", -- optional
-			"nvim-telescope/telescope.nvim",
-		},
 	},
 
 	{
