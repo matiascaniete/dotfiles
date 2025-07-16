@@ -28,6 +28,8 @@ end
 M.base46 = {
 	-- theme = "kanagawa",
 	theme = "kanagawa",
+	-- theme toggle, wanaka for dark, choose one for light
+	theme_toggle = { "kanagawa", "one_light" },
 	transparency = true,
 }
 
