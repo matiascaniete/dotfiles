@@ -26,7 +26,7 @@ If `mode: ask` and the user's message doesn't imply a phase, ask: "¿Recolectar 
 Grep `idea_tags` across `.md` files + glob `filename_patterns`. Exclude `.obsidian/`, templates, `.base`, `output_dir/`, `AI Space/Ideas/`. Record: raw text, source, tag, line.
 
 ### Develop
-Per idea: **type** (strip `#ideafor` → `book`/`app`/`prompt`/`song`, bare `#idea` → `general`), **title** (concise, vault's language), **summary** (one-line summary generated from raw text), **profile match** (parse `USER.md` entries by category — lexical overlap → matching categories + 2–4 `[[wikilinks]]` to entities), **deduplicate** (skip duplicates, keep oldest source).
+Per idea: **type** (strip `#ideafor` → `book`/`app`/`prompt`/`song`, bare `#idea` → `general`), **title** (concise, vault's language), **summary** (one-line plain text — strip URLs, tags, list markers, markdown formatting), **profile match** (parse `USER.md` entries by category — lexical overlap → matching categories + 2–4 `[[wikilinks]]` to entities), **deduplicate** (skip duplicates, keep oldest source).
 
 ### Save
 Use template `AI Space/Templates/T-Idea.md`. One note per idea:
