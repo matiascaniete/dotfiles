@@ -14,7 +14,7 @@ Pipeline: Scan → Develop → Save → Read → Cluster → Rank → Save theme
 | `mode` | `ask` | `full`, `collect`, `group`, or `ask` (infer from message, or preguntar) |
 | `vault_root` | `.` | Vault root directory |
 | `profile_file` | (required) | Path to `USER.md` (from `personal-profiler`). Flat `§`-delimited entries |
-| `output_dir` | `Collected Ideas` | Destination folder inside vault. Creates `ideas/` and `temas/` subdirs |
+| `output_dir` | `AI Space/Collected Ideas` | Destination folder inside vault. Creates `ideas/` and `temas/` subdirs |
 | `idea_tags` | `#idea`, `#ideafor*` | Tags that mark raw ideas |
 | `filename_patterns` | `*Ideas*`, `Ideas for*` | Filename patterns for idea notes |
 
