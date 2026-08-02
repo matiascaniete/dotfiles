@@ -33,9 +33,10 @@ Per idea: **type** (strip `#ideafor` → `book`/`app`/`prompt`/`song`, bare `#id
 ```
 ---
 idea_type: {type}
+idea_state: collected
 source: "[[{source_file}]]"
 profile_rel: ["[[USER.md]] ({category})"]
-tags: [idea-desarrollada, {original_tag}]
+tags: [{original_tag}]
 created: {YYYY-MM-DD}
 ---
 # {Title}
@@ -53,7 +54,7 @@ _Espacio para desarrollo futuro._
 ## Phase 2 — Group
 
 ### Read
-Load individual notes from `{output_dir}/ideas/`. Skip índices and themed notes. Parse frontmatter + body.
+Load individual notes from `{output_dir}/ideas/`. Skip índices and themed notes. Parse frontmatter + body. After processing, update `idea_state: collected` → `grouped` on each note.
 
 ### Cluster
 Each `USER.md` category → theme bucket. Assign ideas to the theme matching their `profile_rel` category. Strongest lexical match wins ties. No match → `General`.
@@ -90,3 +91,4 @@ created: {YYYY-MM-DD}
 - Themed notes overwrite on re-run (idempotent)
 - All output inside `output_dir`
 - Auto-create `ideas/` and `temas/` subdirs within `output_dir` if missing
+- Idea state pipeline: `collected` (Phase 1) → `grouped` (Phase 2) → `incubating` → `developed` → `archived`
