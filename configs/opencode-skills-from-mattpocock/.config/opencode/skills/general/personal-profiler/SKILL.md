@@ -5,36 +5,35 @@ description: Scan any Obsidian vault to generate and maintain a personal profile
 
 # Personal Profiler
 
+Inspired by Hermes Agent's memory model: two compact, bounded, flat files curated by the agent — not one monolithic document.
+
 ## Quick start
 
 1. Determine vault root from context (AGENTS.md, working directory, or user)
-2. Check write rules: if `AGENTS.md` restricts writes, output to `AI Space/Personal Profile.md`; otherwise vault root
-3. If no existing profile → run **Full scan**. If profile exists → run **Incremental scan** (or ask user)
+2. Check write rules: if AGENTS.md restricts writes, output to `AI Space/Profile/`; otherwise vault root
+3. If no existing profile → Full scan. If exists → Incremental scan
 
-## Vault detection
+## Output: two files
 
-Infer the vault path from:
-- The `AGENTS.md` file in the working directory
-- Explicit user direction ("my vault is at /path/to/vault")
-- The current workspace context
+| File | Char limit | Purpose |
+|------|-----------|---------|
+| `USER.md` | 1,375 chars (~500 tokens) | Who the user is — identity, interests, influences, goals, traits |
+| `CONTEXT.md` | 2,200 chars (~800 tokens) | Vault environment — structure, conventions, write restrictions, tools |
 
-Always scan `AGENTS.md` first — it may define write restrictions and naming conventions.
+Both in `{output_dir}/`. Entries are flat text separated by `§`. Agent curates: when full, consolidate or drop before adding. See [PROFILE_STRUCTURE.md](PROFILE_STRUCTURE.md) for templates and entry format.
 
 ## Scan sources
 
 | Source | Extract |
 |---|---|
-| `AGENTS.md`, `README.md`, any `about` / `profile` note | Explicit identity data, conventions |
-| `Journal/` or `Daily/` | Links, ideas, tasks, concerns, mood, content consumed, recurring patterns |
-| Root-level `.md` notes | Active interest topics, knowledge domains |
-| `Projects/` | Professional context, skills, business, current work |
-| `People/` | Influences, relationships, people of interest |
-| `Books/` | Reading habits, research topics |
-| `Clippings/` | Consumed content, authors, themes |
-| `Atlas/` or `Concepts/` | Deep interests, structured knowledge |
-| `TaskNotes/` | Active tasks, organization method, priorities |
-| `Years/` | Historical interests, personal timeline |
-| `Templates/` | Note types created → interests, mental models |
+| `AGENTS.md`, `README.md`, profile notes | Identity, conventions, write rules |
+| `Journal/` or `Daily/` (last 60 days) | Links, tasks, concerns, mood, patterns |
+| Root `.md` notes, `Atlas/` | Interests, knowledge domains |
+| `Projects/` | Professional context, skills, active work |
+| `People/` | Influences, relationships |
+| `Books/`, `Clippings/` | Interests, consumed content, authors |
+| `TaskNotes/` | Active tasks, priorities |
+| `Templates/` | Note types → interests, mental models |
 
 Skip: `.obsidian/`, `Attachments/`, `Excalidraw/`, binary files.
 
@@ -42,36 +41,37 @@ Skip: `.obsidian/`, `Attachments/`, `Excalidraw/`, binary files.
 
 ### Full scan
 
-1. Scan all sources listed above
-2. For `Journal/`: read entries from the last 60 days. If fewer, read all. Identify recurring links, topics, emotional language, and explicit self-statements
-3. For each other source: sample enough notes to identify themes. Use Glob to list files, then Read a representative sample
-4. Synthesize findings into sections (see [PROFILE_STRUCTURE.md](PROFILE_STRUCTURE.md))
-5. Write output to `Personal Profile.md` in the allowed output directory
-6. Add `Last full scan: YYYY-MM-DD` and `Last update: YYYY-MM-DD` to the profile frontmatter
+1. Scan all sources. Sample enough from each to identify themes
+2. Synthesize into `USER.md` and `CONTEXT.md` per [PROFILE_STRUCTURE.md](PROFILE_STRUCTURE.md)
+3. **Curate**: strict char limits. Merge overlapping entries, drop low-priority before anything else. Never exceed limits
+4. Write to `{output_dir}/USER.md` and `{output_dir}/CONTEXT.md`
+5. Add `last_scan:` and `last_incremental:` dates to both frontmatters
 
 ### Incremental scan
 
-1. Read the existing profile to identify `Last update` date
-2. Scan Journal entries since that date
-3. Glob for `.md` files modified since that date (use Bash: `find` with `-newer` or check Journal dates)
-4. Read new/modified content, extract new themes
-5. Update relevant sections of the profile. Append new insights, avoid duplication
-6. Update `Last update` in frontmatter
+1. Read existing files → get `last_incremental` date
+2. Scan Journal + `.md` files modified since that date (`find -newer`)
+3. Extract new themes. Update entries. Consolidate if near char limit
+4. Update `last_incremental` in frontmatter
 
 ### Refresh
 
-1. Same as Full scan
-2. Overwrite the existing profile completely
-3. Mark as `Last full scan: YYYY-MM-DD (refresh)` in frontmatter
+Full scan. Overwrite both files. Mark `last_scan: YYYY-MM-DD (refresh)`.
+
+## Curation rules
+
+| Rule | Detail |
+|------|--------|
+| Bounded | Never exceed char limits. If overflow, consolidate or drop |
+| Merge over delete | Combine related entries before removing |
+| Flat | `§`-delimited, not markdown sections |
+| Compact | No filler words. Facts only |
+| Prioritize | Identity > active projects > goals > past interests |
+| Wikilinks | Only for named entities with dedicated notes |
 
 ## Guidelines
 
-- **Language**: match the vault's primary language (check `AGENTS.md` or README)
-- **Links**: use the vault's link style (`[[wikilinks]]` or markdown links) per `AGENTS.md`
-- **Be honest**: only include what the vault actually contains. If a section has no data, note "No data found" rather than inventing
-- **Avoid duplication**: during incremental scans, check existing content before appending
-- **Frontmatter**: include `last_scan:` and `last_incremental:` dates
-
-## Profile sections
-
-See [PROFILE_STRUCTURE.md](PROFILE_STRUCTURE.md) for the full 9-section template with per-source extraction guidance.
+- **Language**: match vault's primary language (from AGENTS.md)
+- **Links**: vault's link style (`[[wikilinks]]` or markdown) per AGENTS.md
+- **Honest**: only what the vault actually contains. Skip sections with no data
+- **Frontmatter**: `last_scan:` and `last_incremental:` in YAML on both files
