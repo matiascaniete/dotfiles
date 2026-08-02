@@ -23,7 +23,7 @@ If `mode: ask` and the user's message doesn't imply a phase, ask: "¿Recolectar 
 ## Phase 1 — Collect
 
 ### Scan
-Grep `idea_tags` across `.md` files + glob `filename_patterns`. Exclude `.obsidian/`, templates, `.base`, `output_dir/`. Record: raw text, source, tag, line.
+Grep `idea_tags` across `.md` files + glob `filename_patterns`. Exclude `.obsidian/`, templates, `.base`, `output_dir/`, `AI Space/Ideas/`. Record: raw text, source, tag, line.
 
 ### Develop
 Per idea: **type** (strip `#ideafor` → `book`/`app`/`prompt`/`song`, bare `#idea` → `general`), **title** (concise, vault's language), **profile match** (parse `USER.md` entries by category — lexical overlap → 2–4 `[[wikilinks]]` to entities, record category), **deduplicate** (skip duplicates, keep oldest source).
@@ -61,7 +61,7 @@ Each `USER.md` category → theme bucket. Assign ideas to the theme matching the
 ### Rank
 Score within each theme: category match **+1**, entity match **+2**, interest keyword **+1**, goal mention **+3**. Tiers: top third → Alta, middle → Media, bottom → Baja.
 
-### Save (themed note → `{output_dir}/temas/{Theme} - Ideas.md`)
+### Save (themed note → `{output_dir}/temas/{Theme}.md`)
 
 ```
 ---
@@ -80,7 +80,7 @@ created: {YYYY-MM-DD}
 ```
 
 ### Index
-`{output_dir}/Índice de Temas.md` — `[[temas/Theme - Ideas]]` by idea count descending.
+`{output_dir}/Índice de Temas.md` — `[[temas/Theme]]` by idea count descending.
 
 ## Rules
 
