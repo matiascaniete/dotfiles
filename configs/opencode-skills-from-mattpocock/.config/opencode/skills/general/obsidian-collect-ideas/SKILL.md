@@ -26,7 +26,7 @@ If `mode: ask` and the user's message doesn't imply a phase, ask: "¿Recolectar 
 Grep `idea_tags` across `.md` files + glob `filename_patterns`. Exclude `.obsidian/`, templates, `.base`, `output_dir/`, `AI Space/Ideas/`. Record: raw text, source, tag, line.
 
 ### Develop
-Per idea: **type** (strip `#ideafor` → `book`/`app`/`prompt`/`song`, bare `#idea` → `general`), **title** (concise, vault's language), **profile match** (parse `USER.md` entries by category — lexical overlap → 2–4 `[[wikilinks]]` to entities, record category), **deduplicate** (skip duplicates, keep oldest source).
+Per idea: **type** (strip `#ideafor` → `book`/`app`/`prompt`/`song`, bare `#idea` → `general`), **title** (concise, vault's language), **profile match** (parse `USER.md` entries by category — lexical overlap → matching categories + 2–4 `[[wikilinks]]` to entities), **deduplicate** (skip duplicates, keep oldest source).
 
 ### Save (individual note → `{output_dir}/ideas/{Title}.md`)
 
@@ -35,7 +35,7 @@ Per idea: **type** (strip `#ideafor` → `book`/`app`/`prompt`/`song`, bare `#id
 idea_type: {type}
 idea_state: collected
 source: "[[{source_file}]]"
-profile_rel: ["[[USER.md]] ({category})"]
+profile_rel: [{category}]
 tags: [{original_tag}]
 created: {YYYY-MM-DD}
 ---
@@ -67,7 +67,7 @@ Score within each theme: category match **+1**, entity match **+2**, interest ke
 ```
 ---
 theme: {name}
-profile_rel: "[[USER.md]] ({category})"
+profile_rel: [{category}]
 idea_count: {N}
 created: {YYYY-MM-DD}
 ---
