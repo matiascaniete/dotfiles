@@ -14,7 +14,7 @@ Pipeline: Scan → Develop → Save → Read → Cluster → Rank → Save theme
 | `mode` | `ask` | `full`, `collect`, `group`, or `ask` (infer from message, or preguntar) |
 | `vault_root` | `.` | Vault root directory |
 | `profile_file` | (required) | Path to `USER.md` (from `personal-profiler`). Flat `§`-delimited entries |
-| `output_dir` | (required) | Destination folder inside vault |
+| `output_dir` | `Collected Ideas` | Destination folder inside vault. Creates `ideas/` and `temas/` subdirs |
 | `idea_tags` | `#idea`, `#ideafor*` | Tags that mark raw ideas |
 | `filename_patterns` | `*Ideas*`, `Ideas for*` | Filename patterns for idea notes |
 
@@ -23,12 +23,12 @@ If `mode: ask` and the user's message doesn't imply a phase, ask: "¿Recolectar 
 ## Phase 1 — Collect
 
 ### Scan
-Grep `idea_tags` across `.md` files + glob `filename_patterns`. Exclude `.obsidian/`, templates, `.base`, `output_dir`. Record: raw text, source, tag, line.
+Grep `idea_tags` across `.md` files + glob `filename_patterns`. Exclude `.obsidian/`, templates, `.base`, `output_dir/`. Record: raw text, source, tag, line.
 
 ### Develop
 Per idea: **type** (strip `#ideafor` → `book`/`app`/`prompt`/`song`, bare `#idea` → `general`), **title** (concise, vault's language), **profile match** (parse `USER.md` entries by category — lexical overlap → 2–4 `[[wikilinks]]` to entities, record category), **deduplicate** (skip duplicates, keep oldest source).
 
-### Save (individual note)
+### Save (individual note → `{output_dir}/ideas/{Title}.md`)
 
 ```
 ---
@@ -48,12 +48,12 @@ _Espacio para desarrollo futuro._
 ```
 
 ### Index
-`{output_dir}/Índice de Ideas.md` — `[[wikilinks]]` grouped by `idea_type`.
+`{output_dir}/Índice de Ideas.md` — `[[ideas/Title]]` grouped by `idea_type`.
 
 ## Phase 2 — Group
 
 ### Read
-Load individual notes from `output_dir`. Skip índices and themed notes. Parse frontmatter + body.
+Load individual notes from `{output_dir}/ideas/`. Skip índices and themed notes. Parse frontmatter + body.
 
 ### Cluster
 Each `USER.md` category → theme bucket. Assign ideas to the theme matching their `profile_rel` category. Strongest lexical match wins ties. No match → `General`.
@@ -61,7 +61,7 @@ Each `USER.md` category → theme bucket. Assign ideas to the theme matching the
 ### Rank
 Score within each theme: category match **+1**, entity match **+2**, interest keyword **+1**, goal mention **+3**. Tiers: top third → Alta, middle → Media, bottom → Baja.
 
-### Save (themed note)
+### Save (themed note → `{output_dir}/temas/{Theme} - Ideas.md`)
 
 ```
 ---
@@ -72,15 +72,15 @@ created: {YYYY-MM-DD}
 ---
 # {Theme} — Ideas
 ## Prioridad alta
-- [[Idea A]] — {one-line summary}
+- [[ideas/Idea A]] — {one-line summary}
 ## Prioridad media
-- [[Idea C]] — {summary}
+- [[ideas/Idea C]] — {summary}
 ## Prioridad baja
-- [[Idea D]] — {summary}
+- [[ideas/Idea D]] — {summary}
 ```
 
 ### Index
-`{output_dir}/Índice de Temas.md` — `[[wikilinks]]` to themed notes, by idea count descending.
+`{output_dir}/Índice de Temas.md` — `[[temas/Theme - Ideas]]` by idea count descending.
 
 ## Rules
 
@@ -89,3 +89,4 @@ created: {YYYY-MM-DD}
 - Rankings: relative within theme, score 0 still appears in Baja
 - Themed notes overwrite on re-run (idempotent)
 - All output inside `output_dir`
+- Auto-create `ideas/` and `temas/` subdirs within `output_dir` if missing
