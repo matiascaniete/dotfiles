@@ -1,11 +1,11 @@
 ---
 name: obsidian-collect-ideas
-description: Scan an Obsidian vault for scattered ideas (tagged with configurable idea tags or filename patterns), develop them with wikilinks from a user profile, save them as templated notes, group them by themes, and rank by profile relevance. Use when user says "recolectar ideas", "collect ideas", "agrupar ideas", "group ideas", "ordenar ideas", "organizar por temas", or mentions #ideaforbook, #ideaforapp, #ideaforprompt.
+description: Scan an Obsidian vault for scattered ideas (tagged with configurable idea tags or filename patterns), develop them with wikilinks from a user profile, save them as templated notes, group them by themes, rank by profile relevance, and maintain a dynamic .base index. Use when user says "recolectar ideas", "collect ideas", "agrupar ideas", "group ideas", "ordenar ideas", "organizar por temas", or mentions #ideaforbook, #ideaforapp, #ideaforprompt.
 ---
 
 # Obsidian — Collect & Group Ideas
 
-Pipeline: Scan → Develop → Save → Read → Cluster → Rank → Save themed → Index
+Pipeline: Scan → Develop → Save → Read → Cluster → Rank → Update → Generate .base
 
 ## Configuration
 
@@ -14,7 +14,7 @@ Pipeline: Scan → Develop → Save → Read → Cluster → Rank → Save theme
 | `mode` | `ask` | `full`, `collect`, `group`, or `ask` (infer from message, or preguntar) |
 | `vault_root` | `.` | Vault root directory |
 | `profile_file` | (required) | Path to `USER.md` (from `personal-profiler`). Flat `§`-delimited entries |
-| `output_dir` | `AI Space/Collected Ideas` | Destination folder inside vault. Creates `ideas/` and `temas/` subdirs |
+| `output_dir` | `AI Space/Collected Ideas` | Destination folder inside vault |
 | `idea_tags` | `#idea`, `#ideafor*` | Tags that mark raw ideas |
 | `filename_patterns` | `*Ideas*`, `Ideas for*` | Filename patterns for idea notes |
 
@@ -26,14 +26,18 @@ If `mode: ask` and the user's message doesn't imply a phase, ask: "¿Recolectar 
 Grep `idea_tags` across `.md` files + glob `filename_patterns`. Exclude `.obsidian/`, templates, `.base`, `output_dir/`, `AI Space/Ideas/`. Record: raw text, source, tag, line.
 
 ### Develop
-Per idea: **type** (strip `#ideafor` → `book`/`app`/`prompt`/`song`, bare `#idea` → `general`), **title** (concise, vault's language), **profile match** (parse `USER.md` entries by category — lexical overlap → matching categories + 2–4 `[[wikilinks]]` to entities), **deduplicate** (skip duplicates, keep oldest source).
+Per idea: **type** (strip `#ideafor` → `book`/`app`/`prompt`/`song`, bare `#idea` → `general`), **title** (concise, vault's language), **summary** (one-line summary generated from raw text), **profile match** (parse `USER.md` entries by category — lexical overlap → matching categories + 2–4 `[[wikilinks]]` to entities), **deduplicate** (skip duplicates, keep oldest source).
 
-### Save (individual note → `{output_dir}/ideas/{Title}.md`)
+### Save
+Use template `AI Space/Templates/T-Idea.md`. One note per idea:
 
 ```
 ---
 idea_type: {type}
 idea_state: collected
+summary: "{one-line}"
+theme: ""
+priority:
 source: "[[{source_file}]]"
 profile_rel: [{category}]
 tags: [{original_tag}]
@@ -48,47 +52,39 @@ created: {YYYY-MM-DD}
 _Espacio para desarrollo futuro._
 ```
 
-### Index
-`{output_dir}/Índice de Ideas.md` — `[[ideas/Title]]` grouped by `idea_type`.
-
 ## Phase 2 — Group
 
 ### Read
-Load individual notes from `{output_dir}/ideas/`. Skip índices and themed notes. Parse frontmatter + body. After processing, update `idea_state: collected` → `grouped` on each note.
+Load individual notes from `output_dir/`. Parse frontmatter: `idea_type`, `idea_state`, `profile_rel`, `summary`, tags. Parse body: `Conexiones con el perfil`.
 
 ### Cluster
-Each `USER.md` category → theme bucket. Assign ideas to the theme matching their `profile_rel` category. Strongest lexical match wins ties. No match → `General`.
+Each `USER.md` category → theme bucket. Assign each idea a `theme` matching its `profile_rel` category. Strongest lexical match wins ties. No match → `General`.
 
 ### Rank
-Score within each theme: category match **+1**, entity match **+2**, interest keyword **+1**, goal mention **+3**. Tiers: top third → Alta, middle → Media, bottom → Baja.
+Score within each theme: category match **+1**, entity match **+2**, interest keyword **+1**, goal mention **+3**. Assign `priority`: top third → `alta`, middle → `media`, bottom → `baja`.
 
-### Save (themed note → `{output_dir}/temas/{Theme}.md`)
+### Update
+For each idea note, update frontmatter in place:
+- Set `theme` and `priority` based on cluster + rank
+- Set `idea_state: collected` → `grouped`
 
+### Generate .base
+Create or update `{output_dir}/Collected Ideas.base`:
+
+```yaml
+views:
+  - type: table, name: Por tipo, group: idea_type, order: [idea_type, file.name]
+  - type: kanban, name: Por estado, group: idea_state
+  - type: table, name: Por tema, group: theme, order: [priority, file.name]
+  - type: table, name: Todas, columns: [file.name, summary, idea_type, idea_state, theme, priority]
 ```
----
-theme: {name}
-profile_rel: [{category}]
-idea_count: {N}
-created: {YYYY-MM-DD}
----
-# {Theme} — Ideas
-## Prioridad alta
-- [[ideas/Idea A]] — {one-line summary}
-## Prioridad media
-- [[ideas/Idea C]] — {summary}
-## Prioridad baja
-- [[ideas/Idea D]] — {summary}
-```
-
-### Index
-`{output_dir}/Índice de Temas.md` — `[[temas/Theme]]` by idea count descending.
 
 ## Rules
 
 - Preserve original language
 - Profile matching: lexical overlap with `USER.md` flat entries
-- Rankings: relative within theme, score 0 still appears in Baja
-- Themed notes overwrite on re-run (idempotent)
-- All output inside `output_dir`
-- Auto-create `ideas/` and `temas/` subdirs within `output_dir` if missing
+- Rankings: relative within theme, score 0 still gets `baja`
+- `summary` is auto-generated by Phase 1, not left for manual fill
+- `.base` file is regenerated on every Phase 2 run (idempotent)
 - Idea state pipeline: `collected` (Phase 1) → `grouped` (Phase 2) → `incubating` → `developed` → `archived`
+- All output inside `output_dir`
