@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Architecture Viewer</title>
+<link rel="stylesheet" href="./daisyui.css">
+<script src="./tailwind-browser.js"></script>
+<script src="./mermaid.min.js"></script>
+<script src="./panzoom.min.js"></script>
+<style>
+  html, body { height: 100%; }
+  body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", sans-serif; }
+  #stage {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    width: 100vw; height: calc(100vh - 49px);
+    overflow: hidden; cursor: grab;
+  }
+  #stage::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(circle, var(--color-base-content) 1px, transparent 1px);
+    background-size: 22px 22px; opacity: 0.08;
+  }
+  #stage.dragging { cursor: grabbing; }
+  #stage svg {
+    display: block; user-select: none;
+    box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+  }
+  g.cluster-label { cursor: pointer; }
+  g.cluster-label:hover { opacity: 0.85; }
+  g.cluster > rect { cursor: zoom-in; }
+  g.edgePaths path, g.edgeLabels { pointer-events: none; }
+  g.cluster-label { pointer-events: auto; }
+  g.node.stub-node { cursor: pointer; }
+  g.node.stub-node:hover { opacity: 0.85; }
+  #error { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 50; max-width: 90vw; }
+  #icon-sun { display: none; }
+  html[data-theme="dark"] #icon-moon { display: none; }
+  html[data-theme="dark"] #icon-sun { display: block; }
+</style>
+</head>
+<body class="min-h-screen bg-base-100 text-base-content">
+<div id="toolbar" class="sticky top-0 z-10 flex items-center gap-1 px-3 py-2 border-b border-base-300 bg-base-100/80 backdrop-blur-md shadow-sm">
+  <div class="tooltip tooltip-bottom" data-tip="Acercar (rueda)">
+    <button id="zoomIn" class="btn btn-sm btn-ghost btn-circle">
+      <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35M8 11h6M11 8v6"/></svg>
+    </button>
+  </div>
+  <div class="tooltip tooltip-bottom" data-tip="Alejar">
+    <button id="zoomOut" class="btn btn-sm btn-ghost btn-circle">
+      <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35M8 11h6"/></svg>
+    </button>
+  </div>
+  <div class="tooltip tooltip-bottom" data-tip="Centrar (0)">
+    <button id="reset" class="btn btn-sm btn-ghost btn-circle">
+      <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+    </button>
+  </div>
+  <div class="w-px h-6 bg-base-300 mx-1"></div>
+  <div class="tooltip tooltip-bottom" data-tip="Expandir todos">
+    <button id="expandAll" class="btn btn-sm btn-ghost btn-circle">
+      <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 3.75V8.25M3.75 3.75H8.25M3.75 3.75L9 9M3.75 20.25V15.75M3.75 20.25H8.25M3.75 20.25L9 15M20.25 3.75L15.75 3.75M20.25 3.75V8.25M20.25 3.75L15 9M20.25 20.25H15.75M20.25 20.25V15.75M20.25 20.25L15 15"/></svg>
+    </button>
+  </div>
+  <div class="tooltip tooltip-bottom" data-tip="Colapsar todos">
+    <button id="collapseAll" class="btn btn-sm btn-ghost btn-circle">
+      <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9L9 4.5M9 9L4.5 9M9 9L3.75 3.75M9 15L9 19.5M9 15L4.5 15M9 15L3.75 20.25M15 9H19.5M15 9V4.5M15 9L20.25 3.75M15 15H19.5M15 15L15 19.5M15 15L20.25 20.25"/></svg>
+    </button>
+  </div>
+  <div class="w-px h-6 bg-base-300 mx-1"></div>
+  <div class="tooltip tooltip-bottom" data-tip="Cambiar tema">
+    <button id="themeToggle" class="btn btn-sm btn-ghost btn-circle">
+      <svg id="icon-moon" viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="icon-sun" viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+  </div>
+  <span id="src" class="ml-auto badge badge-sm badge-outline badge-ghost font-mono"></span>
+</div>
+<div id="stage"></div>
+<div id="error" hidden></div>
+
+<script>
+(function () {
+  const params = new URLSearchParams(location.search);
+  const src = params.get('src') || 'diagrama.mmd';
+  const stage = document.getElementById('stage');
+  const srcEl = document.getElementById('src');
+  const errBox = document.getElementById('error');
+  srcEl.textContent = src;
+
+  const RESERVED = new Set(['classDef','style','linkStyle','direction','click','end','subgraph','%%','flowchart','graph','---','...','note','options']);
+  let panzoomInstance = null;
+  let model = null;               // memberships parsed from baseCode
+  let baseCode = null;
+  let tree = null;
+  let collapsed = new Set();
+  const ownerCluster = new Map(); // nodeId -> innermost clusterId
+  const parentOf = new Map();     // clusterId -> parent clusterId
+  let renderSeq = 0;
+
+  function currentTheme() {
+    return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default';
+  }
+
+  function topLevelClusters() {
+    return Array.from(model.clusters).filter(id => !parentOf.has(id));
+  }
+
+  async function renderDiagram(code, preserveView = true) {
+    const seq = ++renderSeq;
+    let prev = null;
+    if (preserveView && panzoomInstance) {
+      const p = panzoomInstance.getPan ? panzoomInstance.getPan() : { x: 0, y: 0 };
+      const s = panzoomInstance.getScale ? panzoomInstance.getScale() : 1;
+      prev = { scale: s, x: p.x, y: p.y };
+    }
+    mermaid.initialize({
+      startOnLoad: false, securityLevel: 'loose', theme: currentTheme(),
+      themeVariables: { background: 'transparent' },
+    });
+    const { svg } = await mermaid.render('arch-viz', code);
+    if (seq !== renderSeq) return;
+    stage.innerHTML = svg;
+    const s = stage.firstChild;
+    s.style.backgroundColor = 'transparent';
+    s.style.width = s.getBoundingClientRect().width + 'px';
+    s.style.opacity = '0';
+    panzoomInstance = Panzoom(s, {
+      maxScale: 10, minScale: 0.2,
+      beforeMouseDown: function (e) { return e.target.closest('g.cluster-label') === null; },
+    });
+    s.addEventListener('wheel', panzoomInstance.zoomWithWheel);
+    bindClicks();
+    if (prev) {
+      panzoomInstance.zoom(prev.scale);
+      panzoomInstance.pan(prev.x, prev.y, { relative: false });
+    }
+    s.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 180, easing: 'ease' })
+      .onfinish = () => { s.style.opacity = '1'; };
+  }
+
+  // ---- Reflow source generation ----
+  function generateSource() {
+    const out = [];
+    emitChildren(tree, out);
+    return out.join('\n');
+  }
+
+  function emitChildren(node, out) {
+    for (const item of node.children) {
+      if (item.type === 'subgraph') {
+        if (collapsed.has(item.id)) {
+          out.push(item.id + '["' + item.label + ' (' + transitiveMembers(item.id).size + ')"]');
+        } else {
+          out.push('subgraph ' + item.id + '["' + item.label + '"]');
+          emitChildren(item, out);
+          out.push('end');
+        }
+      } else {
+        const rw = rewriteLine(item.text);
+        if (rw) out.push(rw);
+      }
+    }
+  }
+
+  function rewriteLine(line) {
+    if (!/-->|\.->/.test(line)) return line;
+    const m = line.match(/^([A-Za-z0-9_]+)(\s.*?\s)([A-Za-z0-9_]+)$/);
+    if (!m) return line;
+    const from = rewriteEndpoint(m[1]);
+    const to = rewriteEndpoint(m[3]);
+    if (from === m[1] && to === m[3]) return line;
+    if (from === to) return null;
+    return from + m[2] + to;
+  }
+
+  function rewriteEndpoint(id) {
+    const owner = ownerCluster.get(id);
+    if (!owner) return id;
+    let c = owner;
+    while (c) {
+      if (collapsed.has(c)) return c;
+      c = parentOf.get(c);
+    }
+    return id;
+  }
+
+  // ---- Source parsing ----
+  function parseSource(code) {
+    const memberIds = new Map();
+    const children = new Map();
+    const stack = [];
+    for (const rawLine of code.split('\n')) {
+      const line = rawLine.trim();
+      if (!line) continue;
+      if (/^subgraph\s/.test(line)) {
+        let id = line.replace(/^subgraph\s+/, '').split(/[\["{]/)[0].trim();
+        const parent = stack.length ? stack[stack.length - 1] : null;
+        if (parent) (children.get(parent) || children.set(parent, []).get(parent)).push(id);
+        memberIds.set(id, new Set());
+        stack.push(id);
+        continue;
+      }
+      if (/^end\s*$/.test(line)) { if (stack.length) stack.pop(); continue; }
+      if (!stack.length) continue;
+      const m = line.match(/^([A-Za-z0-9_]+)/);
+      if (!m) continue;
+      const token = m[1];
+      if (RESERVED.has(token)) continue;
+      memberIds.get(stack[stack.length - 1]).add(token);
+    }
+    return { memberIds, children, clusters: new Set(memberIds.keys()) };
+  }
+
+  function buildMaps() {
+    ownerCluster.clear();
+    parentOf.clear();
+    for (const [cid, members] of model.memberIds) {
+      for (const nid of members) if (!ownerCluster.has(nid)) ownerCluster.set(nid, cid);
+    }
+    for (const [pid, kids] of model.children) {
+      for (const k of kids) parentOf.set(k, pid);
+    }
+  }
+
+  function parseTree(code) {
+    const root = { children: [] };
+    const stack = [root];
+    for (const rawLine of code.split('\n')) {
+      const line = rawLine.trim();
+      if (!line) continue;
+      if (/^subgraph\s/.test(line)) {
+        const id = line.replace(/^subgraph\s+/, '').split(/[\["{]/)[0].trim();
+        const lm = line.match(/\["([^"]*)"\]/);
+        const node = { type: 'subgraph', id, label: lm ? lm[1] : id, children: [] };
+        stack[stack.length - 1].children.push(node);
+        stack.push(node);
+        continue;
+      }
+      if (/^end\s*$/.test(line)) { if (stack.length > 1) stack.pop(); continue; }
+      stack[stack.length - 1].children.push({ type: 'line', text: line });
+    }
+    return root;
+  }
+
+  function transitiveMembers(clusterId, seen) {
+    seen = seen || new Set();
+    if (seen.has(clusterId)) return new Set();
+    seen.add(clusterId);
+    const ids = new Set(model.memberIds.get(clusterId) || []);
+    for (const child of model.children.get(clusterId) || []) {
+      for (const n of transitiveMembers(child, seen)) ids.add(n);
+    }
+    return ids;
+  }
+
+  function findClusterEl(clusterId) {
+    return stage.querySelector('g.clusters g.cluster[id$="-' + clusterId + '"]');
+  }
+
+  function findStubNode(clusterId) {
+    return stage.querySelector('g.node[id^="arch-viz-flowchart-' + clusterId + '-"]');
+  }
+
+  function bindClicks() {
+    for (const clusterId of model.clusters) {
+      if (collapsed.has(clusterId)) continue;
+      const cl = findClusterEl(clusterId);
+      if (!cl) continue;
+      const label = cl.querySelector('g.cluster-label');
+      if (label) label.addEventListener('click', () => toggleCluster(clusterId));
+      const body = cl.querySelector('rect.cluster') || cl.querySelector('rect');
+      if (body) body.addEventListener('click', () => focusCluster(clusterId));
+    }
+    for (const clusterId of collapsed) {
+      const stub = findStubNode(clusterId);
+      if (stub) {
+        stub.classList.add('stub-node');
+        stub.addEventListener('click', () => toggleCluster(clusterId));
+      }
+    }
+  }
+
+  // ---- Distinguish click from drag (pointer events: panzoom suppresses mouse events) ----
+  let pressX = null, pressY = null, dragDist = 0;
+  document.addEventListener('pointerdown', e => {
+    pressX = e.clientX; pressY = e.clientY; dragDist = 0;
+  }, true);
+  document.addEventListener('pointermove', e => {
+    if (pressX !== null) {
+      dragDist = Math.max(dragDist, Math.hypot(e.clientX - pressX, e.clientY - pressY));
+    }
+  }, true);
+  document.addEventListener('pointerup', () => { pressX = null; pressY = null; }, true);
+  document.addEventListener('click', e => {
+    if (dragDist > 5) { e.stopImmediatePropagation(); dragDist = 0; }
+  }, true);
+
+  function focusCluster(clusterId) {
+    const cl = findClusterEl(clusterId);
+    if (!cl || !panzoomInstance) return;
+    const stageRect = stage.getBoundingClientRect();
+    const svg = stage.firstChild;
+    const f0 = panzoomInstance.getScale ? panzoomInstance.getScale() : 1;
+    const t0 = panzoomInstance.getPan ? panzoomInstance.getPan() : { x: 0, y: 0 };
+    const r0 = svg.getBoundingClientRect();
+    if (!r0.width || !r0.height) return;
+    const W = r0.width / f0, H = r0.height / f0;
+    const Ox = W / 2, Oy = H / 2;
+    const Lx = r0.x - t0.x * f0 - Ox * (1 - f0);
+    const Ly = r0.y - t0.y * f0 - Oy * (1 - f0);
+    const b = cl.getBoundingClientRect();
+    if (!b.width || !b.height) return;
+    const cx = b.x + b.width / 2;
+    const cy = b.y + b.height / 2;
+    const cLocalX = (cx - Lx - Ox) / f0 - t0.x + Ox;
+    const cLocalY = (cy - Ly - Oy) / f0 - t0.y + Oy;
+    const S = Math.max(0.2, Math.min(10, Math.min(stageRect.width / b.width, stageRect.height / b.height) * 0.9));
+    const u = (stageRect.x + stageRect.width / 2 - Lx - Ox) / S - cLocalX + Ox;
+    const v = (stageRect.y + stageRect.height / 2 - Ly - Oy) / S - cLocalY + Oy;
+    panzoomInstance.zoom(S);
+    panzoomInstance.pan(u, v, { relative: false });
+  }
+
+  function toggleCluster(clusterId) {
+    if (!model.clusters.has(clusterId)) return;
+    if (collapsed.has(clusterId)) collapsed.delete(clusterId); else collapsed.add(clusterId);
+    renderDiagram(generateSource());
+  }
+
+  function fitToView() {
+    if (!panzoomInstance) return;
+    const stageRect = stage.getBoundingClientRect();
+    const svg = stage.firstChild;
+    const f0 = panzoomInstance.getScale ? panzoomInstance.getScale() : 1;
+    const p0 = panzoomInstance.getPan ? panzoomInstance.getPan() : { x: 0, y: 0 };
+    const r0 = svg.getBoundingClientRect();
+    if (!r0.width || !r0.height) return;
+    const W = r0.width / f0;
+    const H = r0.height / f0;
+    const Ox = W / 2, Oy = H / 2;
+    const Lx = r0.x - p0.x * f0 - Ox * (1 - f0);
+    const Ly = r0.y - p0.y * f0 - Oy * (1 - f0);
+    const S = Math.max(0.2, Math.min(1, Math.min(stageRect.width / W, stageRect.height / H) * 0.9));
+    const u = (stageRect.x + stageRect.width / 2 - Lx - Ox) / S;
+    const v = (stageRect.y + stageRect.height / 2 - Ly - Oy) / S;
+    panzoomInstance.zoom(S);
+    panzoomInstance.pan(u, v, { relative: false });
+  }
+
+  function collapseAll() {
+    collapsed = new Set(topLevelClusters());
+    renderDiagram(generateSource(), false).then(fitToView);
+  }
+
+  function expandAll() {
+    collapsed = new Set();
+    renderDiagram(generateSource(), false).then(fitToView);
+  }
+
+  async function applyTheme(t) {
+    document.documentElement.dataset.theme = t;
+    try { localStorage.setItem('av-theme', t); } catch (e) {}
+    if (baseCode) await renderDiagram(generateSource());
+  }
+
+  async function main() {
+    if (typeof mermaid === 'undefined' || typeof Panzoom === 'undefined') {
+      showError('Dependencias no encontradas. Ejecuta:\n  scripts/serve-viewer.sh <diagrama.mmd>\npara copiar viewer.html + assets junto al diagrama.');
+      return;
+    }
+    let initial = 'light';
+    try { initial = localStorage.getItem('av-theme') || initial; } catch (e) {}
+    if (initial !== 'light' && initial !== 'dark') {
+      initial = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    }
+    document.documentElement.dataset.theme = initial;
+    try {
+      const resp = await fetch(src);
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      baseCode = await resp.text();
+      model = parseSource(baseCode);
+      buildMaps();
+      tree = parseTree(baseCode);
+      await renderDiagram(generateSource());
+      fitToView();
+    } catch (err) {
+      showError('No se pudo renderizar "' + src + '".\n\n' + err.message +
+        '\n\nEl diagrama debe existir junto a viewer.html. Ejecuta:\n  scripts/serve-viewer.sh <diagrama.mmd>');
+    }
+  }
+
+  function showError(msg) {
+    errBox.hidden = false;
+    errBox.innerHTML = '<div class="alert alert-error shadow-lg max-w-2xl"><div><span class="font-bold">Error</span><pre class="text-xs font-mono whitespace-pre-wrap mt-1">' +
+      msg.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</pre></div></div>';
+  }
+
+  document.getElementById('zoomIn').onclick = () => panzoomInstance && panzoomInstance.zoomIn();
+  document.getElementById('zoomOut').onclick = () => panzoomInstance && panzoomInstance.zoomOut();
+  document.getElementById('reset').onclick = () => fitToView();
+  document.getElementById('collapseAll').onclick = collapseAll;
+  document.getElementById('expandAll').onclick = expandAll;
+  document.getElementById('themeToggle').onclick = () =>
+    applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+
+  window.addEventListener('keydown', e => {
+    if (e.ctrlKey || e.metaKey) return;
+    if (e.key === '+' || e.key === '=') { panzoomInstance && panzoomInstance.zoomIn(); e.preventDefault(); }
+    if (e.key === '-') { panzoomInstance && panzoomInstance.zoomOut(); e.preventDefault(); }
+    if (e.key === '0') { fitToView(); }
+  });
+
+  window.__viewer = {
+    parseSource, generateSource, toggleCluster, collapseAll, expandAll, applyTheme,
+    get model() { return model; },
+    get collapsed() { return Array.from(collapsed); },
+  };
+
+  main();
+})();
+</script>
+</body>
+</html>
