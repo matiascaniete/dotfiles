@@ -27,13 +27,13 @@ _install_dependency() {
 }
 
 _install-all() {
-    _install-dependency apt-dependencies
-    _install-dependency mpv-shaders
-    _install-dependency oh-my-tmux
-    _install-dependency nnn-plugins
-    _install-dependency zsh
-    _install-dependency zsh-plugins
-    _install-dependency fzf
+    _install_dependency apt-dependencies
+    _install_dependency mpv-shaders
+    _install_dependency oh-my-tmux
+    _install_dependency nnn-plugins
+    _install_dependency zsh
+    _install_dependency zsh-plugins
+    _install_dependency fzf
 }
 
 # dependencies
