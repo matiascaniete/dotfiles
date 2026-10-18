@@ -90,15 +90,41 @@ __install-zsh() {
         && sudo make install
 }
 
+_install_zsh_plugin() { # url [ref]
+    local url="$1" ref="${2:-}" name dir branch
+    name="$(basename "$url" .git)"
+    dir="$ZSH_PLUGINS_PATH/$name"
+    if [ -d "$dir/.git" ]; then
+        echo "  [update] $name${ref:+ -> $ref}"
+        git -C "$dir" fetch --tags --prune --quiet
+        if [ -n "$ref" ]; then
+            git -C "$dir" checkout --quiet "$ref"
+        else
+            branch="$(git -C "$dir" symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null | sed 's#^origin/##')"
+            git -C "$dir" checkout --quiet "${branch:-master}"
+            git -C "$dir" pull --ff-only --quiet
+        fi
+    else
+        echo "  [clone]  $name${ref:+ -> $ref}"
+        git clone --quiet "$url" "$dir"
+        [ -n "$ref" ] && git -C "$dir" checkout --quiet "$ref"
+    fi
+}
+
 __install-zsh-plugins() {
-    mkdir -p $ZSH_PLUGINS_PATH
-    cd $ZSH_PLUGINS_PATH || return 1
-    git clone https://github.com/Aloxaf/fzf-tab
-    git clone https://github.com/zsh-users/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-completions.git
-    git clone https://github.com/zdharma-continuum/fast-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-history-substring-search
-    git clone https://github.com/agkozak/zsh-z.git
-    git clone https://github.com/marzocchi/zsh-notify.git
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    mkdir -p "$ZSH_PLUGINS_PATH"
+    _install_zsh_plugin https://github.com/Aloxaf/fzf-tab v1.3.0
+    _install_zsh_plugin https://github.com/zsh-users/zsh-autosuggestions
+    _install_zsh_plugin https://github.com/zsh-users/zsh-completions.git
+    _install_zsh_plugin https://github.com/zdharma-continuum/fast-syntax-highlighting
+    _install_zsh_plugin https://github.com/zsh-users/zsh-history-substring-search
+    _install_zsh_plugin https://github.com/agkozak/zsh-z.git
+    _install_zsh_plugin https://github.com/marzocchi/zsh-notify.git
+    if [ -d "$HOME/.fzf/.git" ]; then
+        echo "  [update] fzf"
+        git -C "$HOME/.fzf" pull --ff-only --quiet
+    else
+        echo "  [clone]  fzf"
+        git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
+    fi
 }
